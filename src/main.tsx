@@ -7,9 +7,7 @@ import { SidebarProvider } from "./components/ui/sidebar.tsx";
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
   <SidebarProvider>
-    <div className="max-w-8xl ">
     <App />
-    </div>
   </SidebarProvider>
   </BrowserRouter>
 );

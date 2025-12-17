@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 
 const Home = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6">
+    <div className="min-h-screen min-w-full flex items-center justify-center px-6 bg-background">
       <div className="max-w-3xl w-full text-center space-y-8">
         {/* Hero */}
         <div className="space-y-4">
@@ -18,13 +18,15 @@ const Home = () => {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <NavLink to={"/chat"}>
-          <Button size="lg">Open App</Button>
+            <Button size="lg" className="w-full sm:w-auto">Open App</Button>
           </NavLink>
-          <Button variant="outline" size="lg">
-            Learn More
-          </Button>
+          <NavLink to={"/about"}>
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
+              Learn More
+            </Button>
+          </NavLink>
         </div>
 
         {/* Feature Highlights */}
@@ -58,6 +60,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+
   );
 };
 
