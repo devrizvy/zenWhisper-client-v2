@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import api from "../services/axios";
 
 // Hook for fetching private messages for a specific chat
-const fetchPrivateMessages = (chatId: string) => {
-  return axios.get(`${import.meta.env.VITE_BACKEND_URL}/private-chat/${chatId}`)
-    .then(res => res.data);
+const fetchPrivateMessages = async (chatId: string) => {
+  const response = await api.get(`/private-chat/${chatId}`);
+  return response.data;
 };
 
 export const usePrivateMessages = (chatId: string) => {
@@ -19,9 +19,9 @@ export const usePrivateMessages = (chatId: string) => {
 };
 
 // Hook for fetching all chats for a user
-const fetchUserChats = (userEmail: string) => {
-  return axios.get(`${import.meta.env.VITE_BACKEND_URL}/user-chats/${userEmail}`)
-    .then(res => res.data);
+const fetchUserChats = async (userEmail: string) => {
+  const response = await api.get(`/user-chats/${userEmail}`);
+  return response.data;
 };
 
 export const useUserChats = (userEmail: string) => {

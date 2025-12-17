@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import api from "../services/axios";
 
 interface User {
   _id: string;
@@ -19,8 +19,8 @@ const useUsers = (): UseUsersReturn => {
   const { data, refetch, isLoading, error } = useQuery<User[]>({
     queryKey: ["users"],
     queryFn: async (): Promise<User[]> => {
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/users`);
-      return res.data;
+      const response = await api.get('/auth/users');
+      return response.data;
     },
   });
 

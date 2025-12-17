@@ -1,6 +1,5 @@
 // HTTP API Service for zenWhisper backend
-
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+import api from './axios';
 
 interface ApiResponse<T> {
   success: boolean;
@@ -41,37 +40,40 @@ export interface BackendChat {
   lastMessageDate: string;
 }
 
-// Generic API request wrapper
+// Generic API request wrapper using axios
 const apiRequest = async <T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: any = {}
 ): Promise<ApiResponse<T>> => {
   try {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
-    });
+    let response;
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      return {
-        success: false,
-        error: data.message || `HTTP error! status: ${response.status}`,
-      };
+    switch (options.method) {
+      case 'POST':
+        response = await api.post(endpoint, options.body ? JSON.parse(options.body) : {});
+        break;
+      case 'PUT':
+        response = await api.put(endpoint, options.body ? JSON.parse(options.body) : {});
+        break;
+      case 'PATCH':
+        response = await api.patch(endpoint, options.body ? JSON.parse(options.body) : {});
+        break;
+      case 'DELETE':
+        response = await api.delete(endpoint);
+        break;
+      default:
+        response = await api.get(endpoint);
+        break;
     }
 
     return {
       success: true,
-      data,
+      data: response.data,
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Unknown error occurred',
+      error: error.response?.data?.message || error.message || 'Unknown error occurred',
     };
   }
 };

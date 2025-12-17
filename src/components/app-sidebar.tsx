@@ -2,7 +2,6 @@ import { NavLink } from "react-router";
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router';
 import {
-  Star,
   Users,
   NotebookPen,
   Sparkles,
@@ -50,7 +49,7 @@ const navigationItems = [
     badge: "2"
   },
   {
-    label: "Users",
+    label: "People",
     to: "/chat/users",
     icon: UserPlus,
     description: "Find and connect with users",
@@ -63,13 +62,15 @@ const navigationItems = [
     description: "Community circles",
     badge: null
   },
-  {
-    label: "Favorites",
-    to: "/favorites",
-    icon: Star,
-    description: "Cherished moments",
-    badge: "3"
-  },
+  // {
+  //   label: "Favorites",
+  //   to: "/favorites",
+  //   icon: Star,
+  //   description: "Cherished moments",
+  //   badge: "3"
+  // },
+];
+const Tools = [
   {
     label: "AI Summary",
     to: "/ai-summary",
@@ -84,8 +85,31 @@ const navigationItems = [
     description: "Personal reflections",
     badge: "12"
   },
+];
+const Support = [
   {
-    label: "About",
+    label: "Settings",
+    to: "/ai-summary",
+    icon: Settings,
+    description: "Wisdom insights",
+    badge: "New"
+  },
+  {
+    label: "Docs",
+    to: "/notes",
+    icon: NotebookPen,
+    description: "Personal reflections",
+    badge: "12"
+  },
+  {
+    label: "FAQ",
+    to: "/about",
+    icon: Info,
+    description: "The zen path",
+    badge: null
+  },
+  {
+    label: "Overview",
     to: "/about",
     icon: Info,
     description: "The zen path",
@@ -128,11 +152,107 @@ export function AppSidebar() {
         <SidebarContent className="flex-1 px-4">
           <SidebarGroup>
             <SidebarGroupLabel className="text-sidebar-foreground/60 text-xs font-light tracking-widest uppercase mb-4">
-              Navigation
+              Workspace
             </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu className="space-y-1">
                 {navigationItems.map((item, index) => (
+                  <SidebarMenuItem key={item.label}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `zen-menu-item flex items-center gap-4 w-full relative h-12 px-4 border border-transparent transition-all duration-300 ${
+                        isActive
+                          ? 'text-primary font-medium active zen-menu-item'
+                          : 'text-sidebar-foreground/80 hover:text-sidebar-foreground'
+                      }`
+                    }
+                    style={{
+                      animationDelay: `${index * 100}ms`
+                    }}
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <span className="zen-icon relative">
+                          <item.icon className="w-5 h-5 transition-all duration-300" />
+                          {isActive && (
+                            <div className="absolute inset-0 w-5 h-5 bg-primary/20 rounded-full blur-md"></div>
+                          )}
+                        </span>
+                        <div className="flex-1 flex items-center justify-between">
+                          <span className="text-sm font-light tracking-wide">{item.label}</span>
+                          {item.badge && (
+                            <span className="zen-badge">
+                              {item.badge}
+                            </span>
+                          )}
+                        </div>
+                        {isActive && (
+                          <div className="absolute right-2 w-1 h-6 bg-primary rounded-full"></div>
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-sidebar-foreground/60 text-xs font-light tracking-widest uppercase mb-4">
+              Tools
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu className="space-y-1">
+                {Tools.map((item, index) => (
+                  <SidebarMenuItem key={item.label}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `zen-menu-item flex items-center gap-4 w-full relative h-12 px-4 border border-transparent transition-all duration-300 ${
+                        isActive
+                          ? 'text-primary font-medium active zen-menu-item'
+                          : 'text-sidebar-foreground/80 hover:text-sidebar-foreground'
+                      }`
+                    }
+                    style={{
+                      animationDelay: `${index * 100}ms`
+                    }}
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <span className="zen-icon relative">
+                          <item.icon className="w-5 h-5 transition-all duration-300" />
+                          {isActive && (
+                            <div className="absolute inset-0 w-5 h-5 bg-primary/20 rounded-full blur-md"></div>
+                          )}
+                        </span>
+                        <div className="flex-1 flex items-center justify-between">
+                          <span className="text-sm font-light tracking-wide">{item.label}</span>
+                          {item.badge && (
+                            <span className="zen-badge">
+                              {item.badge}
+                            </span>
+                          )}
+                        </div>
+                        {isActive && (
+                          <div className="absolute right-2 w-1 h-6 bg-primary rounded-full"></div>
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-sidebar-foreground/60 text-xs font-light tracking-widest uppercase mb-4">
+              Support
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu className="space-y-1">
+                {Support.map((item, index) => (
                   <SidebarMenuItem key={item.label}>
                   <NavLink
                     to={item.to}

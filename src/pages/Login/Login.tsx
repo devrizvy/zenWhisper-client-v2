@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Shield, User } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate, NavLink } from 'react-router-dom';
+import api from '../../services/axios';
 
 const Login: React.FC = () => {
   const { loginWithToken, isAuthenticated } = useAuth();
@@ -43,32 +44,26 @@ const Login: React.FC = () => {
 
     try {
       // Call your backend login endpoint
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password
-        })
+      const response = await api.post('/auth/login', {
+        email: formData.email,
+        password: formData.password
       });
 
-      const data = await response.json();
+      const data = response.data;
 
-      if (response.ok) {
-        // Store token in localStorage (you might want to use httpOnly cookies in production)
-        localStorage.setItem('zenwhisper_token', data.token);
+      // Store token in localStorage (you might want to use httpOnly cookies in production)
+      localStorage.setItem('zenwhisper_token', data.token);
 
-        // Update auth context with token
-        loginWithToken(data.userInfo, data.token);
+      // Update auth context with token
+      loginWithToken(data.userInfo, data.token);
 
-        navigate('/chat');
+      navigate('/chat');
+    } catch (err: any) {
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
       } else {
-        setError(data.message || 'Login failed');
+        setError('Connection error. Please try again.');
       }
-    } catch (err) {
-      setError('Connection error. Please try again.');
       console.error('Login error:', err);
     } finally {
       setIsLoading(false);

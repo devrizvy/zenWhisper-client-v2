@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Shield, CheckCircle, AlertCircle, UserPlus } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate, NavLink } from 'react-router-dom';
+import api from '../../services/axios';
 
 interface ValidationState {
   email: boolean;
@@ -116,32 +117,24 @@ const Signup: React.FC = () => {
 
     try {
       // Call your backend signup endpoint
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          password: formData.password
-        })
+      await api.post('/signup', {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password
       });
 
-      const data = await response.json();
+      setSuccess('Account created successfully! Redirecting to login...');
 
-      if (response.ok) {
-        setSuccess('Account created successfully! Redirecting to login...');
-
-        // Auto-login after successful signup
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
+      // Auto-login after successful signup
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (err: any) {
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
       } else {
-        setError(data.message || 'Registration failed');
+        setError('Connection error. Please try again.');
       }
-    } catch (err) {
-      setError('Connection error. Please try again.');
       console.error('Signup error:', err);
     } finally {
       setIsLoading(false);

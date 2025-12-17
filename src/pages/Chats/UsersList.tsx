@@ -54,7 +54,7 @@ const UsersList = () => {
               <ArrowLeft size={20} />
             </button>
             <div>
-              <h2 className="text-xl font-semibold text-sidebar-foreground">Find Users</h2>
+              <h2 className="text-xl font-semibold text-sidebar-foreground">Find People</h2>
               <p className="text-xs text-sidebar-foreground/60">Connect with new people</p>
             </div>
           </div>
