@@ -76,8 +76,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen zen-pattern chat-container flex items-center justify-center p-6">
-      <div className="w-full max-w-3xl">
+    <div className="min-h-screen min-w-full zen-pattern chat-container flex items-center justify-center p-6">
+      <div className="w-full max-w-md">
         {/* Logo and title */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center mx-auto mb-4">

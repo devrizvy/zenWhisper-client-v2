@@ -149,7 +149,7 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen zen-pattern chat-container flex items-center justify-center p-6">
+    <div className="min-h-screen min-w-full zen-pattern chat-container flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         {/* Logo and title */}
         <div className="text-center mb-8">
