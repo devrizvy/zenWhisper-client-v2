@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router';
 import {
-  MessageSquare,
   Star,
   Users,
   NotebookPen,
@@ -14,6 +15,8 @@ import {
   ChevronUp,
   Bell,
   HelpCircle,
+  MessageCircle,
+  UserPlus,
 } from "lucide-react";
 
 import {
@@ -42,34 +45,41 @@ const navigationItems = [
   {
     label: "Chats",
     to: "/chat",
-    icon: MessageSquare,
-    description: "Return to sanctuary",
+    icon: MessageCircle,
+    description: "One-on-one conversations",
+    badge: "2"
+  },
+  {
+    label: "Users",
+    to: "/chat/users",
+    icon: UserPlus,
+    description: "Find and connect with users",
     badge: null
   },
   {
-    label: "Favorites",
-    to: "favorites",
-    icon: Star,
-    description: "Cherished moments",
-    badge: "3"
-  },
-  {
     label: "Groups",
-    to: "groups",
+    to: "/group",
     icon: Users,
     description: "Community circles",
     badge: null
   },
   {
+    label: "Favorites",
+    to: "/favorites",
+    icon: Star,
+    description: "Cherished moments",
+    badge: "3"
+  },
+  {
     label: "AI Summary",
-    to: "ai-summary",
+    to: "/ai-summary",
     icon: Sparkles,
     description: "Wisdom insights",
     badge: "New"
   },
   {
     label: "Notes",
-    to: "notes",
+    to: "/notes",
     icon: NotebookPen,
     description: "Personal reflections",
     badge: "12"
@@ -84,6 +94,14 @@ const navigationItems = [
 ];
 
 export function AppSidebar() {
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <Sidebar className="zen-sidebar border-r border-sidebar-border/50">
       <div className="zen-sidebar-content h-full flex flex-col">
@@ -178,17 +196,21 @@ export function AppSidebar() {
                           alt="Profile"
                         />
                         <AvatarFallback className="bg-gradient-to-br from-primary/20 to-accent/20 text-primary font-medium">
-                          JD
+                          {user?.username?.charAt(0).toUpperCase() || 'U'}
                         </AvatarFallback>
                       </Avatar>
                       <div className="status-online absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-sidebar"></div>
                     </div>
                     <div className="flex-1 text-left">
                       <div className="flex items-center gap-1">
-                        <p className="text-sm font-medium text-sidebar-foreground">John Doe</p>
+                        <p className="text-sm font-medium text-sidebar-foreground">
+                          {user?.username || 'Guest User'}
+                        </p>
                         <ChevronUp className="w-3 h-3 text-sidebar-foreground/50 group-hover:rotate-180 transition-transform duration-300" />
                       </div>
-                      <p className="text-xs text-sidebar-foreground/60 font-light">Premium Member</p>
+                      <p className="text-xs text-sidebar-foreground/60 font-light">
+                        {user?.email || 'Not logged in'}
+                      </p>
                     </div>
                   </div>
                 </Button>
@@ -219,7 +241,10 @@ export function AppSidebar() {
                   <span className="text-sm">Help & Support</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-sidebar-border/50" />
-                <DropdownMenuItem className="text-sidebar-foreground hover:bg-sidebar-accent/50 cursor-pointer">
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="text-sidebar-foreground hover:bg-sidebar-accent/50 cursor-pointer"
+                >
                   <LogOut className="mr-3 h-4 w-4" />
                   <span className="text-sm">Log out</span>
                 </DropdownMenuItem>

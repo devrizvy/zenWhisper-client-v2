@@ -1,8 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { NavLink } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Home = () => {
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return (
+      <div className="min-h-screen min-w-full flex items-center justify-center px-6 bg-background">
+        <div className="text-center space-y-4">
+          <h1 className="text-3xl font-bold text-green-600">Successfully Logged In!</h1>
+          <p className="text-muted-foreground">Welcome back!</p>
+          <NavLink to="/chat/chats">
+            <Button size="lg">Go to Chats</Button>
+          </NavLink>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen min-w-full flex items-center justify-center px-6 bg-background">
       <div className="max-w-3xl w-full text-center space-y-8">
@@ -19,11 +36,18 @@ const Home = () => {
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <NavLink to={"/chat"}>
-            <Button size="lg" className="w-full sm:w-auto">Open App</Button>
+          <NavLink to={"/login"}>
+            <Button size="lg" className="w-full sm:w-auto">
+              Sign In
+            </Button>
+          </NavLink>
+          <NavLink to={"/signup"}>
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
+              Create Account
+            </Button>
           </NavLink>
           <NavLink to={"/about"}>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
+            <Button variant="ghost" size="lg" className="w-full sm:w-auto">
               Learn More
             </Button>
           </NavLink>

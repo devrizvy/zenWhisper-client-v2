@@ -11,7 +11,6 @@ import {
   Plus,
   MoreVertical,
   Moon,
-  Sun,
   Bell,
 } from "lucide-react";
 

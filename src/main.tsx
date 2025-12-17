@@ -1,13 +1,29 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.css";
 import App from "./App.tsx";
 import { SidebarProvider } from "./components/ui/sidebar.tsx";
+import { AuthProvider } from "./contexts/AuthContext.tsx";
+
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
-  <SidebarProvider>
-    <App />
-  </SidebarProvider>
-  </BrowserRouter>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <AuthProvider>
+        <SidebarProvider>
+          <App />
+        </SidebarProvider>
+      </AuthProvider>
+    </BrowserRouter>
+  </QueryClientProvider>
 );
