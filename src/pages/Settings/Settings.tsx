@@ -10,7 +10,6 @@ import {
 	Wifi,
 	Lock,
 	Eye,
-	Globe,
 	MessageSquare,
 	LogOut,
 	Smartphone,
@@ -23,21 +22,17 @@ import {
 	Calendar as CalendarIcon,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Settings = () => {
 	const [activeTab, setActiveTab] = useState("profile");
 	const [notifications, setNotifications] = useState(true);
-	const [darkMode, setDarkMode] = useState(true);
 	const [soundEnabled, setSoundEnabled] = useState(true);
 	const [autoSave, setAutoSave] = useState(true);
-	 const { logout, user } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
+	const { user } = useAuth();
+	const { theme, toggleTheme } = useTheme();
+	const darkMode = theme === 'dark';
+	const setDarkMode = () => toggleTheme();
 
 	const tabs = [
 		{ id: "profile", label: "Profile", icon: <User className="w-4 h-4" /> },
@@ -63,9 +58,9 @@ const Settings = () => {
 			case "profile":
 				return (
 					<div className="space-y-6">
-						<div className="glass-panel rounded-2xl p-6">
+						<div className="mira-glass rounded-2xl p-6">
 							<div className="flex items-center justify-between mb-6">
-								<h3 className="text-xl font-semibold text-sidebar-foreground">
+								<h3 className="text-xl font-semibold text-foreground">
 									Profile Information
 								</h3>
 								<button className="text-primary hover:text-primary/80 transition-colors">
@@ -79,10 +74,10 @@ const Settings = () => {
 										<User className="w-8 h-8 text-primary" />
 									</div>
 									<div>
-										<h4 className="text-lg font-medium text-sidebar-foreground">
+										<h4 className="text-lg font-medium text-foreground">
 											{user?.username || "Guest User"}
 										</h4>
-										<p className="text-sm text-sidebar-foreground/60">
+										<p className="text-sm text-foreground/60">
 											 {user?.email || "Not logged in"}
 										</p>
 										<button className="mt-2 text-sm text-primary hover:text-primary/80 transition-colors">
@@ -94,49 +89,49 @@ const Settings = () => {
 								<div className="space-y-4 pt-4">
 									<div className="grid md:grid-cols-2 gap-4">
 										<div>
-											<label className="text-sm text-sidebar-foreground/60 mb-1 block">
+											<label className="text-sm text-foreground/60 mb-1 block">
 												Username
 											</label>
 											<input
 												type="text"
 												defaultValue="johndoe"
-												className="w-full px-3 py-2 zen-search rounded-lg text-sidebar-foreground"
+												className="w-full px-3 py-2 mira-search rounded-lg text-foreground"
 											/>
 										</div>
 										<div>
-											<label className="text-sm text-sidebar-foreground/60 mb-1 block">
+											<label className="text-sm text-foreground/60 mb-1 block">
 												Email
 											</label>
 											<input
 												type="email"
 												defaultValue="john.doe@university.edu"
-												className="w-full px-3 py-2 zen-search rounded-lg text-sidebar-foreground"
+												className="w-full px-3 py-2 mira-search rounded-lg text-foreground"
 											/>
 										</div>
 									</div>
 									<div>
-										<label className="text-sm text-sidebar-foreground/60 mb-1 block">
+										<label className="text-sm text-foreground/60 mb-1 block">
 											Bio
 										</label>
 										<textarea
 											rows={3}
 											placeholder="Tell us about yourself..."
-											className="w-full px-3 py-2 zen-search rounded-lg text-sidebar-foreground placeholder-sidebar-foreground/40 resize-none"
+											className="w-full px-3 py-2 mira-search rounded-lg text-foreground placeholder-sidebar-foreground/40 resize-none"
 										/>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								Learning Preferences
 							</h3>
 							<div className="space-y-3">
 								<div className="flex items-center justify-between p-3 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
 									<div>
-										<h4 className="text-sidebar-foreground">Auto-save Notes</h4>
-										<p className="text-sm text-sidebar-foreground/60">
+										<h4 className="text-foreground">Auto-save Notes</h4>
+										<p className="text-sm text-foreground/60">
 											Automatically save your notes
 										</p>
 									</div>
@@ -161,8 +156,8 @@ const Settings = () => {
 			case "notifications":
 				return (
 					<div className="space-y-6">
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								Notification Preferences
 							</h3>
 							<div className="space-y-4">
@@ -204,10 +199,10 @@ const Settings = () => {
 												</span>
 											</div>
 											<div>
-												<h4 className="text-sidebar-foreground">
+												<h4 className="text-foreground">
 													{item.title}
 												</h4>
-												<p className="text-sm text-sidebar-foreground/60">
+												<p className="text-sm text-foreground/60">
 													{item.desc}
 												</p>
 											</div>
@@ -229,15 +224,15 @@ const Settings = () => {
 							</div>
 						</div>
 
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								Sound & Vibration
 							</h3>
 							<div className="space-y-4">
 								<div className="flex items-center justify-between">
 									<div>
-										<h4 className="text-sidebar-foreground">Sound Effects</h4>
-										<p className="text-sm text-sidebar-foreground/60">
+										<h4 className="text-foreground">Sound Effects</h4>
+										<p className="text-sm text-foreground/60">
 											Play sounds for notifications
 										</p>
 									</div>
@@ -262,24 +257,24 @@ const Settings = () => {
 			case "privacy":
 				return (
 					<div className="space-y-6">
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								Privacy Settings
 							</h3>
 							<div className="space-y-4">
 								<div className="flex items-center justify-between p-4 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
 									<div className="flex items-center gap-3">
-										<Eye className="w-5 h-5 text-sidebar-foreground/60" />
+										<Eye className="w-5 h-5 text-foreground/60" />
 										<div>
-											<h4 className="text-sidebar-foreground">
+											<h4 className="text-foreground">
 												Profile Visibility
 											</h4>
-											<p className="text-sm text-sidebar-foreground/60">
+											<p className="text-sm text-foreground/60">
 												Control who can see your profile
 											</p>
 										</div>
 									</div>
-									<select className="px-3 py-1 zen-search rounded-lg text-sm">
+									<select className="px-3 py-1 mira-search rounded-lg text-sm">
 										<option>Everyone</option>
 										<option>Only Students</option>
 										<option>Private</option>
@@ -288,12 +283,12 @@ const Settings = () => {
 
 								<div className="flex items-center justify-between p-4 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
 									<div className="flex items-center gap-3">
-										<MessageSquare className="w-5 h-5 text-sidebar-foreground/60" />
+										<MessageSquare className="w-5 h-5 text-foreground/60" />
 										<div>
-											<h4 className="text-sidebar-foreground">
+											<h4 className="text-foreground">
 												Message Requests
 											</h4>
-											<p className="text-sm text-sidebar-foreground/60">
+											<p className="text-sm text-foreground/60">
 												Allow messages from anyone
 											</p>
 										</div>
@@ -305,10 +300,10 @@ const Settings = () => {
 
 								<div className="flex items-center justify-between p-4 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
 									<div className="flex items-center gap-3">
-										<Wifi className="w-5 h-5 text-sidebar-foreground/60" />
+										<Wifi className="w-5 h-5 text-foreground/60" />
 										<div>
-											<h4 className="text-sidebar-foreground">Online Status</h4>
-											<p className="text-sm text-sidebar-foreground/60">
+											<h4 className="text-foreground">Online Status</h4>
+											<p className="text-sm text-foreground/60">
 												Show when you're online
 											</p>
 										</div>
@@ -320,56 +315,56 @@ const Settings = () => {
 							</div>
 						</div>
 
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								Security
 							</h3>
 							<div className="space-y-4">
 								<button className="w-full flex items-center justify-between p-4 hover:bg-sidebar-accent/20 rounded-lg transition-colors group">
 									<div className="flex items-center gap-3">
-										<Lock className="w-5 h-5 text-sidebar-foreground/60" />
+										<Lock className="w-5 h-5 text-foreground/60" />
 										<div className="text-left">
-											<h4 className="text-sidebar-foreground">
+											<h4 className="text-foreground">
 												Change Password
 											</h4>
-											<p className="text-sm text-sidebar-foreground/60">
+											<p className="text-sm text-foreground/60">
 												Update your password
 											</p>
 										</div>
 									</div>
-									<ChevronRight className="w-5 h-5 text-sidebar-foreground/40 group-hover:text-sidebar-foreground/60" />
+									<ChevronRight className="w-5 h-5 text-foreground/40 group-hover:text-foreground/60" />
 								</button>
 
 								<button className="w-full flex items-center justify-between p-4 hover:bg-sidebar-accent/20 rounded-lg transition-colors group">
 									<div className="flex items-center gap-3">
-										<Shield className="w-5 h-5 text-sidebar-foreground/60" />
+										<Shield className="w-5 h-5 text-foreground/60" />
 										<div className="text-left">
-											<h4 className="text-sidebar-foreground">
+											<h4 className="text-foreground">
 												Two-Factor Authentication
 											</h4>
-											<p className="text-sm text-sidebar-foreground/60">
+											<p className="text-sm text-foreground/60">
 												Add an extra layer of security
 											</p>
 										</div>
 									</div>
-									<span className="px-3 py-1 text-xs rounded-full bg-sidebar-accent text-sidebar-foreground/60">
+									<span className="px-3 py-1 text-xs rounded-full bg-sidebar-accent text-foreground/60">
 										Not Enabled
 									</span>
 								</button>
 
 								<button className="w-full flex items-center justify-between p-4 hover:bg-sidebar-accent/20 rounded-lg transition-colors group">
 									<div className="flex items-center gap-3">
-										<Smartphone className="w-5 h-5 text-sidebar-foreground/60" />
+										<Smartphone className="w-5 h-5 text-foreground/60" />
 										<div className="text-left">
-											<h4 className="text-sidebar-foreground">
+											<h4 className="text-foreground">
 												Active Sessions
 											</h4>
-											<p className="text-sm text-sidebar-foreground/60">
+											<p className="text-sm text-foreground/60">
 												Manage your logged-in devices
 											</p>
 										</div>
 									</div>
-									<ChevronRight className="w-5 h-5 text-sidebar-foreground/40 group-hover:text-sidebar-foreground/60" />
+									<ChevronRight className="w-5 h-5 text-foreground/40 group-hover:text-foreground/60" />
 								</button>
 							</div>
 						</div>
@@ -379,8 +374,8 @@ const Settings = () => {
 			case "appearance":
 				return (
 					<div className="space-y-6">
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								Theme
 							</h3>
 							<div className="space-y-4">
@@ -391,14 +386,14 @@ const Settings = () => {
 												? "border-primary bg-primary/10"
 												: "border-sidebar-border hover:border-sidebar-foreground/20"
 										}`}
-										onClick={() => setDarkMode(true)}
+										onClick={() => setDarkMode()}
 									>
 										<Moon
 											className="w-6 h-6 mb-2 mx-auto"
 											style={{ color: "oklch(0.55 0.08 145)" }}
 										/>
-										<h4 className="text-sidebar-foreground">Dark Mode</h4>
-										<p className="text-xs text-sidebar-foreground/60 mt-1">
+										<h4 className="text-foreground">Dark Mode</h4>
+										<p className="text-xs text-foreground/60 mt-1">
 											Easy on the eyes
 										</p>
 									</button>
@@ -409,22 +404,22 @@ const Settings = () => {
 												? "border-primary bg-primary/10"
 												: "border-sidebar-border hover:border-sidebar-foreground/20"
 										}`}
-										onClick={() => setDarkMode(false)}
+										onClick={() => setDarkMode()}
 									>
 										<Sun
 											className="w-6 h-6 mb-2 mx-auto"
 											style={{ color: "oklch(0.55 0.08 145)" }}
 										/>
-										<h4 className="text-sidebar-foreground">Light Mode</h4>
-										<p className="text-xs text-sidebar-foreground/60 mt-1">
+										<h4 className="text-foreground">Light Mode</h4>
+										<p className="text-xs text-foreground/60 mt-1">
 											Bright and clean
 										</p>
 									</button>
 
 									<button className="p-4 rounded-xl border-2 border-sidebar-border hover:border-sidebar-foreground/20 transition-all">
-										<Laptop className="w-6 h-6 mb-2 mx-auto text-sidebar-foreground/60" />
-										<h4 className="text-sidebar-foreground">System</h4>
-										<p className="text-xs text-sidebar-foreground/60 mt-1">
+										<Laptop className="w-6 h-6 mb-2 mx-auto text-foreground/60" />
+										<h4 className="text-foreground">System</h4>
+										<p className="text-xs text-foreground/60 mt-1">
 											Follow your device
 										</p>
 									</button>
@@ -432,13 +427,13 @@ const Settings = () => {
 							</div>
 						</div>
 
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								Display
 							</h3>
 							<div className="space-y-4">
 								<div>
-									<label className="text-sm text-sidebar-foreground/60 mb-2 block">
+									<label className="text-sm text-foreground/60 mb-2 block">
 										Font Size
 									</label>
 									<div className="grid grid-cols-4 gap-2">
@@ -449,7 +444,7 @@ const Settings = () => {
 													className={`py-2 px-3 rounded-lg transition-all ${
 														idx === 1
 															? "bg-primary text-primary-foreground"
-															: "bg-sidebar-accent hover:bg-sidebar-accent/70 text-sidebar-foreground"
+															: "bg-sidebar-accent hover:bg-sidebar-accent/70 text-foreground"
 													}`}
 												>
 													{size}
@@ -460,7 +455,7 @@ const Settings = () => {
 								</div>
 
 								<div>
-									<label className="text-sm text-sidebar-foreground/60 mb-2 block">
+									<label className="text-sm text-foreground/60 mb-2 block">
 										Accent Color
 									</label>
 									<div className="flex gap-3">
@@ -486,15 +481,15 @@ const Settings = () => {
 			case "advanced":
 				return (
 					<div className="space-y-6">
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								Data & Storage
 							</h3>
 							<div className="space-y-4">
 								<div className="p-4 bg-sidebar-accent/20 rounded-lg">
 									<div className="flex justify-between items-center mb-2">
-										<h4 className="text-sidebar-foreground">Storage Used</h4>
-										<span className="text-sm text-sidebar-foreground/60">
+										<h4 className="text-foreground">Storage Used</h4>
+										<span className="text-sm text-foreground/60">
 											2.4 GB / 5 GB
 										</span>
 									</div>
@@ -512,22 +507,22 @@ const Settings = () => {
 								<div className="space-y-2">
 									<button className="w-full flex items-center justify-between p-3 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
 										<div className="flex items-center gap-3">
-											<Download className="w-4 h-4 text-sidebar-foreground/60" />
-											<span className="text-sidebar-foreground">
+											<Download className="w-4 h-4 text-foreground/60" />
+											<span className="text-foreground">
 												Export All Data
 											</span>
 										</div>
-										<ChevronRight className="w-4 h-4 text-sidebar-foreground/40" />
+										<ChevronRight className="w-4 h-4 text-foreground/40" />
 									</button>
 
 									<button className="w-full flex items-center justify-between p-3 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
 										<div className="flex items-center gap-3">
-											<RotateCcw className="w-4 h-4 text-sidebar-foreground/60" />
-											<span className="text-sidebar-foreground">
+											<RotateCcw className="w-4 h-4 text-foreground/60" />
+											<span className="text-foreground">
 												Reset Settings
 											</span>
 										</div>
-										<ChevronRight className="w-4 h-4 text-sidebar-foreground/40" />
+										<ChevronRight className="w-4 h-4 text-foreground/40" />
 									</button>
 
 									<button className="w-full flex items-center justify-between p-3 hover:bg-red-500/10 rounded-lg transition-colors group">
@@ -541,20 +536,20 @@ const Settings = () => {
 							</div>
 						</div>
 
-						<div className="glass-panel rounded-2xl p-6">
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-4">
+						<div className="mira-glass rounded-2xl p-6">
+							<h3 className="text-xl font-semibold text-foreground mb-4">
 								About
 							</h3>
 							<div className="space-y-3 text-sm">
 								<div className="flex justify-between">
-									<span className="text-sidebar-foreground/60">Version</span>
-									<span className="text-sidebar-foreground">2.1.0</span>
+									<span className="text-foreground/60">Version</span>
+									<span className="text-foreground">2.1.0</span>
 								</div>
 								<div className="flex justify-between">
-									<span className="text-sidebar-foreground/60">
+									<span className="text-foreground/60">
 										Last Updated
 									</span>
-									<span className="text-sidebar-foreground">Dec 18, 2024</span>
+									<span className="text-foreground">Dec 18, 2024</span>
 								</div>
 							</div>
 						</div>
@@ -567,11 +562,11 @@ const Settings = () => {
 	};
 
 	return (
-		<div className="min-h-screen zen-pattern">
+		<div className="min-h-screen mira-content">
 			<div className="container mx-auto px-4 py-8">
 				<div className="mb-8">
-					<h1 className="zen-title text-4xl mb-2">Settings</h1>
-					<p className="text-sidebar-foreground/70">
+					<h1 className="mira-title text-4xl mb-2">Settings</h1>
+					<p className="text-foreground/70">
 						Customize your zenWhisper experience
 					</p>
 				</div>
@@ -579,7 +574,7 @@ const Settings = () => {
 				<div className="flex flex-col lg:flex-row gap-8">
 					{/* Sidebar Navigation */}
 					<div className="lg:w-64">
-						<div className="glass-panel rounded-2xl p-4 sticky top-8">
+						<div className="mira-glass rounded-2xl p-4 sticky top-8">
 							<nav className="space-y-1">
 								{tabs.map((tab) => (
 									<button
@@ -588,7 +583,7 @@ const Settings = () => {
 										className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
 											activeTab === tab.id
 												? "bg-primary text-primary-foreground shadow-lg"
-												: "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/20"
+												: "text-foreground/70 hover:text-foreground hover:bg-sidebar-accent/20"
 										}`}
 									>
 										{tab.icon}
@@ -613,7 +608,7 @@ const Settings = () => {
 						{/* Save Button */}
 						<div className="flex justify-end mt-8">
 							<button
-								className="px-6 py-3 zen-action-btn text-primary-foreground rounded-xl font-medium transition-all flex items-center gap-2"
+								className="px-6 py-3 mira-action-btn text-primary-foreground rounded-xl font-medium transition-all flex items-center gap-2"
 								style={{
 									background: "oklch(0.55 0.08 145)",
 									boxShadow: "0 4px 20px oklch(0.55 0.08 145 / 0.3)",

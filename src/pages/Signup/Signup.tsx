@@ -9,6 +9,9 @@ import {
 } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate, NavLink } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
 import api from "../../services/axios";
 
 interface ValidationState {
@@ -88,7 +91,7 @@ const Signup: React.FC = () => {
 
 	const getPasswordStrength = (password: string) => {
 		if (password.length === 0)
-			return { strength: 0, color: "text-sidebar-foreground/40", label: "" };
+			return { strength: 0, color: "text-foreground/40", label: "" };
 		if (password.length < 6)
 			return { strength: 1, color: "text-red-600", label: "Weak" };
 		if (password.length < 10)
@@ -164,47 +167,48 @@ const Signup: React.FC = () => {
 	};
 
 	return (
-		<div className="min-h-screen min-w-full zen-pattern chat-container flex items-center justify-center p-6">
+		<div className="min-h-screen min-w-full mira-content chat-container flex items-center justify-center p-6">
 			<div className="w-full max-w-md">
 				{/* Logo and title */}
 				<div className="text-center mb-8">
-					<div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center mx-auto mb-4">
+					<Card className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 bg-background/80 backdrop-blur-md border-border/50">
 						<UserPlus
 							className="w-8 h-8"
 							style={{ color: "oklch(0.55 0.08 145)" }}
 						/>
-					</div>
-					<h1 className="zen-title text-3xl mb-2">Join zenWhisper</h1>
-					<p className="text-sidebar-foreground/60 text-sm">
+					</Card>
+					<h1 className="mira-title text-3xl mb-2">Join zenWhisper</h1>
+					<p className="text-foreground/60 text-sm">
 						Create your account for educational collaboration
 					</p>
 				</div>
 
 				{/* Signup form */}
-				<div className="glass-panel rounded-2xl p-8">
-					<form onSubmit={handleSubmit} className="space-y-5">
+				<Card className="bg-background/80 backdrop-blur-md border-border/50">
+					<CardContent className="p-8">
+						<form onSubmit={handleSubmit} className="space-y-5">
 						{/* Username field */}
 						<div className="space-y-2">
-							<label className="text-sidebar-foreground text-sm font-medium flex items-center justify-between">
+							<label className="text-foreground text-sm font-medium flex items-center justify-between">
 								<span>Username</span>
 								{formData.username &&
 									(validation.username ? (
-										<CheckCircle className="w-4 h-4 text-green-600" />
+										<CheckCircle className="w-4 h-4 text-primary" />
 									) : (
-										<AlertCircle className="w-4 h-4 text-red-600" />
+										<AlertCircle className="w-4 h-4 text-destructive" />
 									))}
 							</label>
-							<input
+							<Input
 								type="text"
 								name="username"
 								value={formData.username}
 								onChange={handleChange}
 								placeholder="Choose a username"
-								className="w-full px-4 py-3 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all"
+								className="bg-background/50 border-border/50 focus:border-primary/50"
 								disabled={isLoading}
 							/>
 							{formData.username && (
-								<p className="text-xs text-sidebar-foreground/60">
+								<p className="text-xs text-foreground/60">
 									{validation.username
 										? "Username available"
 										: "3-20 characters required"}
@@ -214,26 +218,26 @@ const Signup: React.FC = () => {
 
 						{/* Email field */}
 						<div className="space-y-2">
-							<label className="text-sidebar-foreground text-sm font-medium flex items-center justify-between">
+							<label className="text-foreground text-sm font-medium flex items-center justify-between">
 								<span>Email Address</span>
 								{formData.email &&
 									(validation.email ? (
-										<CheckCircle className="w-4 h-4 text-green-600" />
+										<CheckCircle className="w-4 h-4 text-primary" />
 									) : (
-										<AlertCircle className="w-4 h-4 text-red-600" />
+										<AlertCircle className="w-4 h-4 text-destructive" />
 									))}
 							</label>
-							<input
+							<Input
 								type="email"
 								name="email"
 								value={formData.email}
 								onChange={handleChange}
 								placeholder="Enter your email"
-								className="w-full px-4 py-3 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all"
+								className="bg-background/50 border-border/50 focus:border-primary/50"
 								disabled={isLoading}
 							/>
 							{formData.email && (
-								<p className="text-xs text-sidebar-foreground/60">
+								<p className="text-xs text-foreground/60">
 									{validation.email
 										? "Valid email address"
 										: "Please enter a valid email"}
@@ -243,36 +247,38 @@ const Signup: React.FC = () => {
 
 						{/* Password field */}
 						<div className="space-y-2">
-							<label className="text-sidebar-foreground text-sm font-medium flex items-center justify-between">
+							<label className="text-foreground text-sm font-medium flex items-center justify-between">
 								<span>Password</span>
 								{formData.password &&
 									(validation.password ? (
-										<CheckCircle className="w-4 h-4 text-green-600" />
+										<CheckCircle className="w-4 h-4 text-primary" />
 									) : (
-										<AlertCircle className="w-4 h-4 text-red-600" />
+										<AlertCircle className="w-4 h-4 text-destructive" />
 									))}
 							</label>
 							<div className="relative">
-								<input
+								<Input
 									type={showPassword ? "text" : "password"}
 									name="password"
 									value={formData.password}
 									onChange={handleChange}
 									placeholder="Create a password"
-									className="w-full px-4 py-3 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all pr-12"
+									className="bg-background/50 border-border/50 focus:border-primary/50 pr-12"
 									disabled={isLoading}
 								/>
-								<button
+								<Button
 									type="button"
+									variant="ghost"
+									size="sm"
 									onClick={() => setShowPassword(!showPassword)}
-									className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sidebar-foreground/60 hover:text-sidebar-foreground transition-colors"
+									className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 text-muted-foreground hover:text-foreground"
 								>
 									{showPassword ? (
 										<EyeOff className="w-4 h-4" />
 									) : (
 										<Eye className="w-4 h-4" />
 									)}
-								</button>
+								</Button>
 							</div>
 							{formData.password && (
 								<div className="space-y-1">
@@ -293,7 +299,7 @@ const Signup: React.FC = () => {
 											{passwordStrength.label}
 										</span>
 									</div>
-									<p className="text-xs text-sidebar-foreground/60">
+									<p className="text-xs text-foreground/60">
 										Minimum 6 characters
 									</p>
 								</div>
@@ -302,28 +308,28 @@ const Signup: React.FC = () => {
 
 						{/* Confirm password field */}
 						<div className="space-y-2">
-							<label className="text-sidebar-foreground text-sm font-medium">
+							<label className="text-foreground text-sm font-medium">
 								Confirm Password
 							</label>
 							<div className="relative">
-								<input
+								<Input
 									type={showPassword ? "text" : "password"}
 									name="confirmPassword"
 									value={formData.confirmPassword}
 									onChange={handleChange}
 									placeholder="Confirm your password"
-									className="w-full px-4 py-3 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all"
+									className="bg-background/50 border-border/50 focus:border-primary/50"
 									disabled={isLoading}
 								/>
 								{formData.confirmPassword &&
 									formData.password === formData.confirmPassword && (
 										<div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-											<CheckCircle className="w-4 h-4 text-green-600" />
+											<CheckCircle className="w-4 h-4 text-primary" />
 										</div>
 									)}
 							</div>
 							{formData.confirmPassword && (
-								<p className="text-xs text-sidebar-foreground/60">
+								<p className="text-xs text-foreground/60">
 									{formData.password === formData.confirmPassword
 										? "Passwords match"
 										: "Passwords do not match"}
@@ -348,7 +354,7 @@ const Signup: React.FC = () => {
 						)}
 
 						{/* Submit button */}
-						<button
+						<Button
 							type="submit"
 							disabled={
 								isLoading ||
@@ -356,15 +362,15 @@ const Signup: React.FC = () => {
 								!validation.password ||
 								!validation.username
 							}
-							className="w-full py-3 px-4 font-medium rounded-xl zen-action-btn disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+							className="w-full py-3 px-4 text-primary-foreground font-medium rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg"
 							style={{
-								background: "oklch(0.55 0.08 145)",
-								boxShadow: "0 4px 20px oklch(0.55 0.08 145 / 0.3)",
+								background: "var(--primary)",
+								boxShadow: "0 4px 20px var(--primary) / 0.3",
 							}}
 						>
 							{isLoading ? (
 								<>
-									<div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+									<div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
 									<span>Creating account...</span>
 								</>
 							) : (
@@ -372,21 +378,22 @@ const Signup: React.FC = () => {
 									<span>Create Account</span>
 								</>
 							)}
-						</button>
+						</Button>
 					</form>
 
 					{/* Security note */}
-					<div className="mt-6 pt-6 zen-separator">
-						<div className="flex items-center justify-center gap-2 text-sidebar-foreground/60 text-xs">
+					<div className="mt-6 pt-6 mira-separator">
+						<div className="flex items-center justify-center gap-2 text-foreground/60 text-xs">
 							<Shield className="w-3 h-3" />
 							<span>Your data is secure and protected</span>
 						</div>
 					</div>
-				</div>
+					</CardContent>
+				</Card>
 
 				{/* Login link */}
 				<div className="text-center mt-8">
-					<p className="text-sidebar-foreground/60 text-sm">
+					<p className="text-foreground/60 text-sm">
 						Already have an account?{" "}
 						<NavLink
 							to="/login"

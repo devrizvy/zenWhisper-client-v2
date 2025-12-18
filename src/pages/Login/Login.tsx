@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Eye, EyeOff, Shield, User } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate, NavLink } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import api from "../../services/axios";
 
 const Login: React.FC = () => {
@@ -71,116 +74,121 @@ const Login: React.FC = () => {
 	};
 
 	return (
-		<div className="min-h-screen min-w-full zen-pattern chat-container flex items-center justify-center p-6">
-			<div className="w-full max-w-md">
+		<div className="min-h-screen min-w-full mira-content flex items-center justify-center p-6 relative">
+			{/* Background decoration */}
+			<div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
+
+			<div className="w-full max-w-md relative z-10">
 				{/* Logo and title */}
-				<div className="text-center mb-8">
-					<div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center mx-auto mb-4">
-						<User
-							className="w-8 h-8"
-							style={{ color: "oklch(0.65 0.12 155)" }}
-						/>
+				<div className="text-center mb-8 animate-mira-message">
+					<div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 mira-glass border-border/50 shadow-lg">
+						<User className="w-10 h-10 text-primary" />
 					</div>
-					<h1 className="zen-title text-3xl mb-2">zenWhisper</h1>
-					<p className="text-sidebar-foreground/60 text-sm">
+					<h1 className="mira-title text-4xl font-bold mb-3">zenWhisper</h1>
+					<p className="text-muted-foreground text-base font-medium">
 						Educational platform for students and teachers
 					</p>
 				</div>
 
 				{/* Login form */}
-				<div className="glass-panel rounded-2xl p-8">
-					<form onSubmit={handleSubmit} className="space-y-6">
+				<Card className="mira-glass border-border/50 shadow-xl animate-mira-message" style={{ animationDelay: "100ms" }}>
+					<CardHeader className="text-center pb-4">
+						<h2 className="text-2xl font-semibold text-foreground">Welcome Back</h2>
+						<p className="text-muted-foreground">Sign in to continue your journey</p>
+					</CardHeader>
+					<CardContent className="px-6 pb-6">
+						<form onSubmit={handleSubmit} className="space-y-5">
 						{/* Email field */}
 						<div className="space-y-2">
-							<label className="text-sidebar-foreground text-sm font-medium">
-								Email
+							<label htmlFor="email" className="text-foreground font-medium text-sm">
+								Email Address
 							</label>
-							<div className="relative">
-								<input
-									type="email"
-									name="email"
-									value={formData.email}
-									onChange={handleChange}
-									placeholder="Enter your email"
-									className="zen-search w-full px-4 py-3 rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all"
-									disabled={isLoading}
-								/>
-							</div>
+							<Input
+								id="email"
+								type="email"
+								name="email"
+								value={formData.email}
+								onChange={handleChange}
+								placeholder="Enter your email address"
+								className="mira-search"
+								disabled={isLoading}
+							/>
 						</div>
 
 						{/* Password field */}
 						<div className="space-y-2">
-							<label className="text-sidebar-foreground text-sm font-medium">
+							<label htmlFor="password" className="text-foreground font-medium text-sm">
 								Password
 							</label>
 							<div className="relative">
-								<input
+								<Input
+									id="password"
 									type={showPassword ? "text" : "password"}
 									name="password"
 									value={formData.password}
 									onChange={handleChange}
 									placeholder="Enter your password"
-									className="zen-search w-full px-4 py-3 rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all pr-12"
+									className="mira-search pr-12"
 									disabled={isLoading}
 								/>
-								<button
+								<Button
 									type="button"
+									variant="ghost"
+									size="icon"
 									onClick={() => setShowPassword(!showPassword)}
-									className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sidebar-foreground/60 hover:text-sidebar-foreground transition-colors"
+									className="absolute right-2 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
 								>
 									{showPassword ? (
 										<EyeOff className="w-4 h-4" />
 									) : (
 										<Eye className="w-4 h-4" />
 									)}
-								</button>
+								</Button>
 							</div>
 						</div>
 
 						{/* Error message */}
 						{error && (
-							<div className="p-3 rounded-xl border border-destructive/50 bg-destructive/10">
-								<p className="text-destructive text-sm">{error}</p>
+							<div className="p-4 rounded-lg border border-destructive/50 bg-destructive/10 animate-mira-message">
+								<p className="text-destructive text-sm font-medium">{error}</p>
 							</div>
 						)}
 
 						{/* Submit button */}
-						<button
+						<Button
 							type="submit"
 							disabled={isLoading}
-							className="w-full py-3 px-4 text-primary-foreground font-medium rounded-xl zen-action-btn disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-							style={{
-								background: "oklch(0.65 0.12 155)",
-								boxShadow: "0 4px 20px oklch(0.65 0.12 155 / 0.3)",
-							}}
+							className="w-full h-12 text-base font-semibold"
+							size="lg"
 						>
 							{isLoading ? (
 								<>
-									<div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
-									<span>Signing in...</span>
+									<div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"></div>
+									Signing in...
 								</>
 							) : (
-								<span>Sign In</span>
+								"Sign In"
 							)}
-						</button>
+						</Button>
 					</form>
 
 					{/* Security note */}
-					<div className="mt-6 pt-6 zen-separator">
-						<div className="flex items-center justify-center gap-2 text-sidebar-foreground/60 text-xs">
-							<Shield className="w-3 h-3" />
+					<div className="mt-6 pt-6 mira-separator">
+						<div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
+							<Shield className="w-4 h-4" />
 							<span>Secure login for educational purposes</span>
 						</div>
 					</div>
-				</div>
+					</CardContent>
+				</Card>
 
 				{/* Signup link */}
-				<div className="text-center mt-8">
-					<p className="text-sidebar-foreground/60 text-sm">
+				<div className="text-center mt-8 animate-mira-message" style={{ animationDelay: "200ms" }}>
+					<p className="text-muted-foreground text-base font-medium">
 						Don't have an account?{" "}
 						<NavLink
 							to="/signup"
-							className="text-primary hover:text-primary-foreground transition-colors font-medium"
+							className="text-primary hover:text-primary/80 transition-colors font-semibold underline-offset-4 hover:underline"
 						>
 							Sign up here
 						</NavLink>

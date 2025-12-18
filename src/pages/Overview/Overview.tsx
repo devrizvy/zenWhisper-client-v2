@@ -209,13 +209,13 @@ const Overview = () => {
 	];
 
 	return (
-		<div className="min-h-screen zen-pattern">
+		<div className="min-h-screen mira-content">
 			<div className="container mx-auto px-4 py-8">
 				{/* Header */}
 				<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
 					<div>
-						<h1 className="zen-title text-4xl mb-2">Platform Overview</h1>
-						<p className="text-xl text-sidebar-foreground/70">
+						<h1 className="mira-title text-4xl mb-2">Platform Overview</h1>
+						<p className="text-xl text-foreground/70">
 							Real-time insights and analytics for zenWhisper
 						</p>
 					</div>
@@ -227,7 +227,7 @@ const Overview = () => {
 							className={`px-4 py-2 rounded-xl font-medium transition-all ${
 								timeRange === "week"
 									? "bg-primary text-primary-foreground"
-									: "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/20"
+									: "text-foreground/70 hover:text-foreground hover:bg-sidebar-accent/20"
 							}`}
 						>
 							Week
@@ -237,7 +237,7 @@ const Overview = () => {
 							className={`px-4 py-2 rounded-xl font-medium transition-all ${
 								timeRange === "month"
 									? "bg-primary text-primary-foreground"
-									: "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/20"
+									: "text-foreground/70 hover:text-foreground hover:bg-sidebar-accent/20"
 							}`}
 						>
 							Month
@@ -247,7 +247,7 @@ const Overview = () => {
 							className={`px-4 py-2 rounded-xl font-medium transition-all ${
 								timeRange === "year"
 									? "bg-primary text-primary-foreground"
-									: "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/20"
+									: "text-foreground/70 hover:text-foreground hover:bg-sidebar-accent/20"
 							}`}
 						>
 							Year
@@ -260,7 +260,7 @@ const Overview = () => {
 					{statCards.map((stat, idx) => (
 						<div
 							key={idx}
-							className="glass-panel rounded-2xl p-6 hover:scale-105 transition-all"
+							className="mira-glass rounded-2xl p-6 hover:scale-105 transition-all"
 						>
 							<div className="flex items-center justify-between mb-4">
 								<div
@@ -282,10 +282,10 @@ const Overview = () => {
 									{stat.change}
 								</div>
 							</div>
-							<h3 className="text-2xl font-bold text-sidebar-foreground mb-1">
+							<h3 className="text-2xl font-bold text-foreground mb-1">
 								{stat.value}
 							</h3>
-							<p className="text-sm text-sidebar-foreground/60">{stat.title}</p>
+							<p className="text-sm text-foreground/60">{stat.title}</p>
 						</div>
 					))}
 				</div>
@@ -295,9 +295,9 @@ const Overview = () => {
 					{/* Left Column */}
 					<div className="lg:col-span-2 space-y-8">
 						{/* Activity Chart */}
-						<div className="glass-panel rounded-2xl p-6">
+						<div className="mira-glass rounded-2xl p-6">
 							<div className="flex items-center justify-between mb-6">
-								<h2 className="text-xl font-semibold text-sidebar-foreground flex items-center gap-2">
+								<h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
 									<BarChart3
 										className="w-5 h-5"
 										style={{ color: "oklch(0.55 0.08 145)" }}
@@ -305,16 +305,16 @@ const Overview = () => {
 									Platform Activity
 								</h2>
 								<button className="p-2 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
-									<Filter className="w-4 h-4 text-sidebar-foreground/60" />
+									<Filter className="w-4 h-4 text-foreground/60" />
 								</button>
 							</div>
 							<div className="h-64 bg-sidebar-accent/10 rounded-xl flex items-center justify-center">
 								<div className="text-center">
-									<BarChart3 className="w-12 h-12 mx-auto mb-4 text-sidebar-foreground/30" />
-									<p className="text-sidebar-foreground/60">
+									<BarChart3 className="w-12 h-12 mx-auto mb-4 text-foreground/30" />
+									<p className="text-foreground/60">
 										Activity chart visualization
 									</p>
-									<p className="text-sm text-sidebar-foreground/40">
+									<p className="text-sm text-foreground/40">
 										Shows user engagement over time
 									</p>
 								</div>
@@ -322,9 +322,9 @@ const Overview = () => {
 						</div>
 
 						{/* Recent Classrooms */}
-						<div className="glass-panel rounded-2xl p-6">
+						<div className="mira-glass rounded-2xl p-6">
 							<div className="flex items-center justify-between mb-6">
-								<h2 className="text-xl font-semibold text-sidebar-foreground flex items-center gap-2">
+								<h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
 									<BookOpen
 										className="w-5 h-5"
 										style={{ color: "oklch(0.55 0.08 145)" }}
@@ -357,16 +357,16 @@ const Overview = () => {
 												/>
 											</div>
 											<div>
-												<h4 className="text-sidebar-foreground font-medium">
+												<h4 className="text-foreground font-medium">
 													{classroom.name}
 												</h4>
-												<p className="text-sm text-sidebar-foreground/60">
+												<p className="text-sm text-foreground/60">
 													{classroom.instructor} • {classroom.students} students
 												</p>
 											</div>
 										</div>
 										<div className="text-right">
-											<div className="text-sm text-sidebar-foreground/60 mb-1">
+											<div className="text-sm text-foreground/60 mb-1">
 												{classroom.messages} messages
 											</div>
 											<div
@@ -385,9 +385,9 @@ const Overview = () => {
 						</div>
 
 						{/* Recent Activity */}
-						<div className="glass-panel rounded-2xl p-6">
+						<div className="mira-glass rounded-2xl p-6">
 							<div className="flex items-center justify-between mb-6">
-								<h2 className="text-xl font-semibold text-sidebar-foreground flex items-center gap-2">
+								<h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
 									<Clock
 										className="w-5 h-5"
 										style={{ color: "oklch(0.55 0.08 145)" }}
@@ -395,7 +395,7 @@ const Overview = () => {
 									Recent Activity
 								</h2>
 								<button className="p-2 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
-									<Eye className="w-4 h-4 text-sidebar-foreground/60" />
+									<Eye className="w-4 h-4 text-foreground/60" />
 								</button>
 							</div>
 							<div className="space-y-4">
@@ -413,11 +413,11 @@ const Overview = () => {
 											</span>
 										</div>
 										<div className="flex-1">
-											<p className="text-sidebar-foreground">
+											<p className="text-foreground">
 												<span className="font-medium">{activity.user}</span>{" "}
 												{activity.action}
 											</p>
-											<p className="text-sm text-sidebar-foreground/60">
+											<p className="text-sm text-foreground/60">
 												{activity.time}
 											</p>
 										</div>
@@ -430,9 +430,9 @@ const Overview = () => {
 					{/* Right Column */}
 					<div className="space-y-8">
 						{/* Top Performers */}
-						<div className="glass-panel rounded-2xl p-6">
+						<div className="mira-glass rounded-2xl p-6">
 							<div className="flex items-center justify-between mb-6">
-								<h2 className="text-xl font-semibold text-sidebar-foreground flex items-center gap-2">
+								<h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
 									<Trophy
 										className="w-5 h-5"
 										style={{ color: "oklch(0.55 0.08 145)" }}
@@ -440,7 +440,7 @@ const Overview = () => {
 									Top Performers
 								</h2>
 								<button className="p-2 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
-									<Award className="w-4 h-4 text-sidebar-foreground/60" />
+									<Award className="w-4 h-4 text-foreground/60" />
 								</button>
 							</div>
 							<div className="space-y-4">
@@ -460,14 +460,14 @@ const Overview = () => {
 										</div>
 										<div className="flex-1 min-w-0">
 											<div className="flex items-center justify-between mb-1">
-												<h4 className="text-sidebar-foreground font-medium truncate">
+												<h4 className="text-foreground font-medium truncate">
 													{performer.name}
 												</h4>
 												<span className="text-sm font-bold text-primary">
 													{performer.score}
 												</span>
 											</div>
-											<div className="flex items-center justify-between text-xs text-sidebar-foreground/60">
+											<div className="flex items-center justify-between text-xs text-foreground/60">
 												<span>{performer.sessions} sessions</span>
 												<span
 													className={`px-2 py-0.5 rounded-full ${
@@ -488,9 +488,9 @@ const Overview = () => {
 						</div>
 
 						{/* Quick Stats */}
-						<div className="glass-panel rounded-2xl p-6">
+						<div className="mira-glass rounded-2xl p-6">
 							<div className="flex items-center justify-between mb-6">
-								<h2 className="text-xl font-semibold text-sidebar-foreground flex items-center gap-2">
+								<h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
 									<PieChart
 										className="w-5 h-5"
 										style={{ color: "oklch(0.55 0.08 145)" }}
@@ -498,14 +498,14 @@ const Overview = () => {
 									Key Metrics
 								</h2>
 								<button className="p-2 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
-									<Download className="w-4 h-4 text-sidebar-foreground/60" />
+									<Download className="w-4 h-4 text-foreground/60" />
 								</button>
 							</div>
 							<div className="space-y-4">
 								<div className="flex items-center justify-between p-3">
 									<div className="flex items-center gap-3">
-										<Target className="w-4 h-4 text-sidebar-foreground/60" />
-										<span className="text-sidebar-foreground/70">
+										<Target className="w-4 h-4 text-foreground/60" />
+										<span className="text-foreground/70">
 											Completion Rate
 										</span>
 									</div>
@@ -515,8 +515,8 @@ const Overview = () => {
 								</div>
 								<div className="flex items-center justify-between p-3">
 									<div className="flex items-center gap-3">
-										<Users className="w-4 h-4 text-sidebar-foreground/60" />
-										<span className="text-sidebar-foreground/70">
+										<Users className="w-4 h-4 text-foreground/60" />
+										<span className="text-foreground/70">
 											Active Users
 										</span>
 									</div>
@@ -526,8 +526,8 @@ const Overview = () => {
 								</div>
 								<div className="flex items-center justify-between p-3">
 									<div className="flex items-center gap-3">
-										<Lightbulb className="w-4 h-4 text-sidebar-foreground/60" />
-										<span className="text-sidebar-foreground/70">
+										<Lightbulb className="w-4 h-4 text-foreground/60" />
+										<span className="text-foreground/70">
 											Avg. Session Time
 										</span>
 									</div>
@@ -535,8 +535,8 @@ const Overview = () => {
 								</div>
 								<div className="flex items-center justify-between p-3">
 									<div className="flex items-center gap-3">
-										<Globe className="w-4 h-4 text-sidebar-foreground/60" />
-										<span className="text-sidebar-foreground/70">
+										<Globe className="w-4 h-4 text-foreground/60" />
+										<span className="text-foreground/70">
 											Global Reach
 										</span>
 									</div>
@@ -546,9 +546,9 @@ const Overview = () => {
 						</div>
 
 						{/* AI Insights */}
-						<div className="glass-panel rounded-2xl p-6">
+						<div className="mira-glass rounded-2xl p-6">
 							<div className="flex items-center justify-between mb-6">
-								<h2 className="text-xl font-semibold text-sidebar-foreground flex items-center gap-2">
+								<h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
 									<Brain
 										className="w-5 h-5"
 										style={{ color: "oklch(0.55 0.08 145)" }}
@@ -565,19 +565,19 @@ const Overview = () => {
 											Trending Up
 										</span>
 									</div>
-									<p className="text-sm text-sidebar-foreground/80">
+									<p className="text-sm text-foreground/80">
 										Student engagement increased by 15% this week with peak
 										activity between 2-4 PM
 									</p>
 								</div>
 								<div className="p-4 bg-sidebar-accent/30 rounded-xl">
 									<div className="flex items-center gap-2 mb-2">
-										<Lightbulb className="w-4 h-4 text-sidebar-foreground" />
-										<span className="text-sm font-medium text-sidebar-foreground">
+										<Lightbulb className="w-4 h-4 text-foreground" />
+										<span className="text-sm font-medium text-foreground">
 											Recommendation
 										</span>
 									</div>
-									<p className="text-sm text-sidebar-foreground/80">
+									<p className="text-sm text-foreground/80">
 										Consider scheduling more collaborative sessions during
 										weekend afternoons for higher participation
 									</p>

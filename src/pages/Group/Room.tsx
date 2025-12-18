@@ -192,35 +192,35 @@ const Room = () => {
 	}
 
 	return (
-		<div className="min-h-screen zen-pattern px-2 sm:px-0">
+		<div className="min-h-screen mira-content px-2 sm:px-0">
 			<Toaster position="top-right" />
 
 			{/* Header */}
 			<div className="text-center mb-8 pt-8">
-				<h1 className="zen-title text-4xl mb-2">Classroom</h1>
-				<p className="text-sidebar-foreground/60">
+				<h1 className="mira-title text-4xl mb-2">Classroom</h1>
+				<p className="text-foreground/60">
 					Create or join virtual classrooms for learning
 				</p>
 			</div>
 
 			<div className="flex items-center justify-center py-4 sm:py-8">
-				<div className="glass-panel rounded-2xl p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-md lg:max-w-lg">
+				<div className="mira-glass rounded-2xl p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-md lg:max-w-lg">
 					{currentRoom ? (
 						// Already in a room view - Educational themed
 						<>
 							<div className="text-center mb-6 sm:mb-8">
-								<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-sidebar-foreground">
+								<h1 className="text-2xl sm:text-3xl font-bold mb-4 text-foreground">
 									Current Classroom
 								</h1>
 								<div className="bg-sidebar-accent/20 p-4 sm:p-6 rounded-xl my-4 border border-sidebar-border">
-									<h2 className="text-lg sm:text-xl font-semibold mb-2 text-blue-600">
+									<h2 className="text-lg sm:text-xl font-semibold mb-2 text-primary">
 										{currentRoom.name}
 									</h2>
-									<div className="flex items-center justify-center text-xs sm:text-sm text-sidebar-foreground/60">
+									<div className="flex items-center justify-center text-xs sm:text-sm text-foreground/60">
 										<span>Class ID: {currentRoom.id}</span>
 										<button
 											onClick={copyRoomId}
-											className="ml-2 text-blue-600 hover:text-blue-700 transition-colors p-1 rounded"
+											className="ml-2 text-primary hover:text-primary/90 transition-colors p-1 rounded"
 											title="Copy Class ID"
 										>
 											<Copy size={12} className="sm:w-3.5 sm:h-3.5" />
@@ -230,8 +230,8 @@ const Room = () => {
 
 								{/* Online Users */}
 								{onlineUsers.length > 0 && (
-									<div className="bg-blue-50 p-3 sm:p-4 rounded-xl mb-4">
-										<div className="flex items-center justify-center gap-2 text-sidebar-foreground/80 mb-3">
+									<div className="bg-primary/10 p-3 sm:p-4 rounded-xl mb-4">
+										<div className="flex items-center justify-center gap-2 text-foreground/80 mb-3">
 											<Users size={16} className="sm:w-4 sm:h-4" />
 											<span className="text-sm sm:text-base">
 												{onlineUsers.length} Students Online
@@ -243,8 +243,8 @@ const Room = () => {
 													key={idx}
 													className={`px-3 py-1 rounded-full text-xs sm:text-sm border ${
 														user === username
-															? "bg-blue-100 text-blue-700 border-blue-200"
-															: "bg-sidebar-accent/30 text-sidebar-foreground/80 border-sidebar-border"
+															? "bg-primary/10 text-primary border-primary/20"
+															: "bg-sidebar-accent/30 text-foreground/80 border-sidebar-border"
 													}`}
 												>
 													{user}
@@ -258,7 +258,7 @@ const Room = () => {
 							<div className="flex flex-col sm:flex-row gap-3 mb-4 sm:mb-6">
 								<button
 									onClick={continueToChat}
-									className="flex-1 zen-action-btn text-primary-foreground p-3 sm:p-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+									className="flex-1 mira-action-btn text-primary-foreground p-3 sm:p-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
 									style={{
 										background: "oklch(0.55 0.08 145)",
 										boxShadow: "0 4px 20px oklch(0.55 0.08 145 / 0.3)",
@@ -270,7 +270,7 @@ const Room = () => {
 
 								<button
 									onClick={leaveRoom}
-									className="bg-red-600 text-white p-3 sm:p-4 rounded-lg hover:opacity-90 transition-colors flex items-center justify-center sm:w-auto"
+									className="bg-destructive text-destructive-foreground p-3 sm:p-4 rounded-lg hover:opacity-90 transition-colors flex items-center justify-center sm:w-auto"
 									title="Leave Classroom"
 								>
 									<LogOut size={16} className="sm:w-4 sm:h-4" />
@@ -279,7 +279,7 @@ const Room = () => {
 							</div>
 
 							<div className="border-t border-sidebar-border pt-4 sm:pt-6 mt-2">
-								<h3 className="text-base sm:text-lg font-semibold mb-3 text-sidebar-foreground">
+								<h3 className="text-base sm:text-lg font-semibold mb-3 text-foreground">
 									Join Another Classroom
 								</h3>
 								<div className="space-y-4">
@@ -287,18 +287,18 @@ const Room = () => {
 										onChange={(event) => setRoomName(event.target.value)}
 										type="text"
 										placeholder="Classroom Name"
-										className="w-full p-3 sm:p-4 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
+										className="w-full p-3 sm:p-4 mira-search rounded-xl text-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
 									/>
 									<input
 										onChange={(event) => setRoomId(event.target.value)}
 										type="text"
 										placeholder="Class ID"
-										className="w-full p-3 sm:p-4 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
+										className="w-full p-3 sm:p-4 mira-search rounded-xl text-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
 									/>
 									<button
 										onClick={joinTheRoom}
 										disabled={loading}
-										className="w-full zen-action-btn text-primary-foreground p-3 sm:p-4 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
+										className="w-full mira-action-btn text-primary-foreground p-3 sm:p-4 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
 									>
 										{loading ? "Joining..." : "Join Classroom"}
 									</button>
@@ -314,8 +314,8 @@ const Room = () => {
 									onClick={() => setIsCreating(false)}
 									className={`flex-1 py-3 rounded-md transition text-xs sm:text-sm font-medium ${
 										!isCreating
-											? "zen-action-btn text-primary-foreground"
-											: "text-sidebar-foreground/60 hover:text-sidebar-foreground"
+											? "mira-action-btn text-primary-foreground"
+											: "text-foreground/60 hover:text-foreground"
 									}`}
 								>
 									Join Classroom
@@ -324,15 +324,15 @@ const Room = () => {
 									onClick={() => setIsCreating(true)}
 									className={`flex-1 py-3 rounded-md transition text-xs sm:text-sm font-medium ${
 										isCreating
-											? "zen-action-btn text-primary-foreground"
-											: "text-sidebar-foreground/60 hover:text-sidebar-foreground"
+											? "mira-action-btn text-primary-foreground"
+											: "text-foreground/60 hover:text-foreground"
 									}`}
 								>
 									Create Classroom
 								</button>
 							</div>
 
-							<h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-sidebar-foreground">
+							<h1 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-foreground">
 								{isCreating ? "Create a New Classroom" : "Join a Classroom"}
 							</h1>
 
@@ -343,7 +343,7 @@ const Room = () => {
 									type="text"
 									maxLength={14}
 									placeholder="Classroom Name"
-									className="w-full p-3 sm:p-4 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
+									className="w-full p-3 sm:p-4 mira-search rounded-xl text-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
 								/>
 
 								{isCreating ? (
@@ -352,7 +352,7 @@ const Room = () => {
 										onChange={(event) => setRoomId(event.target.value)}
 										type="text"
 										placeholder="Class ID (optional - will be generated if empty)"
-										className="w-full p-3 sm:p-4 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
+										className="w-full p-3 sm:p-4 mira-search rounded-xl text-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
 									/>
 								) : (
 									<input
@@ -360,14 +360,14 @@ const Room = () => {
 										onChange={(event) => setRoomId(event.target.value)}
 										type="text"
 										placeholder="Class ID"
-										className="w-full p-3 sm:p-4 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
+										className="w-full p-3 sm:p-4 mira-search rounded-xl text-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all text-sm sm:text-base"
 									/>
 								)}
 
 								<button
 									onClick={isCreating ? createNewRoom : joinTheRoom}
 									disabled={loading}
-									className="w-full zen-action-btn text-primary-foreground p-3 sm:p-4 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
+									className="w-full mira-action-btn text-primary-foreground p-3 sm:p-4 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
 								>
 									{loading ? (
 										"Processing..."
@@ -384,7 +384,7 @@ const Room = () => {
 								{/* Recent Rooms */}
 								{recentRooms.length > 0 && (
 									<div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-sidebar-border">
-										<h3 className="text-base sm:text-lg font-semibold mb-4 text-sidebar-foreground">
+										<h3 className="text-base sm:text-lg font-semibold mb-4 text-foreground">
 											Recent Classrooms
 										</h3>
 										<div className="space-y-3">
@@ -392,19 +392,19 @@ const Room = () => {
 												<button
 													key={idx}
 													onClick={() => joinExistingRoom(room)}
-													className="w-full flex items-center justify-between bg-sidebar-accent/20 hover:bg-sidebar-accent/30 text-sidebar-foreground p-3 sm:p-4 rounded-lg border border-sidebar-border transition-colors"
+													className="w-full flex items-center justify-between bg-sidebar-accent/20 hover:bg-sidebar-accent/30 text-foreground p-3 sm:p-4 rounded-lg border border-sidebar-border transition-colors"
 												>
 													<div className="text-left min-w-0 flex-1">
 														<div className="font-medium text-sm sm:text-base truncate mb-1">
 															{room.name}
 														</div>
-														<div className="text-xs text-sidebar-foreground/60">
+														<div className="text-xs text-foreground/60">
 															ID: {room.id}
 														</div>
 													</div>
 													<ArrowRight
 														size={16}
-														className="sm:w-4 sm:h-4 flex-shrink-0 ml-3 text-sidebar-foreground/60"
+														className="sm:w-4 sm:h-4 flex-shrink-0 ml-3 text-foreground/60"
 													/>
 												</button>
 											))}

@@ -192,20 +192,20 @@ const FAQ = () => {
 	};
 
 	return (
-		<div className="min-h-screen zen-pattern">
+		<div className="min-h-screen mira-content">
 			<div className="container mx-auto px-4 py-8">
 				{/* Header */}
 				<div className="text-center mb-12">
-					<div className="w-20 h-20 glass-panel rounded-2xl flex items-center justify-center mx-auto mb-6 zen-float">
+					<div className="w-20 h-20 mira-glass rounded-2xl flex items-center justify-center mx-auto mb-6 zen-float">
 						<HelpCircle
 							className="w-10 h-10"
 							style={{ color: "oklch(0.55 0.08 145)" }}
 						/>
 					</div>
-					<h1 className="zen-title text-4xl sm:text-5xl mb-4">
+					<h1 className="mira-title text-4xl sm:text-5xl mb-4">
 						Frequently Asked Questions
 					</h1>
-					<p className="text-xl text-sidebar-foreground/70 max-w-2xl mx-auto">
+					<p className="text-xl text-foreground/70 max-w-2xl mx-auto">
 						Find answers to common questions about zenWhisper
 					</p>
 				</div>
@@ -213,13 +213,13 @@ const FAQ = () => {
 				{/* Search Bar */}
 				<div className="max-w-2xl mx-auto mb-8">
 					<div className="relative">
-						<Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-sidebar-foreground/40" />
+						<Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-foreground/40" />
 						<input
 							type="text"
 							placeholder="Search for answers..."
 							value={searchQuery}
 							onChange={(e) => setSearchQuery(e.target.value)}
-							className="w-full pl-12 pr-4 py-4 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 text-lg"
+							className="w-full pl-12 pr-4 py-4 mira-search rounded-xl text-foreground placeholder-sidebar-foreground/40 text-lg"
 						/>
 					</div>
 				</div>
@@ -233,7 +233,7 @@ const FAQ = () => {
 							className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all ${
 								activeCategory === category.id
 									? "bg-primary text-primary-foreground shadow-lg"
-									: "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/20"
+									: "text-foreground/70 hover:text-foreground hover:bg-sidebar-accent/20"
 							}`}
 						>
 							{category.icon}
@@ -246,13 +246,13 @@ const FAQ = () => {
 				<div className="max-w-4xl mx-auto">
 					{filteredFAQs.length === 0 ? (
 						<div className="text-center py-12">
-							<div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center mx-auto mb-4">
-								<Search className="w-8 h-8 text-sidebar-foreground/40" />
+							<div className="w-16 h-16 mira-glass rounded-2xl flex items-center justify-center mx-auto mb-4">
+								<Search className="w-8 h-8 text-foreground/40" />
 							</div>
-							<h3 className="text-xl font-semibold text-sidebar-foreground mb-2">
+							<h3 className="text-xl font-semibold text-foreground mb-2">
 								No matching questions found
 							</h3>
-							<p className="text-sidebar-foreground/60 mb-4">
+							<p className="text-foreground/60 mb-4">
 								Try different search terms or browse all categories
 							</p>
 							<button
@@ -260,7 +260,7 @@ const FAQ = () => {
 									setSearchQuery("");
 									setActiveCategory("all");
 								}}
-								className="px-6 py-2 zen-action-btn text-primary-foreground rounded-xl transition-all"
+								className="px-6 py-2 mira-action-btn text-primary-foreground rounded-xl transition-all"
 								style={{
 									background: "oklch(0.55 0.08 145)",
 									boxShadow: "0 4px 20px oklch(0.55 0.08 145 / 0.3)",
@@ -274,7 +274,7 @@ const FAQ = () => {
 							{filteredFAQs.map((faq) => (
 								<div
 									key={faq.id}
-									className="glass-panel rounded-2xl overflow-hidden transition-all hover:scale-[1.02]"
+									className="mira-glass rounded-2xl overflow-hidden transition-all hover:scale-[1.02]"
 								>
 									<button
 										onClick={() => toggleExpand(faq.id)}
@@ -291,22 +291,22 @@ const FAQ = () => {
 													{faq.icon}
 												</span>
 											</div>
-											<h3 className="text-lg font-medium text-sidebar-foreground">
+											<h3 className="text-lg font-medium text-foreground">
 												{faq.question}
 											</h3>
 										</div>
 										<div className="ml-4">
 											{expandedItems.has(faq.id) ? (
-												<ChevronUp className="w-5 h-5 text-sidebar-foreground/40" />
+												<ChevronUp className="w-5 h-5 text-foreground/40" />
 											) : (
-												<ChevronDown className="w-5 h-5 text-sidebar-foreground/40" />
+												<ChevronDown className="w-5 h-5 text-foreground/40" />
 											)}
 										</div>
 									</button>
 
 									{expandedItems.has(faq.id) && (
 										<div className="px-6 pb-4 border-t border-sidebar-border/50">
-											<p className="text-sidebar-foreground/80 leading-relaxed">
+											<p className="text-foreground/80 leading-relaxed">
 												{faq.answer}
 											</p>
 										</div>
@@ -318,16 +318,16 @@ const FAQ = () => {
 				</div>
 
 				{/* Contact Support */}
-				<div className="mt-16 glass-panel rounded-3xl p-8 max-w-4xl mx-auto">
+				<div className="mt-16 mira-glass rounded-3xl p-8 max-w-4xl mx-auto">
 					<div className="text-center">
-						<div className="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center mx-auto mb-6">
+						<div className="w-16 h-16 mira-glass rounded-2xl flex items-center justify-center mx-auto mb-6">
 							<Mail
 								className="w-8 h-8"
 								style={{ color: "oklch(0.55 0.08 145)" }}
 							/>
 						</div>
-						<h2 className="zen-title text-2xl mb-4">Still have questions?</h2>
-						<p className="text-lg text-sidebar-foreground/70 mb-8 max-w-2xl mx-auto">
+						<h2 className="mira-title text-2xl mb-4">Still have questions?</h2>
+						<p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
 							Our support team is here to help you 24/7. Get in touch with us
 							through any of the following channels.
 						</p>
@@ -338,10 +338,10 @@ const FAQ = () => {
 									className="w-8 h-8 mx-auto mb-3"
 									style={{ color: "oklch(0.55 0.08 145)" }}
 								/>
-								<h3 className="text-sidebar-foreground font-medium mb-2">
+								<h3 className="text-foreground font-medium mb-2">
 									Live Chat
 								</h3>
-								<p className="text-sm text-sidebar-foreground/60 mb-3">
+								<p className="text-sm text-foreground/60 mb-3">
 									Chat with our support team instantly
 								</p>
 								<button className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center gap-1 mx-auto">
@@ -354,10 +354,10 @@ const FAQ = () => {
 									className="w-8 h-8 mx-auto mb-3"
 									style={{ color: "oklch(0.55 0.08 145)" }}
 								/>
-								<h3 className="text-sidebar-foreground font-medium mb-2">
+								<h3 className="text-foreground font-medium mb-2">
 									Email Support
 								</h3>
-								<p className="text-sm text-sidebar-foreground/60 mb-3">
+								<p className="text-sm text-foreground/60 mb-3">
 									Get detailed help via email
 								</p>
 								<a
@@ -373,10 +373,10 @@ const FAQ = () => {
 									className="w-8 h-8 mx-auto mb-3"
 									style={{ color: "oklch(0.55 0.08 145)" }}
 								/>
-								<h3 className="text-sidebar-foreground font-medium mb-2">
+								<h3 className="text-foreground font-medium mb-2">
 									Help Center
 								</h3>
-								<p className="text-sm text-sidebar-foreground/60 mb-3">
+								<p className="text-sm text-foreground/60 mb-3">
 									Browse our detailed guides
 								</p>
 								<a

@@ -1,30 +1,33 @@
 import { Outlet } from "react-router-dom";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
-	SidebarProvider,
 	SidebarTrigger,
 	SidebarInset,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { Search, Plus, MoreVertical, Moon, Bell } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Search, Plus, MoreVertical, Moon, Sun, Bell } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Layout() {
+	const { theme, toggleTheme } = useTheme();
+
 	return (
 		<>
 			<AppSidebar />
-			<SidebarInset className="bg-background/90 backdrop-blur-sm">
+			<SidebarInset className="mira-content">
 				{/* Enhanced Header */}
-				<header className="zen-header flex h-16 shrink-0 items-center gap-4 px-6">
-					<SidebarTrigger className="text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 transition-all duration-200" />
+				<header className="mira-header flex h-16 shrink-0 items-center gap-4 px-6 border-b">
+					<SidebarTrigger className="mira-action-btn text-muted-foreground hover:text-foreground p-2 rounded-lg" />
 
 					{/* Search Bar */}
 					<div className="flex-1 max-w-md">
 						<div className="relative">
-							<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-sidebar-foreground/50" />
-							<input
+							<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+							<Input
 								type="text"
 								placeholder="Search conversations, notes, or people..."
-								className="zen-search w-full h-10 pl-10 pr-4 rounded-full text-sm text-sidebar-foreground placeholder:text-sidebar-foreground/50 focus:outline-none"
+								className="pl-10 pr-4 mira-search"
 							/>
 						</div>
 					</div>
@@ -33,30 +36,36 @@ export default function Layout() {
 					<div className="flex items-center gap-2">
 						<Button
 							variant="ghost"
-							size="sm"
-							className="zen-action-btn h-9 w-9 p-0 text-sidebar-foreground/70 hover:text-sidebar-foreground"
+							size="icon"
+							className="mira-action-btn text-muted-foreground hover:text-foreground"
 						>
 							<Plus className="w-4 h-4" />
 						</Button>
 						<Button
 							variant="ghost"
-							size="sm"
-							className="zen-action-btn h-9 w-9 p-0 text-sidebar-foreground/70 hover:text-sidebar-foreground"
+							size="icon"
+							className="mira-action-btn text-muted-foreground hover:text-foreground relative"
 						>
 							<Bell className="w-4 h-4" />
+							<span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
 						</Button>
 						<Button
 							variant="ghost"
-							size="sm"
-							className="zen-action-btn h-9 w-9 p-0 text-sidebar-foreground/70 hover:text-sidebar-foreground"
+							size="icon"
+							onClick={toggleTheme}
+							className="mira-action-btn text-muted-foreground hover:text-foreground"
 						>
-							<Moon className="w-4 h-4" />
+							{theme === 'dark' ? (
+								<Sun className="w-4 h-4" />
+							) : (
+								<Moon className="w-4 h-4" />
+							)}
 						</Button>
-						<div className="h-6 w-px bg-sidebar-border/30 mx-1" />
+						<div className="h-6 w-px bg-border mx-2" />
 						<Button
 							variant="ghost"
-							size="sm"
-							className="zen-action-btn h-9 w-9 p-0 text-sidebar-foreground/70 hover:text-sidebar-foreground"
+							size="icon"
+							className="mira-action-btn text-muted-foreground hover:text-foreground"
 						>
 							<MoreVertical className="w-4 h-4" />
 						</Button>
@@ -64,9 +73,9 @@ export default function Layout() {
 				</header>
 
 				{/* Enhanced Main Content Area */}
-				<main className="chat-container flex-1 overflow-hidden flex flex-col">
+				<main className="flex-1 overflow-hidden flex flex-col">
 					{/* Content Container with better spacing for chat */}
-					<div className="flex-1 flex flex-col min-h-0 zen-scrollbar">
+					<div className="flex-1 flex flex-col min-h-0 mira-scrollbar">
 						<Outlet />
 					</div>
 				</main>

@@ -235,19 +235,19 @@ const ChatFeed = () => {
 
 	if (isError) {
 		return (
-			<div className="min-h-screen zen-pattern">
+			<div className="min-h-screen mira-content">
 				<div className="flex h-[calc(100vh-4rem)] items-center justify-center">
 					<div className="text-center max-w-md p-8">
-						<div className="w-20 h-20 mx-auto mb-6 glass-panel rounded-2xl flex items-center justify-center">
+						<div className="w-20 h-20 mx-auto mb-6 mira-glass rounded-2xl flex items-center justify-center">
 							<span className="text-3xl">⚠️</span>
 						</div>
-						<h2 className="zen-title text-xl mb-4">Error Loading Messages</h2>
-						<p className="text-sm text-sidebar-foreground/70 mb-6">
+						<h2 className="mira-title text-xl mb-4">Error Loading Messages</h2>
+						<p className="text-sm text-foreground/70 mb-6">
 							{error?.message || "Failed to load messages"}
 						</p>
 						<button
 							onClick={() => window.location.reload()}
-							className="zen-action-btn px-6 py-3 text-white rounded-xl transition-all"
+							className="mira-action-btn px-6 py-3 text-white rounded-xl transition-all"
 							style={{
 								background: "oklch(0.55 0.08 145)",
 								boxShadow: "0 4px 20px oklch(0.55 0.08 145 / 0.3)",
@@ -263,19 +263,19 @@ const ChatFeed = () => {
 
 	if (!partnerEmail || !partnerUsername) {
 		return (
-			<div className="min-h-screen zen-pattern">
+			<div className="min-h-screen mira-content">
 				<div className="flex h-[calc(100vh-4rem)] items-center justify-center">
-					<div className="text-center text-sidebar-foreground max-w-md p-8">
-						<div className="w-20 h-20 mx-auto mb-6 glass-panel rounded-2xl flex items-center justify-center zen-float">
+					<div className="text-center text-foreground max-w-md p-8">
+						<div className="w-20 h-20 mx-auto mb-6 mira-glass rounded-2xl flex items-center justify-center zen-float">
 							<span className="text-3xl">💬</span>
 						</div>
-						<h2 className="zen-title text-xl mb-4">No chat selected</h2>
-						<p className="text-sm text-sidebar-foreground/70 mb-6">
+						<h2 className="mira-title text-xl mb-4">No chat selected</h2>
+						<p className="text-sm text-foreground/70 mb-6">
 							Select a user to start messaging
 						</p>
 						<button
 							onClick={() => navigate("/chat")}
-							className="zen-action-btn px-6 py-3 text-white rounded-xl transition-all"
+							className="mira-action-btn px-6 py-3 text-white rounded-xl transition-all"
 							style={{
 								background: "oklch(0.55 0.08 145)",
 								boxShadow: "0 4px 20px oklch(0.55 0.08 145 / 0.3)",
@@ -290,21 +290,21 @@ const ChatFeed = () => {
 	}
 
 	return (
-		<div className="min-h-screen zen-pattern">
+		<div className="min-h-screen mira-content">
 			<div className="flex-1 flex flex-col h-[calc(100vh-4rem)]">
 				{/* Header */}
-				<div className="p-4 glass-panel border-b border-sidebar-border/50 rounded-b-2xl">
+				<div className="p-4 mira-glass border-b border-sidebar-border/50 rounded-b-2xl">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-3">
 							<button
 								onClick={() => navigate("/chat")}
-								className="p-3 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all md:hidden"
+								className="p-3 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all md:hidden"
 							>
 								<ArrowLeft size={20} />
 							</button>
 
 							<div className="relative">
-								<div className="w-12 h-12 rounded-full glass-panel flex items-center justify-center border-2 border-sidebar-border">
+								<div className="w-12 h-12 rounded-full mira-glass flex items-center justify-center border-2 border-sidebar-border">
 									<span
 										className="text-sm font-semibold"
 										style={{ color: "oklch(0.55 0.08 145)" }}
@@ -312,14 +312,14 @@ const ChatFeed = () => {
 										{partnerUsername.charAt(0).toUpperCase()}
 									</span>
 								</div>
-								<div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-sidebar animate-pulse"></div>
+								<div className="absolute bottom-0 right-0 w-3 h-3 bg-primary rounded-full border-2 border-sidebar animate-pulse"></div>
 							</div>
 
 							<div>
-								<h3 className="font-semibold text-sidebar-foreground">
+								<h3 className="font-semibold text-foreground">
 									{partnerUsername}
 								</h3>
-								<p className="text-xs text-sidebar-foreground/60">
+								<p className="text-xs text-foreground/60">
 									{isTyping
 										? "typing..."
 										: isConnected
@@ -331,15 +331,15 @@ const ChatFeed = () => {
 
 						<div className="flex items-center gap-2">
 							<div
-								className={`w-2 h-2 rounded-full ${isConnected ? "bg-green-400" : "bg-red-400"}`}
+								className={`w-2 h-2 rounded-full ${isConnected ? "bg-primary" : "bg-destructive"}`}
 							></div>
-							<button className="p-3 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
+							<button className="p-3 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
 								<Phone className="w-4 h-4" />
 							</button>
-							<button className="p-3 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
+							<button className="p-3 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
 								<Video className="w-4 h-4" />
 							</button>
-							<button className="p-3 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
+							<button className="p-3 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
 								<MoreVertical className="w-4 h-4" />
 							</button>
 						</div>
@@ -351,16 +351,16 @@ const ChatFeed = () => {
 					{isPending ? (
 						<div className="flex items-center justify-center h-full">
 							<div className="text-center">
-								<div className="w-12 h-12 glass-panel rounded-2xl flex items-center justify-center mx-auto mb-6">
+								<div className="w-12 h-12 mira-glass rounded-2xl flex items-center justify-center mx-auto mb-6">
 									<div
 										className="w-6 h-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin"
 										style={{ borderTopColor: "oklch(0.55 0.08 145)" }}
 									></div>
 								</div>
-								<h3 className="zen-title text-lg mb-2">
+								<h3 className="mira-title text-lg mb-2">
 									Loading conversation...
 								</h3>
-								<p className="text-sm text-sidebar-foreground/70">
+								<p className="text-sm text-foreground/70">
 									Please wait while we load your messages
 								</p>
 							</div>
@@ -368,11 +368,11 @@ const ChatFeed = () => {
 					) : messages.length === 0 ? (
 						<div className="flex items-center justify-center h-full">
 							<div className="text-center p-8 max-w-md">
-								<div className="w-20 h-20 mx-auto mb-6 glass-panel rounded-2xl flex items-center justify-center zen-float">
+								<div className="w-20 h-20 mx-auto mb-6 mira-glass rounded-2xl flex items-center justify-center zen-float">
 									<span className="text-3xl">👋</span>
 								</div>
-								<h3 className="zen-title text-xl mb-4">Start a conversation</h3>
-								<p className="text-sm text-sidebar-foreground/70 leading-relaxed">
+								<h3 className="mira-title text-xl mb-4">Start a conversation</h3>
+								<p className="text-sm text-foreground/70 leading-relaxed">
 									Send your first message to {partnerUsername}
 								</p>
 							</div>
@@ -389,7 +389,7 @@ const ChatFeed = () => {
 										className={`max-w-xs lg:max-w-md px-5 py-3 rounded-2xl ${
 											msg.isOwn
 												? "text-white rounded-br-none"
-												: "glass-panel rounded-bl-none border border-sidebar-border/50"
+												: "mira-glass rounded-bl-none border border-sidebar-border/50"
 										}`}
 										style={
 											msg.isOwn
@@ -405,7 +405,7 @@ const ChatFeed = () => {
 											className={`text-xs mt-2 ${
 												msg.isOwn
 													? "text-white/70"
-													: "text-sidebar-foreground/50"
+													: "text-foreground/50"
 											}`}
 										>
 											{msg.time}
@@ -415,7 +415,7 @@ const ChatFeed = () => {
 							))}
 							{isTyping && (
 								<div className="flex justify-start">
-									<div className="glass-panel rounded-2xl rounded-bl-none px-5 py-3 max-w-xs border border-sidebar-border/50">
+									<div className="mira-glass rounded-2xl rounded-bl-none px-5 py-3 max-w-xs border border-sidebar-border/50">
 										<div className="flex space-x-1">
 											<div
 												className="w-2 h-2 rounded-full animate-bounce"
@@ -445,12 +445,12 @@ const ChatFeed = () => {
 				</div>
 
 				{/* Message Input */}
-				<div className="p-4 glass-panel border-t border-sidebar-border/50 rounded-t-2xl">
+				<div className="p-4 mira-glass border-t border-sidebar-border/50 rounded-t-2xl">
 					<div className="flex items-center gap-3 mb-4">
 						<div
-							className={`w-2 h-2 rounded-full ${isConnected ? "bg-green-400" : "bg-red-400"}`}
+							className={`w-2 h-2 rounded-full ${isConnected ? "bg-primary" : "bg-destructive"}`}
 						></div>
-						<span className="text-xs text-sidebar-foreground/60 font-medium">
+						<span className="text-xs text-foreground/60 font-medium">
 							{isConnected ? "Connected" : "Connecting..."}
 						</span>
 					</div>
@@ -464,12 +464,12 @@ const ChatFeed = () => {
 								handleTyping();
 							}}
 							placeholder={`Message ${partnerUsername}...`}
-							className="zen-search flex-1 px-4 py-3 text-sidebar-foreground placeholder-sidebar-foreground/40"
+							className="mira-search flex-1 px-4 py-3 text-foreground placeholder-sidebar-foreground/40"
 						/>
 						<button
 							type="submit"
 							disabled={currentMessage.trim() === "" || !isConnected}
-							className="zen-action-btn px-6 py-3 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+							className="mira-action-btn px-6 py-3 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
 							style={{
 								background:
 									currentMessage.trim() && isConnected

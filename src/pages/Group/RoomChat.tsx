@@ -187,37 +187,37 @@ const RoomChat = () => {
 	}
 
 	return (
-		<div className="flex flex-col h-screen zen-pattern">
+		<div className="flex flex-col h-screen mira-content">
 			{/* Classroom Header */}
-			<div className="glass-panel border-b border-sidebar-border shadow-sm">
+			<div className="mira-glass border-b border-sidebar-border shadow-sm">
 				<div className="container mx-auto px-4 py-4">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-4">
 							<button
 								onClick={leaveRoom}
-								className="p-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 rounded-lg transition-colors"
+								className="p-2 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-lg transition-colors"
 							>
 								<ArrowLeft size={24} />
 							</button>
 
 							<div className="flex items-center gap-3">
 								<div className="relative">
-									<div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
-										<span className="text-xl font-bold text-white">#</span>
+									<div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+										<span className="text-xl font-bold text-primary-foreground">#</span>
 									</div>
 									<div className="absolute -top-1 -right-1">
-										<div className="w-3 h-3 bg-green-500 rounded-full"></div>
+										<div className="w-3 h-3 bg-primary rounded-full"></div>
 									</div>
 								</div>
 
 								<div>
-									<h2 className="text-xl font-bold text-sidebar-foreground flex items-center gap-2">
-										<span className="text-blue-600">#</span>
+									<h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+										<span className="text-primary">#</span>
 										{roomName}
 									</h2>
-									<p className="text-sm text-sidebar-foreground/60 flex items-center gap-2">
+									<p className="text-sm text-foreground/60 flex items-center gap-2">
 										<div className="relative flex h-2 w-2">
-											<div className="absolute inline-flex h-full w-full rounded-full bg-green-500"></div>
+											<div className="absolute inline-flex h-full w-full rounded-full bg-primary"></div>
 										</div>
 										{onlineUsers.length}{" "}
 										{onlineUsers.length === 1 ? "student" : "students"} online
@@ -227,13 +227,13 @@ const RoomChat = () => {
 						</div>
 
 						<div className="flex items-center gap-2">
-							<button className="p-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 rounded-lg transition-colors">
+							<button className="p-2 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-lg transition-colors">
 								<Users className="w-5 h-5" />
 							</button>
-							<button className="p-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/30 rounded-lg transition-colors">
+							<button className="p-2 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-lg transition-colors">
 								<Settings className="w-5 h-5" />
 							</button>
-							<button className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors">
+							<button className="p-2 text-destructive hover:text-destructive/90 hover:bg-destructive/10 rounded-lg transition-colors">
 								<LogOut className="w-5 h-5" />
 							</button>
 						</div>
@@ -247,7 +247,7 @@ const RoomChat = () => {
 					<div className="flex items-center justify-center h-full">
 						<div className="text-center">
 							<div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
-							<h1 className="text-xl font-bold text-sidebar-foreground mt-4">
+							<h1 className="text-xl font-bold text-foreground mt-4">
 								Loading classroom...
 							</h1>
 						</div>
@@ -260,7 +260,7 @@ const RoomChat = () => {
 								className={`${msg.isSystem ? "flex justify-center" : "flex gap-3 animate-fadeIn"}`}
 							>
 								{msg.isSystem ? (
-									<div className="px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-sm text-blue-700 font-medium">
+									<div className="px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm text-primary font-medium">
 										<span className="flex items-center gap-2">
 											<Zap className="w-4 h-4" />
 											{msg.message}
@@ -268,25 +268,25 @@ const RoomChat = () => {
 									</div>
 								) : (
 									<>
-										<div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-											<span className="text-lg font-bold text-white">
+										<div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
+											<span className="text-lg font-bold text-primary-foreground">
 												{msg.author.charAt(0).toUpperCase()}
 											</span>
 										</div>
 										<div className="flex-1">
 											<div className="flex items-baseline gap-2 mb-1">
-												<span className="font-semibold text-sidebar-foreground text-sm">
+												<span className="font-semibold text-foreground text-sm">
 													{msg.author}
 												</span>
-												<span className="text-xs text-sidebar-foreground/50">
+												<span className="text-xs text-foreground/50">
 													{msg.time}
 												</span>
 											</div>
 											<div
 												className={`inline-block px-4 py-3 rounded-lg ${
 													msg.isOwn
-														? "bg-blue-600 text-white rounded-br-sm"
-														: "bg-sidebar-accent/30 text-sidebar-foreground rounded-bl-sm border border-sidebar-border"
+														? "bg-primary text-primary-foreground rounded-br-sm"
+														: "bg-sidebar-accent/30 text-foreground rounded-bl-sm border border-sidebar-border"
 												}`}
 											>
 												<p className="leading-relaxed">{msg.message}</p>
@@ -303,10 +303,10 @@ const RoomChat = () => {
 
 			{/* Online Students Bar */}
 			{onlineUsers.length > 0 && (
-				<div className="glass-panel border-t border-sidebar-border px-4 py-3">
+				<div className="mira-glass border-t border-sidebar-border px-4 py-3">
 					<div className="container mx-auto">
 						<div className="flex items-center gap-3 overflow-x-auto">
-							<span className="text-sm text-sidebar-foreground/60 whitespace-nowrap font-medium">
+							<span className="text-sm text-foreground/60 whitespace-nowrap font-medium">
 								Online Students:
 							</span>
 							<div className="flex gap-2 flex-wrap">
@@ -315,11 +315,11 @@ const RoomChat = () => {
 										key={idx}
 										className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
 											user === username
-												? "bg-blue-100 text-blue-700 border-blue-200"
-												: "bg-sidebar-accent/30 text-sidebar-foreground/70 border-sidebar-border"
+												? "bg-primary/10 text-primary border-primary/20"
+												: "bg-sidebar-accent/30 text-foreground/70 border-sidebar-border"
 										}`}
 									>
-										<div className="w-2 h-2 bg-green-500 rounded-full"></div>
+										<div className="w-2 h-2 bg-primary rounded-full"></div>
 										<span>{user === username ? `${user} (you)` : user}</span>
 									</div>
 								))}
@@ -330,13 +330,13 @@ const RoomChat = () => {
 			)}
 
 			{/* Input Section */}
-			<div className="glass-panel border-t border-sidebar-border">
+			<div className="mira-glass border-t border-sidebar-border">
 				<div className="container mx-auto p-4">
 					<div className="flex items-center gap-2 mb-2">
 						<div
-							className={`w-2 h-2 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"} ${isConnected ? "animate-pulse" : ""}`}
+							className={`w-2 h-2 rounded-full ${isConnected ? "bg-primary" : "bg-destructive"} ${isConnected ? "animate-pulse" : ""}`}
 						></div>
-						<span className="text-xs text-sidebar-foreground/60">
+						<span className="text-xs text-foreground/60">
 							{isConnected ? "Connected to classroom" : "Connecting..."}
 						</span>
 					</div>
@@ -348,14 +348,14 @@ const RoomChat = () => {
 								value={message}
 								onChange={(e) => setMessage(e.target.value)}
 								placeholder={`Type your message in ${roomName} classroom...`}
-								className="w-full px-4 py-3 zen-search rounded-xl text-sidebar-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all"
+								className="w-full px-4 py-3 mira-search rounded-xl text-foreground placeholder-sidebar-foreground/40 focus:outline-none transition-all"
 							/>
 						</div>
 
 						<button
 							type="submit"
 							disabled={!message.trim() || !isConnected}
-							className="px-6 py-3 bottom-0 zen-action-btn text-primary-foreground rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+							className="px-6 py-3 bottom-0 mira-action-btn text-primary-foreground rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
 							style={{
 								background: "oklch(0.55 0.08 145)",
 								boxShadow: "0 4px 20px oklch(0.55 0.08 145 / 0.3)",
