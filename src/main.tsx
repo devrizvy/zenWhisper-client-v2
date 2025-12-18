@@ -8,22 +8,22 @@ import { AuthProvider } from "./contexts/AuthContext.tsx";
 
 // Create a client
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      refetchOnWindowFocus: false,
-    },
-  },
+	defaultOptions: {
+		queries: {
+			retry: false,
+			refetchOnWindowFocus: false,
+		},
+	},
 });
 
 createRoot(document.getElementById("root")!).render(
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <AuthProvider>
-        <SidebarProvider>
-          <App />
-        </SidebarProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  </QueryClientProvider>
+	<QueryClientProvider client={queryClient}>
+		<BrowserRouter>
+			<AuthProvider>
+				<SidebarProvider>
+					<App />
+				</SidebarProvider>
+			</AuthProvider>
+		</BrowserRouter>
+	</QueryClientProvider>,
 );
