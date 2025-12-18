@@ -22,6 +22,8 @@ import {
 	Users,
 	Calendar as CalendarIcon,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
 	const [activeTab, setActiveTab] = useState("profile");
@@ -29,6 +31,13 @@ const Settings = () => {
 	const [darkMode, setDarkMode] = useState(true);
 	const [soundEnabled, setSoundEnabled] = useState(true);
 	const [autoSave, setAutoSave] = useState(true);
+	 const { logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
 	const tabs = [
 		{ id: "profile", label: "Profile", icon: <User className="w-4 h-4" /> },
@@ -39,7 +48,7 @@ const Settings = () => {
 		},
 		{
 			id: "privacy",
-			label: "Privacy & Security",
+			label: "Privacy",
 			icon: <Shield className="w-4 h-4" />,
 		},
 		{
@@ -47,7 +56,6 @@ const Settings = () => {
 			label: "Appearance",
 			icon: <Palette className="w-4 h-4" />,
 		},
-		{ id: "advanced", label: "Advanced", icon: <Globe className="w-4 h-4" /> },
 	];
 
 	const renderTabContent = () => {
@@ -72,10 +80,10 @@ const Settings = () => {
 									</div>
 									<div>
 										<h4 className="text-lg font-medium text-sidebar-foreground">
-											John Doe
+											{user?.username || "Guest User"}
 										</h4>
 										<p className="text-sm text-sidebar-foreground/60">
-											john.doe@university.edu
+											 {user?.email || "Not logged in"}
 										</p>
 										<button className="mt-2 text-sm text-primary hover:text-primary/80 transition-colors">
 											Change Avatar
@@ -125,26 +133,6 @@ const Settings = () => {
 								Learning Preferences
 							</h3>
 							<div className="space-y-3">
-								<div className="flex items-center justify-between p-3 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
-									<div>
-										<h4 className="text-sidebar-foreground">Study Reminders</h4>
-										<p className="text-sm text-sidebar-foreground/60">
-											Get notified about study sessions
-										</p>
-									</div>
-									<button
-										className={`w-12 h-6 rounded-full transition-colors ${
-											notifications ? "bg-primary" : "bg-sidebar-accent"
-										}`}
-										onClick={() => setNotifications(!notifications)}
-									>
-										<div
-											className={`w-5 h-5 bg-white rounded-full transition-transform ${
-												notifications ? "translate-x-6" : "translate-x-0.5"
-											}`}
-										/>
-									</button>
-								</div>
 								<div className="flex items-center justify-between p-3 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
 									<div>
 										<h4 className="text-sidebar-foreground">Auto-save Notes</h4>

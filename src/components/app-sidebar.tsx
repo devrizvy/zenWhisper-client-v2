@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import {
 	Users,
 	NotebookPen,
@@ -106,6 +105,16 @@ const Support = [
 ];
 
 export function AppSidebar() {
+	const { user } = useAuth();
+
+	// Filter Support items based on user role - only show Overview for admin users
+	const filteredSupport = Support.filter(item => {
+		if (item.label === "Overview") {
+			return user?.role === "admin";
+		}
+		return true;
+	});
+
 	return (
 		<Sidebar className="zen-sidebar border-r border-sidebar-border/50">
 			<div className="zen-sidebar-content h-full flex flex-col">
@@ -232,7 +241,7 @@ export function AppSidebar() {
 						</SidebarGroupLabel>
 						<SidebarGroupContent>
 							<SidebarMenu className="space-y-1">
-								{Support.map((item, index) => (
+								{filteredSupport.map((item, index) => (
 									<SidebarMenuItem key={item.label}>
 										<NavLink
 											to={item.to}

@@ -3,6 +3,7 @@ import React, { createContext, useContext, useReducer, useEffect } from "react";
 interface User {
 	email: string;
 	username: string;
+	role?: string;
 }
 
 interface AuthState {
