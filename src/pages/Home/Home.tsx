@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import {
 	MessageCircle,
 	Users,
@@ -20,10 +21,27 @@ import {
 	BookOpen,
 	HelpCircle,
 	BarChart3,
+	Moon,
+	Sun,
+	Menu,
+	X,
 } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const Home = () => {
 	const { isAuthenticated, user } = useAuth();
+	const { theme, toggleTheme } = useTheme();
+	const [isScrolled, setIsScrolled] = useState(false);
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+	// Handle scroll effect for navbar
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsScrolled(window.scrollY > 20);
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	// Dashboard for authenticated users
 	if (isAuthenticated) {
@@ -161,6 +179,131 @@ const Home = () => {
 	// Landing page for non-authenticated users
 	return (
 		<div className="min-h-screen w-full bg-background">
+			{/* Floating Navbar */}
+			<nav className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 ease-out ${
+				isScrolled
+					? "bg-background/90 backdrop-blur-xl border border-border/50 shadow-2xl shadow-black/5 rounded-2xl py-2"
+					: "bg-transparent py-3"
+			}`}>
+				<div className="max-w-7xl mx-auto px-4 sm:px-6">
+					<div className="flex items-center justify-between">
+						{/* Logo */}
+						<NavLink to="/" className="flex items-center gap-2.5 group">
+							<div className={`w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg transition-all duration-300 ${
+								isScrolled ? "shadow-primary/25 group-hover:shadow-primary/40 group-hover:scale-105" : "shadow-primary/20"
+							}`}>
+								<Waves className="w-5 h-5 text-white" />
+							</div>
+							<span className="font-bold text-base tracking-tight">zenWhisper</span>
+						</NavLink>
+
+						{/* Desktop Navigation */}
+						<div className="hidden md:flex items-center gap-1">
+							{[
+								{ to: "/docs", label: "Docs" },
+								{ to: "/faq", label: "FAQ" },
+								{ to: "/about", label: "About" },
+							].map((link) => (
+								<NavLink
+									key={link.to}
+									to={link.to}
+									className="relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted/50"
+								>
+									{link.label}
+								</NavLink>
+							))}
+						</div>
+
+						{/* Right Actions */}
+						<div className="flex items-center gap-2">
+							{/* Theme Toggle */}
+							<Button
+								variant="ghost"
+								size="icon"
+								onClick={toggleTheme}
+								className={`h-9 w-9 rounded-xl transition-all duration-300 ${
+									isScrolled
+										? "hover:bg-muted/80"
+										: "hover:bg-black/5 dark:hover:bg-white/10"
+								}`}
+							>
+								{theme === 'dark' ? (
+									<Sun className="w-4 h-4 transition-transform duration-300 hover:rotate-90" />
+								) : (
+									<Moon className="w-4 h-4 transition-transform duration-300 hover:-rotate-12" />
+								)}
+							</Button>
+
+							{/* Get Started Button - Desktop */}
+							<NavLink to="/signup" className="hidden sm:block">
+								<Button
+									size="sm"
+									className={`h-9 px-5 rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 ${
+										isScrolled
+											? "shadow-primary/25 hover:shadow-primary/40"
+											: "shadow-primary/30 hover:shadow-primary/50"
+									}`}
+								>
+									Get Started
+									<ArrowRight className="ml-1.5 w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+								</Button>
+							</NavLink>
+
+							{/* Mobile Menu Button */}
+							<Button
+								variant="ghost"
+								size="icon"
+								className={`md:hidden h-9 w-9 rounded-xl transition-all duration-300 ${
+									isScrolled
+										? "hover:bg-muted/80"
+										: "hover:bg-black/5 dark:hover:bg-white/10"
+								}`}
+								onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+							>
+								{isMobileMenuOpen ? (
+									<X className="w-5 h-5 transition-transform duration-300 rotate-90" />
+								) : (
+									<Menu className="w-5 h-5" />
+								)}
+							</Button>
+						</div>
+					</div>
+				</div>
+
+				{/* Mobile Menu */}
+				{isMobileMenuOpen && (
+					<div className="md:hidden mt-2 pt-4 border-t border-border/50 bg-background/95 backdrop-blur-xl rounded-b-2xl animate-in slide-in-from-top-2 duration-300">
+						<div className="px-4 pb-4 space-y-1">
+							{[
+								{ to: "/docs", label: "Docs", icon: BookOpen },
+								{ to: "/faq", label: "FAQ", icon: HelpCircle },
+								{ to: "/about", label: "About", icon: Feather },
+							].map((link) => (
+								<NavLink
+									key={link.to}
+									to={link.to}
+									onClick={() => setIsMobileMenuOpen(false)}
+									className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-all duration-200"
+								>
+									<link.icon className="w-4 h-4" />
+									{link.label}
+								</NavLink>
+							))}
+							<div className="pt-2">
+								<NavLink
+									to="/signup"
+									onClick={() => setIsMobileMenuOpen(false)}
+									className="flex items-center justify-center gap-2 w-full px-4 py-3 text-sm font-medium text-primary-foreground bg-primary rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+								>
+									Get Started
+									<ArrowRight className="w-4 h-4" />
+								</NavLink>
+							</div>
+						</div>
+					</div>
+				)}
+			</nav>
+
 			{/* Hero Section */}
 			<div className="relative overflow-hidden">
 				<div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />

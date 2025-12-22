@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
 	BookOpen,
+	HelpCircle,
 	Search,
 	MessageCircle,
 	Users,
@@ -93,81 +95,63 @@ const Docs = () => {
 			case "getting-started":
 				return (
 					<div className="space-y-8">
-						<div className="mira-glass rounded-2xl p-8">
+						<div className="bg-card border rounded-2xl p-8">
 							<div className="flex items-center gap-4 mb-6">
-								<div
-									className="w-12 h-12 rounded-xl flex items-center justify-center"
-									style={{ backgroundColor: "oklch(0.55 0.08 145 / 0.1)" }}
-								>
-									<BookOpen
-										className="w-6 h-6"
-										style={{ color: "oklch(0.55 0.08 145)" }}
-									/>
+								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+									<BookOpen className="w-6 h-6 text-primary" />
 								</div>
 								<div>
-									<h2 className="mira-title text-2xl">
+									<h2 className="text-2xl font-semibold">
 										Getting Started with zenWhisper
 									</h2>
-									<p className="text-foreground/70">
+									<p className="text-muted-foreground">
 										Everything you need to know to get started
 									</p>
 								</div>
 							</div>
 
 							<div className="grid md:grid-cols-2 gap-6">
-								<div className="mira-glass rounded-xl p-6 hover:scale-105 transition-all cursor-pointer">
-									<div
-										className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-										style={{ backgroundColor: "oklch(0.55 0.08 145 / 0.1)" }}
-									>
-										<Users
-											className="w-5 h-5"
-											style={{ color: "oklch(0.55 0.08 145)" }}
-										/>
+								<div className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow cursor-pointer">
+									<div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+										<Users className="w-5 h-5 text-primary" />
 									</div>
-									<h3 className="text-lg font-semibold text-foreground mb-2">
+									<h3 className="text-lg font-semibold mb-2">
 										Create Your Account
 									</h3>
-									<p className="text-sm text-foreground/60 mb-4">
+									<p className="text-sm text-muted-foreground mb-4">
 										Sign up in seconds with your email and start collaborating
 										immediately.
 									</p>
-									<a
-										href="/signup"
+									<NavLink
+										to="/signup"
 										className="text-sm text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
 									>
 										Get Started <ChevronRight className="w-3 h-3" />
-									</a>
+									</NavLink>
 								</div>
 
-								<div className="mira-glass rounded-xl p-6 hover:scale-105 transition-all cursor-pointer">
-									<div
-										className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-										style={{ backgroundColor: "oklch(0.55 0.08 145 / 0.1)" }}
-									>
-										<MessageCircle
-											className="w-5 h-5"
-											style={{ color: "oklch(0.55 0.08 145)" }}
-										/>
+								<div className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow cursor-pointer">
+									<div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+										<MessageCircle className="w-5 h-5 text-primary" />
 									</div>
-									<h3 className="text-lg font-semibold text-foreground mb-2">
+									<h3 className="text-lg font-semibold mb-2">
 										Join Your First Classroom
 									</h3>
-									<p className="text-sm text-foreground/60 mb-4">
+									<p className="text-sm text-muted-foreground mb-4">
 										Connect with teachers and classmates in virtual classrooms.
 									</p>
-									<a
-										href="/group"
+									<NavLink
+										to="/group"
 										className="text-sm text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
 									>
 										Explore Classrooms <ChevronRight className="w-3 h-3" />
-									</a>
+									</NavLink>
 								</div>
 							</div>
 						</div>
 
-						<div className="mira-glass rounded-2xl p-8">
-							<h3 className="text-xl font-semibold text-foreground mb-6">
+						<div className="bg-card border rounded-2xl p-8">
+							<h3 className="text-xl font-semibold mb-6">
 								Quick Start Steps
 							</h3>
 							<div className="space-y-6">
@@ -194,17 +178,14 @@ const Docs = () => {
 									},
 								].map((item) => (
 									<div key={item.step} className="flex gap-4">
-										<div
-											className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium text-primary-foreground flex-shrink-0"
-											style={{ backgroundColor: "oklch(0.55 0.08 145)" }}
-										>
+										<div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-sm font-medium text-primary-foreground flex-shrink-0">
 											{item.step}
 										</div>
 										<div className="flex-1">
-											<h4 className="text-foreground font-medium">
+											<h4 className="font-medium">
 												{item.title}
 											</h4>
-											<p className="text-sm text-foreground/60">
+											<p className="text-sm text-muted-foreground">
 												{item.desc}
 											</p>
 										</div>
@@ -218,20 +199,14 @@ const Docs = () => {
 			case "features":
 				return (
 					<div className="space-y-8">
-						<div className="mira-glass rounded-2xl p-8">
+						<div className="bg-card border rounded-2xl p-8">
 							<div className="flex items-center gap-4 mb-6">
-								<div
-									className="w-12 h-12 rounded-xl flex items-center justify-center"
-									style={{ backgroundColor: "oklch(0.55 0.08 145 / 0.1)" }}
-								>
-									<Zap
-										className="w-6 h-6"
-										style={{ color: "oklch(0.55 0.08 145)" }}
-									/>
+								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+									<Zap className="w-6 h-6 text-primary" />
 								</div>
 								<div>
-									<h2 className="mira-title text-2xl">Powerful Features</h2>
-									<p className="text-foreground/70">
+									<h2 className="text-2xl font-semibold">Powerful Features</h2>
+									<p className="text-muted-foreground">
 										Discover what makes zenWhisper special
 									</p>
 								</div>
@@ -273,17 +248,14 @@ const Docs = () => {
 								].map((feature, idx) => (
 									<div
 										key={idx}
-										className="mira-glass rounded-xl p-6 hover:scale-105 transition-all"
+										className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow"
 									>
-										<div
-											className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
-											style={{ backgroundColor: "oklch(0.55 0.08 145 / 0.1)" }}
-										>
-											<span style={{ color: "oklch(0.55 0.08 145)" }}>
+										<div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+											<span className="text-primary">
 												{feature.icon}
 											</span>
 										</div>
-										<h3 className="text-lg font-semibold text-foreground mb-2">
+										<h3 className="text-lg font-semibold mb-2">
 											{feature.title}
 											{feature.badge && (
 												<span className="ml-2 px-2 py-0.5 text-xs rounded-full bg-primary/20 text-primary">
@@ -291,7 +263,7 @@ const Docs = () => {
 												</span>
 											)}
 										</h3>
-										<p className="text-sm text-foreground/60">
+										<p className="text-sm text-muted-foreground">
 											{feature.desc}
 										</p>
 									</div>
@@ -304,49 +276,43 @@ const Docs = () => {
 			case "api":
 				return (
 					<div className="space-y-8">
-						<div className="mira-glass rounded-2xl p-8">
+						<div className="bg-card border rounded-2xl p-8">
 							<div className="flex items-center gap-4 mb-6">
-								<div
-									className="w-12 h-12 rounded-xl flex items-center justify-center"
-									style={{ backgroundColor: "oklch(0.55 0.08 145 / 0.1)" }}
-								>
-									<Code
-										className="w-6 h-6"
-										style={{ color: "oklch(0.55 0.08 145)" }}
-									/>
+								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+									<Code className="w-6 h-6 text-primary" />
 								</div>
 								<div>
-									<h2 className="mira-title text-2xl">API Reference</h2>
-									<p className="text-foreground/70">
+									<h2 className="text-2xl font-semibold">API Reference</h2>
+									<p className="text-muted-foreground">
 										Integrate zenWhisper into your applications
 									</p>
 								</div>
 							</div>
 
-							<div className="mira-glass rounded-xl p-6 mb-6">
+							<div className="bg-muted rounded-xl p-6 mb-6">
 								<div className="flex items-center justify-between mb-4">
-									<h3 className="text-lg font-semibold text-foreground">
+									<h3 className="text-lg font-semibold">
 										Base URL
 									</h3>
-									<button className="p-2 hover:bg-sidebar-accent/20 rounded-lg transition-colors">
+									<button className="p-2 hover:bg-muted-foreground/20 rounded-lg transition-colors">
 										<Copy className="w-4 h-4" />
 									</button>
 								</div>
-								<code className="block p-4 bg-sidebar-accent/50 rounded-lg text-sm font-mono">
+								<code className="block p-4 bg-background rounded-lg text-sm font-mono">
 									https://api.zenwhisper.com/v1
 								</code>
 							</div>
 
 							<div className="space-y-6">
 								<div>
-									<h3 className="text-lg font-semibold text-foreground mb-4">
+									<h3 className="text-lg font-semibold mb-4">
 										Authentication
 									</h3>
-									<p className="text-foreground/70 mb-4">
+									<p className="text-muted-foreground mb-4">
 										All API requests must include your API key in the
 										Authorization header:
 									</p>
-									<div className="mira-glass rounded-xl p-4 overflow-x-auto">
+									<div className="bg-muted rounded-xl p-4 overflow-x-auto">
 										<pre className="text-sm">
 											<code>{`Authorization: Bearer YOUR_API_KEY`}</code>
 										</pre>
@@ -354,10 +320,10 @@ const Docs = () => {
 								</div>
 
 								<div>
-									<h3 className="text-lg font-semibold text-foreground mb-4">
+									<h3 className="text-lg font-semibold mb-4">
 										Example Request
 									</h3>
-									<div className="mira-glass rounded-xl p-4 overflow-x-auto">
+									<div className="bg-muted rounded-xl p-4 overflow-x-auto">
 										<pre className="text-sm">
 											<code>{`curl -X POST https://api.zenwhisper.com/v1/messages \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
@@ -374,20 +340,14 @@ const Docs = () => {
 			case "tutorials":
 				return (
 					<div className="space-y-8">
-						<div className="mira-glass rounded-2xl p-8">
+						<div className="bg-card border rounded-2xl p-8">
 							<div className="flex items-center gap-4 mb-6">
-								<div
-									className="w-12 h-12 rounded-xl flex items-center justify-center"
-									style={{ backgroundColor: "oklch(0.55 0.08 145 / 0.1)" }}
-								>
-									<Video
-										className="w-6 h-6"
-										style={{ color: "oklch(0.55 0.08 145)" }}
-									/>
+								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+									<Video className="w-6 h-6 text-primary" />
 								</div>
 								<div>
-									<h2 className="mira-title text-2xl">Video Tutorials</h2>
-									<p className="text-foreground/70">
+									<h2 className="text-2xl font-semibold">Video Tutorials</h2>
+									<p className="text-muted-foreground">
 										Learn by watching step-by-step guides
 									</p>
 								</div>
@@ -422,17 +382,17 @@ const Docs = () => {
 								].map((video, idx) => (
 									<div
 										key={idx}
-										className="mira-glass rounded-xl p-6 hover:scale-105 transition-all cursor-pointer"
+										className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow cursor-pointer"
 									>
-										<div className="aspect-video bg-sidebar-accent/30 rounded-lg mb-4 flex items-center justify-center">
-											<Video className="w-8 h-8 text-foreground/40" />
+										<div className="aspect-video bg-muted rounded-lg mb-4 flex items-center justify-center">
+											<Video className="w-8 h-8 text-muted-foreground/40" />
 										</div>
-										<h3 className="text-foreground font-medium mb-2">
+										<h3 className="font-medium mb-2">
 											{video.title}
 										</h3>
-										<div className="flex items-center justify-between text-sm text-foreground/60">
+										<div className="flex items-center justify-between text-sm text-muted-foreground">
 											<span>{video.duration}</span>
-											<span className="px-2 py-0.5 rounded-full bg-sidebar-accent/50">
+											<span className="px-2 py-0.5 rounded-full bg-muted">
 												{video.level}
 											</span>
 										</div>
@@ -449,95 +409,94 @@ const Docs = () => {
 	};
 
 	return (
-		<div className="min-h-screen mira-content">
-			<div className="container mx-auto px-4 py-8">
-				<div className="mb-8">
-					<h1 className="mira-title text-4xl mb-2">Documentation</h1>
-					<p className="text-foreground/70">
-						Complete guide to zenWhisper
-					</p>
+		<>
+			{/* Page Header */}
+			<div className="mb-8">
+				<h1 className="text-4xl font-bold mb-2">Documentation</h1>
+				<p className="text-muted-foreground">
+					Complete guide to zenWhisper
+				</p>
+			</div>
+
+			{/* Search Bar */}
+			<div className="mb-8">
+				<div className="relative max-w-2xl">
+					<Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+					<input
+						type="text"
+						placeholder="Search documentation..."
+						value={searchQuery}
+						onChange={(e) => setSearchQuery(e.target.value)}
+						className="w-full pl-12 pr-4 py-3 border rounded-xl bg-background"
+					/>
 				</div>
+			</div>
 
-				{/* Search Bar */}
-				<div className="mb-8">
-					<div className="relative max-w-2xl">
-						<Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-foreground/40" />
-						<input
-							type="text"
-							placeholder="Search documentation..."
-							value={searchQuery}
-							onChange={(e) => setSearchQuery(e.target.value)}
-							className="w-full pl-12 pr-4 py-3 mira-search rounded-xl text-foreground placeholder-sidebar-foreground/40"
-						/>
-					</div>
-				</div>
-
-				<div className="flex flex-col lg:flex-row gap-8">
-					{/* Sidebar Navigation */}
-					<div className="lg:w-80">
-						<div className="mira-glass rounded-2xl p-6 sticky top-8">
-							<nav className="space-y-6">
-								{filteredSections.map((section) => (
-									<div key={section.id}>
-										<button
-											onClick={() => setActiveSection(section.id)}
-											className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all mb-2 ${
-												activeSection === section.id
-													? "bg-primary text-primary-foreground shadow-lg"
-													: "text-foreground/70 hover:text-foreground hover:bg-sidebar-accent/20"
-											}`}
-										>
-											{section.icon}
-											<span className="font-medium">{section.title}</span>
-										</button>
-										{activeSection === section.id && (
-											<div className="ml-4 space-y-1">
-												{section.items.map((item, idx) => (
-													<a
-														key={idx}
-														href="#"
-														className="flex items-center gap-2 px-3 py-2 text-sm text-foreground/60 hover:text-foreground/80 rounded-lg transition-colors"
-													>
-														{item.icon}
-														{item.title}
-													</a>
-												))}
-											</div>
-										)}
-									</div>
-								))}
-							</nav>
-
-							<div className="mt-8 pt-8 border-t border-sidebar-border">
-								<div className="space-y-3">
-									<a
-										href="https://github.com/zenwhisper"
-										target="_blank"
-										rel="noopener noreferrer"
-										className="flex items-center gap-3 px-4 py-3 text-foreground/70 hover:text-foreground rounded-xl transition-colors"
+			<div className="flex flex-col lg:flex-row gap-8">
+				{/* Sidebar Navigation */}
+				<div className="lg:w-80">
+					<div className="bg-card border rounded-2xl p-6 sticky top-24">
+						<nav className="space-y-6">
+							{filteredSections.map((section) => (
+								<div key={section.id}>
+									<button
+										onClick={() => setActiveSection(section.id)}
+										className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all mb-2 ${
+											activeSection === section.id
+												? "bg-primary text-primary-foreground"
+												: "text-muted-foreground hover:text-foreground hover:bg-muted"
+										}`}
 									>
-										<GitBranch className="w-4 h-4" />
-										<span>GitHub</span>
-										<ExternalLink className="w-3 h-3 ml-auto" />
-									</a>
-									<a
-										href="/support"
-										className="flex items-center gap-3 px-4 py-3 text-foreground/70 hover:text-foreground rounded-xl transition-colors"
-									>
-										<MessageCircle className="w-4 h-4" />
-										<span>Support</span>
-										<ExternalLink className="w-3 h-3 ml-auto" />
-									</a>
+										{section.icon}
+										<span className="font-medium">{section.title}</span>
+									</button>
+									{activeSection === section.id && (
+										<div className="ml-4 space-y-1">
+											{section.items.map((item, idx) => (
+												<a
+													key={idx}
+													href="#"
+													className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg transition-colors"
+												>
+													{item.icon}
+													{item.title}
+												</a>
+											))}
+										</div>
+									)}
 								</div>
+							))}
+						</nav>
+
+						<div className="mt-8 pt-8 border-t">
+							<div className="space-y-3">
+								<a
+									href="https://github.com/zenwhisper"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center gap-3 px-4 py-3 text-muted-foreground hover:text-foreground rounded-xl transition-colors"
+								>
+									<GitBranch className="w-4 h-4" />
+									<span>GitHub</span>
+									<ExternalLink className="w-3 h-3 ml-auto" />
+								</a>
+								<NavLink
+									to="/faq"
+									className="flex items-center gap-3 px-4 py-3 text-muted-foreground hover:text-foreground rounded-xl transition-colors"
+								>
+									<HelpCircle className="w-4 h-4" />
+									<span>FAQ</span>
+									<ExternalLink className="w-3 h-3 ml-auto" />
+								</NavLink>
 							</div>
 						</div>
 					</div>
-
-					{/* Main Content */}
-					<div className="flex-1 max-w-4xl">{renderContent()}</div>
 				</div>
+
+				{/* Main Content */}
+				<div className="flex-1 max-w-4xl">{renderContent()}</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

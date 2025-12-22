@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import Layout from "./Layout/MainLayout";
+import PublicLayout from "./Layout/PublicLayout";
 import Favorites from "./pages/Favorites/Favorites";
 import Group from "./pages/Group/Group";
 import Notes from "./pages/Notes/Notes";
@@ -22,12 +23,21 @@ export function App() {
 		<ThemeProvider>
 			<AuthProvider>
 				<Routes>
+					{/* Public routes without layout */}
 					<Route index element={<Home />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Signup />} />
 
-					{/* Layout routes */}
+					{/* Public routes with PublicLayout (docs, faq) */}
+					<Route path="/docs" element={<PublicLayout />}>
+						<Route index element={<Docs />} />
+					</Route>
+					<Route path="/faq" element={<PublicLayout />}>
+						<Route index element={<FAQ />} />
+					</Route>
+
+					{/* Protected routes with MainLayout */}
 					<Route path="/" element={<Layout />}>
 						<Route path="favorites" element={<Favorites />} />
 						<Route path="chat/*" element={<Chats />} />
@@ -35,8 +45,6 @@ export function App() {
 						<Route path="notes" element={<Notes />} />
 						<Route path="ai-summary" element={<AISummary />} />
 						<Route path="settings" element={<Settings />} />
-						<Route path="docs" element={<Docs />} />
-						<Route path="faq" element={<FAQ />} />
 						<Route path="overview" element={<Overview />} />
 					</Route>
 				</Routes>
