@@ -268,75 +268,78 @@ const RoomChat = () => {
 					</div>
 				) : (
 					<div className="space-y-6 max-w-5xl mx-auto">
-						{messages.map((msg, index) => (
-							<div
-								key={msg.id}
-								className={`group ${msg.isSystem ? "flex justify-center" : `${msg.isOwn ? "flex justify-end" : "flex justify-start"} animate-fadeIn`}`}
-								style={{ animationDelay: `${index * 50}ms` }}
-							>
-								{msg.isSystem ? (
-									<div className="px-6 py-3 bg-primary/10 border border-primary/20 rounded-full text-sm text-primary font-medium mira-glass">
-										<span className="flex items-center gap-2">
-											<Zap className="w-4 h-4" />
-											{msg.message}
-										</span>
-									</div>
-								) : (
-									<div className={`flex gap-4 max-w-lg lg:max-w-2xl ${msg.isOwn ? "flex-row-reverse" : "flex-row"}`}>
-										{/* Avatar */}
-										<div className="relative flex-shrink-0">
-											<div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-												<span className="text-lg font-bold text-primary-foreground">
-													{msg.author.charAt(0).toUpperCase()}
-												</span>
-											</div>
-											{!msg.isOwn && (
-												<div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
-											)}
+						{messages.map((msg, index) => {
+							const messageKey = `${msg.id}-${index}`;
+							return (
+								<div
+									key={messageKey}
+									className={`group ${msg.isSystem ? "flex justify-center" : `${msg.isOwn ? "flex justify-end" : "flex justify-start"} animate-fadeIn`}`}
+									style={{ animationDelay: `${index * 50}ms` }}
+								>
+									{msg.isSystem ? (
+										<div className="px-6 py-3 bg-primary/10 border border-primary/20 rounded-full text-sm text-primary font-medium mira-glass">
+											<span className="flex items-center gap-2">
+												<Zap className="w-4 h-4" />
+												{msg.message}
+											</span>
 										</div>
-
-										{/* Message Content */}
-										<div className={`flex-1 min-w-0 ${msg.isOwn ? "text-right" : "text-left"}`}>
-											{/* Header with Author and Time */}
-											<div className="flex items-center gap-3 mb-2">
-												<span className="font-semibold text-foreground text-sm leading-tight">
-													{msg.isOwn ? "You" : msg.author}
-												</span>
-												<span className="text-xs text-foreground/50 font-medium bg-background/50 px-2 py-1 rounded-full">
-													{msg.time}
-												</span>
-											</div>
-
-											{/* Message Bubble */}
-											<div
-												className={`relative inline-block px-5 py-4 rounded-2xl shadow-sm group-hover:shadow-md transition-shadow ${
-													msg.isOwn
-														? "bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-br-none"
-														: "mira-glass rounded-bl-none border border-border/50"
-												}`}
-											>
-												{!msg.isOwn && (
-													<div className="absolute -left-2 top-4 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-sidebar-accent/30"></div>
-												)}
-												{msg.isOwn && (
-													<div className="absolute -right-2 top-4 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-primary"></div>
-												)}
-												<p className="text-base leading-relaxed break-words">
-													{msg.message}
-												</p>
-											</div>
-
-											{/* Message Status for own messages */}
-											{msg.isOwn && (
-												<div className="flex items-center gap-1 mt-2 justify-end">
-													<span className="text-xs text-primary/60">✓ Sent</span>
+									) : (
+										<div className={`flex gap-4 max-w-lg lg:max-w-2xl ${msg.isOwn ? "flex-row-reverse" : "flex-row"}`}>
+											{/* Avatar */}
+											<div className="relative flex-shrink-0">
+												<div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+													<span className="text-lg font-bold text-primary-foreground">
+														{msg.author.charAt(0).toUpperCase()}
+													</span>
 												</div>
-											)}
+												{!msg.isOwn && (
+													<div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
+												)}
+											</div>
+
+											{/* Message Content */}
+											<div className={`flex-1 min-w-0 ${msg.isOwn ? "text-right" : "text-left"}`}>
+												{/* Header with Author and Time */}
+												<div className="flex items-center gap-3 mb-2">
+													<span className="font-semibold text-foreground text-sm leading-tight">
+														{msg.isOwn ? "You" : msg.author}
+													</span>
+													<span className="text-xs text-foreground/50 font-medium bg-background/50 px-2 py-1 rounded-full">
+														{msg.time}
+													</span>
+												</div>
+
+												{/* Message Bubble */}
+												<div
+													className={`relative inline-block px-5 py-4 rounded-2xl shadow-sm group-hover:shadow-md transition-shadow ${
+														msg.isOwn
+															? "bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-br-none"
+															: "mira-glass rounded-bl-none border border-border/50"
+													}`}
+												>
+													{!msg.isOwn && (
+														<div className="absolute -left-2 top-4 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-sidebar-accent/30"></div>
+													)}
+													{msg.isOwn && (
+														<div className="absolute -right-2 top-4 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-primary"></div>
+													)}
+													<p className="text-base leading-relaxed break-words">
+														{msg.message}
+													</p>
+												</div>
+
+												{/* Message Status for own messages */}
+												{msg.isOwn && (
+													<div className="flex items-center gap-1 mt-2 justify-end">
+														<span className="text-xs text-primary/60">✓ Sent</span>
+													</div>
+												)}
+											</div>
 										</div>
-									</div>
-								)}
-							</div>
-						))}
+									)}
+								</div>
+							);
+						})}
 						<div ref={messagesEndRef} />
 					</div>
 				)}

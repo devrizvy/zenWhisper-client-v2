@@ -70,7 +70,7 @@ const Tools = [
 		to: "/notes",
 		icon: NotebookPen,
 		description: "Personal reflections",
-		badge: "12",
+		badge: "New",
 	},
 ];
 const Support = [

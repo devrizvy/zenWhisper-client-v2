@@ -6,13 +6,21 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Plus, MoreVertical, Moon, Sun, Bell } from "lucide-react";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Search, Plus, Moon, Sun, FileText, MessageSquare, Users, HelpCircle, BookOpen } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Layout() {
 	const { theme, toggleTheme } = useTheme();
 	const { isAuthenticated, isLoading } = useAuth();
+	const navigate = useNavigate();
 
 	// Show loading screen while checking authentication
 	if (isLoading) {
@@ -53,21 +61,57 @@ export default function Layout() {
 
 					{/* Right Actions */}
 					<div className="flex items-center gap-2">
-						<Button
-							variant="ghost"
-							size="icon"
-							className="mira-action-btn text-muted-foreground hover:text-foreground"
-						>
-							<Plus className="w-4 h-4" />
-						</Button>
-						<Button
-							variant="ghost"
-							size="icon"
-							className="mira-action-btn text-muted-foreground hover:text-foreground relative"
-						>
-							<Bell className="w-4 h-4" />
-							<span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
-						</Button>
+						{/* New Quick Action Menu */}
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button
+									variant="ghost"
+									size="icon"
+									className="mira-action-btn text-muted-foreground hover:text-foreground"
+								>
+									<Plus className="w-4 h-4" />
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent align="end" className="w-48">
+								<DropdownMenuItem onClick={() => navigate("/notes")} className="cursor-pointer">
+									<FileText className="mr-2 h-4 w-4" />
+									<span>New Note</span>
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => navigate("/chat/users")} className="cursor-pointer">
+									<MessageSquare className="mr-2 h-4 w-4" />
+									<span>New Chat</span>
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => navigate("/group")} className="cursor-pointer">
+									<Users className="mr-2 h-4 w-4" />
+									<span>Join Group</span>
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+
+						{/* Help Menu - replaces fake notification bell */}
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button
+									variant="ghost"
+									size="icon"
+									className="mira-action-btn text-muted-foreground hover:text-foreground"
+								>
+									<HelpCircle className="w-4 h-4" />
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent align="end" className="w-48">
+								<DropdownMenuItem onClick={() => navigate("/docs")} className="cursor-pointer">
+									<BookOpen className="mr-2 h-4 w-4" />
+									<span>Documentation</span>
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => navigate("/faq")} className="cursor-pointer">
+									<HelpCircle className="mr-2 h-4 w-4" />
+									<span>FAQ</span>
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+
+						{/* Theme Toggle */}
 						<Button
 							variant="ghost"
 							size="icon"
@@ -79,14 +123,6 @@ export default function Layout() {
 							) : (
 								<Moon className="w-4 h-4" />
 							)}
-						</Button>
-						<div className="h-6 w-px bg-border mx-2" />
-						<Button
-							variant="ghost"
-							size="icon"
-							className="mira-action-btn text-muted-foreground hover:text-foreground"
-						>
-							<MoreVertical className="w-4 h-4" />
 						</Button>
 					</div>
 				</header>

@@ -94,7 +94,7 @@ const Settings = () => {
 											</label>
 											<input
 												type="text"
-												defaultValue="johndoe"
+												defaultValue={user?.username}
 												className="w-full px-3 py-2 mira-search rounded-lg text-foreground"
 											/>
 										</div>
@@ -104,7 +104,7 @@ const Settings = () => {
 											</label>
 											<input
 												type="email"
-												defaultValue="john.doe@university.edu"
+												defaultValue={user?.email}
 												className="w-full px-3 py-2 mira-search rounded-lg text-foreground"
 											/>
 										</div>
