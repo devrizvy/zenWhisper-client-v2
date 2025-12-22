@@ -62,7 +62,7 @@ const Signup: React.FC = () => {
 	// Redirect if already authenticated
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate("/chat/chats");
+			navigate("/welcome");
 		}
 	}, [isAuthenticated, navigate]);
 
@@ -195,7 +195,7 @@ const Signup: React.FC = () => {
 					if (loginSuccess) {
 						toast.success("Welcome to zenWhisper!");
 						setTimeout(() => {
-							navigate("/");
+							navigate("/welcome");
 						}, 500);
 					} else {
 						// Account created but login failed - redirect to login

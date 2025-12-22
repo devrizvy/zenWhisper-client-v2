@@ -17,6 +17,7 @@ import Settings from "./pages/Settings/Settings";
 import Docs from "./pages/Docs/Docs";
 import FAQ from "./pages/FAQ/FAQ";
 import Overview from "./pages/Overview/Overview";
+import Welcome from "./pages/Welcome/Welcome";
 
 export function App() {
 	return (
@@ -39,6 +40,7 @@ export function App() {
 
 					{/* Protected routes with MainLayout */}
 					<Route path="/" element={<Layout />}>
+						<Route path="welcome" element={<Welcome />} />
 						<Route path="favorites" element={<Favorites />} />
 						<Route path="chat/*" element={<Chats />} />
 						<Route path="group/*" element={<Group />} />

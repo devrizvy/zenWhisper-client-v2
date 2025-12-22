@@ -34,7 +34,7 @@ const Login: React.FC = () => {
 	// Redirect if already authenticated
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate("/chat");
+			navigate("/welcome");
 		}
 	}, [isAuthenticated, navigate, user]);
 
@@ -63,7 +63,7 @@ const Login: React.FC = () => {
 			const success = await login(formData.email, formData.password);
 			if (success) {
 				toast.success("Welcome back!");
-				navigate("/chat");
+				navigate("/welcome");
 			}
 		} catch (err: any) {
 			const errorMessage = err.response?.data?.message || "Connection error. Please try again.";
