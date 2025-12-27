@@ -52,7 +52,7 @@ const Room = () => {
 			try {
 				setRecentRooms(JSON.parse(savedRecentRooms));
 			} catch (e) {
-				console.error("Failed to parse recent rooms", e);
+				// Invalid data, ignore
 			}
 		}
 	}, [isAuthenticated, navigate, username]);

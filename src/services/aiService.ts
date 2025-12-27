@@ -43,7 +43,6 @@ export const aiApi = {
         throw new Error('Invalid response format');
       }
     } catch (error) {
-      console.error('Failed to summarize text:', error);
       // Return a fallback response
       return {
         success: false,
@@ -77,7 +76,6 @@ export const aiApi = {
         };
       }
     } catch (error) {
-      console.error('Failed to check AI service status:', error);
       return {
         available: false,
         service: 'Unknown',

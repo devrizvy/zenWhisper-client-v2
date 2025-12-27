@@ -49,20 +49,17 @@ class SocketService {
 				});
 
 				this.socket.on("connect", () => {
-					console.log("Connected to server:", this.socket?.id);
-
 					// Register user as online
 					this.socket?.emit("user_online", userEmail);
 					resolve();
 				});
 
 				this.socket.on("connect_error", (error) => {
-					console.error("Connection error:", error);
 					reject(error);
 				});
 
 				this.socket.on("disconnect", () => {
-					console.log("Disconnected from server");
+					// Handle disconnect
 				});
 			} catch (error) {
 				reject(error);

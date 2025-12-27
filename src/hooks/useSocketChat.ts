@@ -115,7 +115,6 @@ export const useSocketChat = ({
 			time: string;
 		}) => {
 			// This could be displayed as a system message in the current room
-			console.log("User joined:", message);
 		};
 
 		const handleLeaveMessage = (message: {
@@ -124,7 +123,6 @@ export const useSocketChat = ({
 			time: string;
 		}) => {
 			// This could be displayed as a system message in the current room
-			console.log("User left:", message);
 		};
 
 		// Register listeners

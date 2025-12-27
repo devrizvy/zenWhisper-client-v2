@@ -20,6 +20,9 @@ import {
 	Sun,
 	Menu,
 	X,
+	Star,
+	Target,
+	Infinity,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -39,7 +42,7 @@ const Home = () => {
 
 	// Landing page for all users
 	return (
-		<div className="min-h-screen w-full bg-background">
+		<div className="min-h-screen w-full bg-background overflow-hidden">
 			{/* Floating Navbar */}
 			<nav className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 ease-out ${
 				isScrolled
@@ -165,63 +168,81 @@ const Home = () => {
 				)}
 			</nav>
 
-			{/* Hero Section */}
+			{/* Hero Section with Animated Background */}
 			<div className="relative overflow-hidden">
-				<div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
-				<div className="max-w-6xl mx-auto px-6 py-20 md:py-32 relative">
-					<div className="text-center space-y-6 max-w-3xl mx-auto">
+				{/* Animated Background Shapes */}
+				<div className="absolute inset-0 overflow-hidden">
+					<div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+					<div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000" />
+					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-3xl" />
+				</div>
+
+				{/* Grid Pattern Overlay */}
+				<div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+
+				<div className="max-w-6xl mx-auto px-6 py-24 md:py-32 relative">
+					<div className="text-center space-y-8 max-w-3xl mx-auto">
+						{/* Badge */}
+						<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium animate-in fade-in slide-in-from-bottom-4 duration-700">
+							<Sparkles className="w-4 h-4" />
+							<span>New: AI-Powered Summarization</span>
+							<ArrowRight className="w-4 h-4" />
+						</div>
+
 						{/* Logo & Branding */}
-						<div className="flex items-center justify-center gap-3 mb-8">
-							<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
-								<Waves className="w-8 h-8 text-white" />
+						<div className="flex items-center justify-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+							<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-105">
+								<Waves className="w-9 h-9 text-white" />
 							</div>
-							<div>
+							<div className="text-left">
 								<h1 className="text-3xl font-bold tracking-tight">zenWhisper</h1>
 								<p className="text-sm text-muted-foreground">Find your inner peace</p>
 							</div>
 						</div>
 
 						{/* Hero Text */}
-						<h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-							Study. Chat.{" "}
-							<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-								Think Better.
-							</span>
-						</h2>
-						<p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-							A focused chat platform built for learning. Connect with study partners,
-							join group discussions, take smart notes, and use AI to summarize
-							long conversations into clear insights.
-						</p>
+						<div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+							<h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+								Study. Chat.{" "}
+								<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient">
+									Think Better.
+								</span>
+							</h2>
+							<p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+								A focused chat platform built for learning. Connect with study partners,
+								join group discussions, take smart notes, and use AI to summarize
+								long conversations into clear insights.
+							</p>
+						</div>
 
 						{/* CTA Buttons */}
-						<div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-							<NavLink to="/signup" className="w-full sm:w-auto">
-								<Button size="lg" className="w-full sm:w-auto h-12 px-8 text-base">
+						<div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+							<NavLink to="/signup" className="w-full sm:w-auto group">
+								<Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 hover:scale-105">
 									Get Started Free
-									<ArrowRight className="ml-2 w-4 h-4" />
+									<ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
 								</Button>
 							</NavLink>
 							<NavLink to="/login" className="w-full sm:w-auto">
-								<Button variant="outline" size="lg" className="w-full sm:w-auto h-12 px-8 text-base">
+								<Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-base border-2 transition-all duration-300 hover:scale-105">
 									Sign In
 								</Button>
 							</NavLink>
 						</div>
 
-						{/* Trust Indicators */}
-						<div className="flex items-center justify-center gap-6 pt-8 text-sm text-muted-foreground">
-							<div className="flex items-center gap-2">
-								<Shield className="w-4 h-4 text-primary" />
-								<span>Secure & Private</span>
+						{/* Stats / Trust Indicators */}
+						<div className="flex flex-wrap items-center justify-center gap-8 pt-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-400">
+							<div className="flex items-center gap-2 text-muted-foreground">
+								<Shield className="w-5 h-5 text-primary" />
+								<span className="font-medium">Secure & Private</span>
 							</div>
-							<div className="flex items-center gap-2">
-								<Zap className="w-4 h-4 text-accent" />
-								<span>Real-time Sync</span>
+							<div className="flex items-center gap-2 text-muted-foreground">
+								<Zap className="w-5 h-5 text-accent" />
+								<span className="font-medium">Real-time Sync</span>
 							</div>
-							<div className="flex items-center gap-2">
-								<CheckCircle2 className="w-4 h-4 text-green-500" />
-								<span>Always Free</span>
+							<div className="flex items-center gap-2 text-muted-foreground">
+								<Infinity className="w-5 h-5 text-green-500" />
+								<span className="font-medium">Always Free</span>
 							</div>
 						</div>
 					</div>
@@ -229,10 +250,17 @@ const Home = () => {
 			</div>
 
 			{/* Features Section */}
-			<div className="max-w-6xl mx-auto px-6 py-20">
+			<div className="max-w-7xl mx-auto px-6 py-24">
 				<div className="text-center mb-16">
-					<h2 className="text-3xl md:text-4xl font-bold mb-4">
-						Everything You Need to Study Smarter
+					<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
+						<Star className="w-4 h-4" />
+						<span>Powerful Features</span>
+					</div>
+					<h2 className="text-4xl md:text-5xl font-bold mb-4">
+						Everything You Need to{" "}
+						<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+							Study Smarter
+						</span>
 					</h2>
 					<p className="text-muted-foreground text-lg max-w-2xl mx-auto">
 						Powerful features designed specifically for students and learners
@@ -240,15 +268,15 @@ const Home = () => {
 				</div>
 
 				{/* Main Features Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					{/* Smart Chats */}
-					<Card className="border-primary/20 hover:shadow-lg transition-shadow">
+					<Card className="group border-primary/20 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10">
 						<CardContent className="p-6 space-y-4">
-							<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-								<MessageCircle className="w-6 h-6 text-primary" />
+							<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+								<MessageCircle className="w-7 h-7 text-primary" />
 							</div>
 							<div>
-								<h3 className="text-lg font-semibold mb-2">Smart Chats</h3>
+								<h3 className="text-xl font-semibold mb-2">Smart Chats</h3>
 								<p className="text-sm text-muted-foreground">
 									Direct messaging with real-time sync. Organize conversations,
 									favorite important chats, and never lose track of discussions.
@@ -272,13 +300,13 @@ const Home = () => {
 					</Card>
 
 					{/* Study Groups */}
-					<Card className="border-accent/20 hover:shadow-lg transition-shadow">
+					<Card className="group border-accent/20 hover:border-accent/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10">
 						<CardContent className="p-6 space-y-4">
-							<div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-								<Users className="w-6 h-6 text-accent" />
+							<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+								<Users className="w-7 h-7 text-accent" />
 							</div>
 							<div>
-								<h3 className="text-lg font-semibold mb-2">Study Groups</h3>
+								<h3 className="text-xl font-semibold mb-2">Study Groups</h3>
 								<p className="text-sm text-muted-foreground">
 									Create or join classroom study circles. Collaborate in real-time
 									with multiple students on any subject.
@@ -302,13 +330,13 @@ const Home = () => {
 					</Card>
 
 					{/* Built-in Notes */}
-					<Card className="border-amber-500/20 hover:shadow-lg transition-shadow">
+					<Card className="group border-amber-500/20 hover:border-amber-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/10">
 						<CardContent className="p-6 space-y-4">
-							<div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center">
-								<NotebookPen className="w-6 h-6 text-amber-500" />
+							<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-500/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+								<NotebookPen className="w-7 h-7 text-amber-500" />
 							</div>
 							<div>
-								<h3 className="text-lg font-semibold mb-2">Built-in Notes</h3>
+								<h3 className="text-xl font-semibold mb-2">Built-in Notes</h3>
 								<p className="text-sm text-muted-foreground">
 									Powerful note-taking with folders, tags, pinning, and archiving.
 									Keep your study materials organized and accessible.
@@ -332,13 +360,13 @@ const Home = () => {
 					</Card>
 
 					{/* AI Summary */}
-					<Card className="border-purple-500/20 hover:shadow-lg transition-shadow">
+					<Card className="group border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10">
 						<CardContent className="p-6 space-y-4">
-							<div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center">
-								<Sparkles className="w-6 h-6 text-purple-500" />
+							<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-500/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+								<Sparkles className="w-7 h-7 text-purple-500" />
 							</div>
 							<div>
-								<h3 className="text-lg font-semibold mb-2">AI Summarizer</h3>
+								<h3 className="text-xl font-semibold mb-2">AI Summarizer</h3>
 								<p className="text-sm text-muted-foreground">
 									Transform long text into concise summaries. Choose your preferred
 									length and format. Perfect for reviewing study materials.
@@ -362,13 +390,13 @@ const Home = () => {
 					</Card>
 
 					{/* Search & Discovery */}
-					<Card className="border-blue-500/20 hover:shadow-lg transition-shadow">
+					<Card className="group border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10">
 						<CardContent className="p-6 space-y-4">
-							<div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-								<Brain className="w-6 h-6 text-blue-500" />
+							<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-500/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+								<Brain className="w-7 h-7 text-blue-500" />
 							</div>
 							<div>
-								<h3 className="text-lg font-semibold mb-2">Smart Search</h3>
+								<h3 className="text-xl font-semibold mb-2">Smart Search</h3>
 								<p className="text-sm text-muted-foreground">
 									Find anything across conversations, notes, and people.
 									Quickly locate that important discussion or note.
@@ -392,13 +420,13 @@ const Home = () => {
 					</Card>
 
 					{/* Docs & Support */}
-					<Card className="border-green-500/20 hover:shadow-lg transition-shadow">
+					<Card className="group border-green-500/20 hover:border-green-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-green-500/10">
 						<CardContent className="p-6 space-y-4">
-							<div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-								<BookOpen className="w-6 h-6 text-green-500" />
+							<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+								<BookOpen className="w-7 h-7 text-green-500" />
 							</div>
 							<div>
-								<h3 className="text-lg font-semibold mb-2">Docs & FAQ</h3>
+								<h3 className="text-xl font-semibold mb-2">Docs & FAQ</h3>
 								<p className="text-sm text-muted-foreground">
 									Comprehensive documentation and FAQ to help you get started.
 									Learn tips and tricks for productive studying.
@@ -424,9 +452,15 @@ const Home = () => {
 			</div>
 
 			{/* How It Works Section */}
-			<div className="bg-muted/30 py-20">
-				<div className="max-w-6xl mx-auto px-6">
+			<div className="relative bg-muted/30 py-24 overflow-hidden">
+				{/* Background decoration */}
+				<div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent" />
+				<div className="max-w-6xl mx-auto px-6 relative">
 					<div className="text-center mb-16">
+						<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
+							<Target className="w-4 h-4" />
+							<span>Simple Steps</span>
+						</div>
 						<h2 className="text-3xl md:text-4xl font-bold mb-4">
 							How zenWhisper Works
 						</h2>
@@ -435,9 +469,13 @@ const Home = () => {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-						<div className="text-center space-y-4">
-							<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto shadow-lg">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+						{/* Connecting Line (Desktop) */}
+						<div className="hidden md:block absolute top-8 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-primary via-accent to-primary opacity-20" />
+
+						{/* Step 1 */}
+						<div className="text-center space-y-4 relative">
+							<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto shadow-xl shadow-primary/30 hover:scale-110 transition-transform duration-300">
 								<span className="text-2xl font-bold text-white">1</span>
 							</div>
 							<h3 className="text-xl font-semibold">Create Your Account</h3>
@@ -447,8 +485,9 @@ const Home = () => {
 							</p>
 						</div>
 
-						<div className="text-center space-y-4">
-							<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto shadow-lg">
+						{/* Step 2 */}
+						<div className="text-center space-y-4 relative">
+							<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto shadow-xl shadow-primary/30 hover:scale-110 transition-transform duration-300">
 								<span className="text-2xl font-bold text-white">2</span>
 							</div>
 							<h3 className="text-xl font-semibold">Connect & Collaborate</h3>
@@ -458,8 +497,9 @@ const Home = () => {
 							</p>
 						</div>
 
-						<div className="text-center space-y-4">
-							<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto shadow-lg">
+						{/* Step 3 */}
+						<div className="text-center space-y-4 relative">
+							<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto shadow-xl shadow-primary/30 hover:scale-110 transition-transform duration-300">
 								<span className="text-2xl font-bold text-white">3</span>
 							</div>
 							<h3 className="text-xl font-semibold">Take Notes & Summarize</h3>
@@ -473,24 +513,34 @@ const Home = () => {
 			</div>
 
 			{/* CTA Section */}
-			<div className="bg-gradient-to-r from-primary/10 to-accent/10 py-20">
-				<div className="max-w-4xl mx-auto px-6 text-center space-y-6">
-					<h2 className="text-3xl md:text-4xl font-bold">
-						Ready to Study Smarter?
+			<div className="relative py-24 overflow-hidden">
+				{/* Animated gradient background */}
+				<div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10" />
+				<div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]" />
+				<div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+				<div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000" />
+
+				<div className="max-w-4xl mx-auto px-6 text-center space-y-8 relative">
+					<h2 className="text-4xl md:text-5xl font-bold">
+						Ready to{" "}
+						<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+							Study Smarter?
+						</span>
 					</h2>
 					<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
 						Join thousands of students who are already learning more effectively
 						with zenWhisper. Start your journey today.
 					</p>
 					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-						<NavLink to="/signup" className="w-full sm:w-auto">
-							<Button size="lg" className="w-full sm:w-auto h-12 px-8 text-base">
+						<NavLink to="/signup" className="w-full sm:w-auto group">
+							<Button size="lg" className="w-full sm:w-auto h-14 px-10 text-base shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 hover:scale-105">
 								Create Free Account
-								<ArrowRight className="ml-2 w-4 h-4" />
+								<ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
 							</Button>
 						</NavLink>
 						<NavLink to="/docs" className="w-full sm:w-auto">
-							<Button variant="outline" size="lg" className="w-full sm:w-auto h-12 px-8 text-base">
+							<Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-10 text-base border-2 transition-all duration-300 hover:scale-105">
+								<BookOpen className="w-4 h-4 mr-2" />
 								Read Documentation
 							</Button>
 						</NavLink>
@@ -524,7 +574,7 @@ const Home = () => {
 						</div>
 					</div>
 					<div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-						<p>&copy; 2024 zenWhisper. Crafted by devrizvy.</p>
+						<p>&copy; 2025 zenWhisper. Crafted by devrizvy.</p>
 					</div>
 				</div>
 			</footer>

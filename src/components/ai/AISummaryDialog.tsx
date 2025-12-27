@@ -90,7 +90,6 @@ export const AISummaryDialog: React.FC<AISummaryDialogProps> = ({
       const response = await aiApi.summarizeText(request);
       setSummary(response);
     } catch (error: any) {
-      console.error('Failed to generate summary:', error);
       setSummary({
         success: false,
         summary: '',

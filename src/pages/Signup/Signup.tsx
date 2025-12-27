@@ -168,9 +168,6 @@ const Signup: React.FC = () => {
 				formData.password
 			);
 
-			// Log the response for debugging
-			console.log("Signup response:", response);
-
 			// Check if signup was successful
 			if (response.success) {
 				const data = response.data as any;
@@ -211,9 +208,6 @@ const Signup: React.FC = () => {
 				toast.error(errorMsg);
 			}
 		} catch (err: any) {
-			// Better error extraction
-			console.error("Signup error:", err);
-
 			let errorMessage = "Connection error. Please try again.";
 
 			// Try to extract error from different possible structures

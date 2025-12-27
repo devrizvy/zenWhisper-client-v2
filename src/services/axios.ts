@@ -37,11 +37,6 @@ api.interceptors.response.use(
 			window.location.href = "/login";
 		}
 
-		// Handle network errors
-		if (error.code === "NETWORK_ERROR") {
-			console.error("Network error. Please check your connection.");
-		}
-
 		return Promise.reject(error);
 	},
 );

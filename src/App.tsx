@@ -18,6 +18,7 @@ import Docs from "./pages/Docs/Docs";
 import FAQ from "./pages/FAQ/FAQ";
 import Overview from "./pages/Overview/Overview";
 import Welcome from "./pages/Welcome/Welcome";
+import Admin from "./pages/Admin/Admin";
 
 export function App() {
 	return (
@@ -48,6 +49,7 @@ export function App() {
 						<Route path="ai-summary" element={<AISummary />} />
 						<Route path="settings" element={<Settings />} />
 						<Route path="overview" element={<Overview />} />
+						<Route path="admin" element={<Admin />} />
 					</Route>
 				</Routes>
 				<Toaster

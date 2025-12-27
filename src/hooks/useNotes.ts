@@ -29,7 +29,6 @@ const fetchNotes = async (filters: Record<string, any>) => {
     });
     return { ...response, notes: sortedNotes };
   } catch (error) {
-    console.error('Failed to fetch notes:', error);
     // Return empty data on error to prevent app crash
     return { notes: [], folders: [], total: 0 };
   }
@@ -40,7 +39,6 @@ const fetchFolders = async () => {
     const response = await foldersApi.getAllFolders();
     return response;
   } catch (error) {
-    console.error('Failed to fetch folders:', error);
     return [];
   }
 };

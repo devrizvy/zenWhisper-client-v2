@@ -71,7 +71,7 @@ const AISummary = () => {
           timestamp: new Date(item.timestamp)
         })));
       } catch (error) {
-        console.error('Failed to parse summary history:', error);
+        // Invalid history data, ignore
       }
     }
     checkServiceStatus();
@@ -129,7 +129,6 @@ const AISummary = () => {
         setSummaryHistory(prev => [newHistoryItem, ...prev].slice(0, 20)); // Keep only last 20 items
       }
     } catch (error: any) {
-      console.error('Failed to generate summary:', error);
       setCurrentSummary({
         success: false,
         summary: '',

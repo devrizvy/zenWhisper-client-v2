@@ -67,7 +67,6 @@ const RoomChat = () => {
 	// Join room when connected and room info is available
 	useEffect(() => {
 		if (isConnected && id && username) {
-			console.log("Joining room:", id, "as:", username);
 			joinRoom(id);
 			toast.success(`Connected to ${roomName}`);
 		}
@@ -144,9 +143,6 @@ const RoomChat = () => {
 		e.preventDefault();
 
 		if (message.trim() && id) {
-			console.log("Sending room message:", message.trim());
-			console.log("Socket connected:", isConnected);
-
 			// Send message via socket service
 			sendRoomMessage({
 				roomId: id,
@@ -154,8 +150,6 @@ const RoomChat = () => {
 				message: message.trim(),
 			});
 			setMessage("");
-		} else {
-			console.log("Cannot send message - missing data:", { message: message.trim(), id, isConnected });
 		}
 	};
 

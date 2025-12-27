@@ -84,7 +84,6 @@ export const notesApi = {
         total: responseData.total || notes.length
       };
     } catch (error) {
-      console.error('Error fetching notes:', error);
       // Return empty data on error to prevent app crash
       return { notes: [], folders: [], total: 0 };
     }
@@ -171,7 +170,6 @@ export const notesApi = {
         updatedAt: note.updatedAt
       };
     } catch (error) {
-      console.error('Pin endpoint not available:', error);
       throw new Error('Pin/unpin feature is not yet implemented');
     }
   },
@@ -195,7 +193,6 @@ export const notesApi = {
         updatedAt: note.updatedAt
       };
     } catch (error) {
-      console.error('Archive endpoint not available:', error);
       throw new Error('Archive/unarchive feature is not yet implemented');
     }
   },
@@ -226,7 +223,6 @@ export const foldersApi = {
         noteCount: folder.noteCount || 0
       }));
     } catch (error) {
-      console.error('Failed to fetch folders:', error);
       return [];
     }
   },

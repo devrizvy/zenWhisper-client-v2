@@ -7,6 +7,7 @@ interface User {
 	username: string;
 	name?: string;
 	role?: string;
+	status?: string;
 }
 
 interface AuthState {
@@ -116,10 +117,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 			const response = await authApi.login(email, password);
 			if (response.success && response.data) {
 				const { token, userInfo } = response.data;
+
+				// Check if user is blocked
+				if (userInfo.status === "BLOCKED") {
+					toast.error("Your account has been blocked. Please contact the administrator.");
+					return false;
+				}
+
 				const user: User = {
 					email: userInfo.email,
 					username: userInfo.username,
 					name: userInfo.username,
+					role: userInfo.role,
+					status: userInfo.status,
 				};
 
 				localStorage.setItem("zenwhisper_user", JSON.stringify(user));
@@ -146,6 +156,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 			username: user.name || user.username, // Use name from backend, fallback to username
 			name: user.name,
 			role: user.role,
+			status: user.status,
 		};
 
 		localStorage.setItem("zenwhisper_user", JSON.stringify(mappedUser));

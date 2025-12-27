@@ -2,26 +2,19 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
 	BookOpen,
-	HelpCircle,
 	Search,
 	MessageCircle,
 	Users,
-	Settings,
+	FileText,
+	Sparkles,
 	Shield,
 	Zap,
-	Code,
 	ChevronRight,
 	ExternalLink,
-	Copy,
-	Download,
-	FileText,
-	Video,
-	Terminal,
 	GitBranch,
-	Cloud,
-	Smartphone,
-	CheckCircle,
-	AlertCircle,
+	Waves,
+	ArrowRight,
+	CheckCircle2,
 } from "lucide-react";
 
 const Docs = () => {
@@ -32,162 +25,131 @@ const Docs = () => {
 		{
 			id: "getting-started",
 			title: "Getting Started",
-			icon: <BookOpen className="w-5 h-5" />,
-			items: [
-				{ title: "Installation", icon: <Download className="w-4 h-4" /> },
-				{ title: "Quick Start Guide", icon: <Zap className="w-4 h-4" /> },
-				{ title: "Account Setup", icon: <Users className="w-4 h-4" /> },
-				{ title: "Basic Concepts", icon: <AlertCircle className="w-4 h-4" /> },
-			],
+			icon: <Zap className="w-5 h-5" />,
 		},
 		{
 			id: "features",
 			title: "Features",
-			icon: <Zap className="w-5 h-5" />,
-			items: [
-				{
-					title: "Real-time Chat",
-					icon: <MessageCircle className="w-4 h-4" />,
-				},
-				{ title: "Virtual Classrooms", icon: <Users className="w-4 h-4" /> },
-				{ title: "Smart Notes", icon: <FileText className="w-4 h-4" /> },
-				{ title: "AI Summaries", icon: <Terminal className="w-4 h-4" /> },
-			],
-		},
-		{
-			id: "api",
-			title: "API Reference",
-			icon: <Code className="w-5 h-5" />,
-			items: [
-				{ title: "Authentication", icon: <Shield className="w-4 h-4" /> },
-				{ title: "Endpoints", icon: <GitBranch className="w-4 h-4" /> },
-				{ title: "Webhooks", icon: <Cloud className="w-4 h-4" /> },
-				{ title: "Rate Limits", icon: <AlertCircle className="w-4 h-4" /> },
-			],
-		},
-		{
-			id: "tutorials",
-			title: "Tutorials",
-			icon: <Video className="w-5 h-5" />,
-			items: [
-				{ title: "Video Guides", icon: <Video className="w-4 h-4" /> },
-				{
-					title: "Step-by-Step Examples",
-					icon: <CheckCircle className="w-4 h-4" />,
-				},
-				{ title: "Best Practices", icon: <BookOpen className="w-4 h-4" /> },
-				{ title: "Troubleshooting", icon: <Settings className="w-4 h-4" /> },
-			],
+			icon: <Sparkles className="w-5 h-5" />,
 		},
 	];
 
-	const filteredSections = sections
-		.map((section) => ({
-			...section,
-			items: section.items.filter((item) =>
-				item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-			),
-		}))
-		.filter((section) => section.items.length > 0);
+	const filteredSections = sections.filter((section) =>
+		searchQuery === "" ||
+		section.title.toLowerCase().includes(searchQuery.toLowerCase())
+	);
 
 	const renderContent = () => {
 		switch (activeSection) {
 			case "getting-started":
 				return (
-					<div className="space-y-8 ">
-						<div className="bg-card border rounded-2xl p-8">
-							<div className="flex items-center gap-4 mb-6">
-								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-									<BookOpen className="w-6 h-6 text-primary" />
+					<div className="space-y-6">
+						{/* Hero Card */}
+						<div className="relative overflow-hidden border border-border/50 rounded-2xl p-8 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+							<div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+							<div className="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
+							<div className="relative flex items-center gap-4 mb-6">
+								<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/30">
+									<Waves className="w-8 h-8 text-white" />
 								</div>
 								<div>
-									<h2 className="text-2xl font-semibold">
-										Getting Started with zenWhisper
-									</h2>
+									<h2 className="text-2xl font-bold">Getting Started</h2>
 									<p className="text-muted-foreground">
-										Everything you need to know to get started
+										Quick guide to start using zenWhisper
 									</p>
 								</div>
 							</div>
-
-							<div className="grid md:grid-cols-2 gap-6">
-								<div className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow cursor-pointer">
-									<div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-										<Users className="w-5 h-5 text-primary" />
-									</div>
-									<h3 className="text-lg font-semibold mb-2">
-										Create Your Account
-									</h3>
-									<p className="text-sm text-muted-foreground mb-4">
-										Sign up in seconds with your email and start collaborating
-										immediately.
-									</p>
-									<NavLink
-										to="/signup"
-										className="text-sm text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
-									>
-										Get Started <ChevronRight className="w-3 h-3" />
-									</NavLink>
-								</div>
-
-								<div className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow cursor-pointer">
-									<div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-										<MessageCircle className="w-5 h-5 text-primary" />
-									</div>
-									<h3 className="text-lg font-semibold mb-2">
-										Join Your First Classroom
-									</h3>
-									<p className="text-sm text-muted-foreground mb-4">
-										Connect with teachers and classmates in virtual classrooms.
-									</p>
-									<NavLink
-										to="/group"
-										className="text-sm text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
-									>
-										Explore Classrooms <ChevronRight className="w-3 h-3" />
-									</NavLink>
-								</div>
-							</div>
+							<p className="text-muted-foreground max-w-2xl">
+								zenWhisper is a collaborative study platform designed for students.
+								Connect with peers, join study groups, take notes, and use AI to summarize your learning materials.
+							</p>
 						</div>
 
-						<div className="bg-card border rounded-2xl p-8">
-							<h3 className="text-xl font-semibold mb-6">
-								Quick Start Steps
+						{/* Quick Actions */}
+						<div className="grid sm:grid-cols-2 gap-4">
+							<NavLink to="/chat/users" className="group">
+								<div className="border border-border/50 rounded-xl p-6 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300">
+									<div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+										<Users className="w-6 h-6 text-primary" />
+									</div>
+									<h3 className="text-lg font-semibold mb-2">Find Study Partners</h3>
+									<p className="text-sm text-muted-foreground mb-4">
+										Discover other students and start one-on-one conversations
+									</p>
+									<span className="text-sm text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+										Browse users <ChevronRight className="w-4 h-4" />
+									</span>
+								</div>
+							</NavLink>
+
+							<NavLink to="/chat/rooms" className="group">
+								<div className="border border-border/50 rounded-xl p-6 hover:border-accent/50 hover:bg-accent/5 transition-all duration-300">
+									<div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+										<Users className="w-6 h-6 text-accent" />
+									</div>
+									<h3 className="text-lg font-semibold mb-2">Join Study Groups</h3>
+									<p className="text-sm text-muted-foreground mb-4">
+										Create or join virtual classrooms for group discussions
+									</p>
+									<span className="text-sm text-accent flex items-center gap-1 group-hover:gap-2 transition-all">
+										View rooms <ChevronRight className="w-4 h-4" />
+									</span>
+								</div>
+							</NavLink>
+
+							<NavLink to="/notes" className="group">
+								<div className="border border-border/50 rounded-xl p-6 hover:border-amber-500/50 hover:bg-amber-500/5 transition-all duration-300">
+									<div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+										<FileText className="w-6 h-6 text-amber-500" />
+									</div>
+									<h3 className="text-lg font-semibold mb-2">Take Notes</h3>
+									<p className="text-sm text-muted-foreground mb-4">
+										Create and organize your study materials with folders
+									</p>
+									<span className="text-sm text-amber-500 flex items-center gap-1 group-hover:gap-2 transition-all">
+										Open notes <ChevronRight className="w-4 h-4" />
+									</span>
+								</div>
+							</NavLink>
+
+							<NavLink to="/ai-summary" className="group">
+								<div className="border border-border/50 rounded-xl p-6 hover:border-purple-500/50 hover:bg-purple-500/5 transition-all duration-300">
+									<div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+										<Sparkles className="w-6 h-6 text-purple-500" />
+									</div>
+									<h3 className="text-lg font-semibold mb-2">AI Summarizer</h3>
+									<p className="text-sm text-muted-foreground mb-4">
+										Transform long text into concise summaries
+									</p>
+									<span className="text-sm text-purple-500 flex items-center gap-1 group-hover:gap-2 transition-all">
+										Try AI <ChevronRight className="w-4 h-4" />
+									</span>
+								</div>
+							</NavLink>
+						</div>
+
+						{/* Quick Start Steps */}
+						<div className="border border-border/50 rounded-2xl p-6">
+							<h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
+								<BookOpen className="w-5 h-5 text-primary" />
+								Quick Start
 							</h3>
-							<div className="space-y-6">
+							<div className="space-y-4">
 								{[
-									{
-										step: 1,
-										title: "Sign Up",
-										desc: "Create your account with email and password",
-									},
-									{
-										step: 2,
-										title: "Complete Profile",
-										desc: "Add your username and avatar",
-									},
-									{
-										step: 3,
-										title: "Join Classrooms",
-										desc: "Enter classroom codes or create new ones",
-									},
-									{
-										step: 4,
-										title: "Start Collaborating",
-										desc: "Chat, share notes, and learn together",
-									},
+									{ step: 1, title: "Sign up or log in", desc: "Create your account or access existing one" },
+									{ step: 2, title: "Explore the dashboard", desc: "Get familiar with the welcome page" },
+									{ step: 3, title: "Find study partners", desc: "Browse users and start conversations" },
+									{ step: 4, title: "Join or create rooms", desc: "Connect with classmates in study groups" },
+									{ step: 5, title: "Take notes", desc: "Organize your learning materials" },
+									{ step: 6, title: "Use AI summarizer", desc: "Summarize long content quickly" },
 								].map((item) => (
 									<div key={item.step} className="flex gap-4">
-										<div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-sm font-medium text-primary-foreground flex-shrink-0">
+										<div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
 											{item.step}
 										</div>
-										<div className="flex-1">
-											<h4 className="font-medium">
-												{item.title}
-											</h4>
-											<p className="text-sm text-muted-foreground">
-												{item.desc}
-											</p>
+										<div className="flex-1 pb-4 border-b border-border/50 last:border-0 last:pb-0">
+											<h4 className="font-medium mb-1">{item.title}</h4>
+											<p className="text-sm text-muted-foreground">{item.desc}</p>
 										</div>
 									</div>
 								))}
@@ -198,207 +160,96 @@ const Docs = () => {
 
 			case "features":
 				return (
-					<div className="space-y-8">
-						<div className="bg-card border rounded-2xl p-8">
-							<div className="flex items-center gap-4 mb-6">
-								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-									<Zap className="w-6 h-6 text-primary" />
+					<div className="space-y-6">
+						{/* Hero Card */}
+						<div className="relative overflow-hidden border border-border/50 rounded-2xl p-8 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+							<div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+							<div className="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
+							<div className="relative flex items-center gap-4 mb-6">
+								<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/30">
+									<Sparkles className="w-8 h-8 text-white" />
 								</div>
 								<div>
-									<h2 className="text-2xl font-semibold">Powerful Features</h2>
+									<h2 className="text-2xl font-bold">Features</h2>
 									<p className="text-muted-foreground">
-										Discover what makes zenWhisper special
+										Everything you need for effective studying
 									</p>
 								</div>
 							</div>
+						</div>
 
-							<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-								{[
-									{
-										icon: <MessageCircle className="w-6 h-6" />,
-										title: "Real-time Messaging",
-										desc: "Instant chat with typing indicators and read receipts",
-										badge: "New",
-									},
-									{
-										icon: <Users className="w-6 h-6" />,
-										title: "Virtual Classrooms",
-										desc: "Create and join collaborative learning spaces",
-									},
-									{
-										icon: <FileText className="w-6 h-6" />,
-										title: "Smart Notes",
-										desc: "Organize and share study materials with ease",
-									},
-									{
-										icon: <Terminal className="w-6 h-6" />,
-										title: "AI Summaries",
-										desc: "Get AI-generated summaries of lectures and content",
-									},
-									{
-										icon: <Shield className="w-6 h-6" />,
-										title: "Privacy First",
-										desc: "End-to-end encryption for all communications",
-									},
-									{
-										icon: <Smartphone className="w-6 h-6" />,
-										title: "Cross Platform",
-										desc: "Available on web, mobile, and desktop",
-									},
-								].map((feature, idx) => (
-									<div
-										key={idx}
-										className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow"
-									>
-										<div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-											<span className="text-primary">
-												{feature.icon}
-											</span>
-										</div>
-										<h3 className="text-lg font-semibold mb-2">
-											{feature.title}
-											{feature.badge && (
-												<span className="ml-2 px-2 py-0.5 text-xs rounded-full bg-primary/20 text-primary">
-													{feature.badge}
+						{/* Features Grid */}
+						<div className="grid sm:grid-cols-2 gap-4">
+							{[
+								{
+									icon: <MessageCircle className="w-6 h-6" />,
+									title: "Real-time Chat",
+									desc: "Instant messaging with typing indicators and online status",
+									color: "primary",
+									link: "/chat",
+								},
+								{
+									icon: <Users className="w-6 h-6" />,
+									title: "Virtual Classrooms",
+									desc: "Study rooms with unique IDs for collaborative learning",
+									color: "accent",
+									link: "/chat/rooms",
+								},
+								{
+									icon: <FileText className="w-6 h-6" />,
+									title: "Smart Notes",
+									desc: "Organize notes in folders with search, pin & archive",
+									color: "amber",
+									link: "/notes",
+								},
+								{
+									icon: <Sparkles className="w-6 h-6" />,
+									title: "AI Summarizer",
+									desc: "Summarize text in different lengths and formats",
+									color: "purple",
+									link: "/ai-summary",
+								},
+								{
+									icon: <Shield className="w-6 h-6" />,
+									title: "Secure & Private",
+									desc: "JWT authentication with secure token management",
+									color: "green",
+									link: null,
+								},
+								{
+									icon: <Zap className="w-6 h-6" />,
+									title: "Real-time Sync",
+									desc: "WebSocket powered instant updates across devices",
+									color: "blue",
+									link: null,
+								},
+							].map((feature, idx) => (
+								<div key={idx} className="group">
+									{feature.link ? (
+										<NavLink to={feature.link} className="block">
+											<div className={`border border-border/50 rounded-xl p-6 hover:border-${feature.color}/50 hover:bg-${feature.color}/5 transition-all duration-300 h-full`}>
+												<div className={`w-12 h-12 rounded-xl bg-${feature.color === 'primary' ? 'primary' : feature.color === 'accent' ? 'accent' : feature.color === 'green' ? 'green-500' : feature.color === 'blue' ? 'blue-500' : feature.color + '-500'}/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+													<span className={`text-${feature.color === 'primary' ? 'primary' : feature.color === 'accent' ? 'accent' : feature.color === 'green' ? 'green-500' : feature.color === 'blue' ? 'blue-500' : feature.color + '-500'}`}>
+														{feature.icon}
+													</span>
+												</div>
+												<h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+												<p className="text-sm text-muted-foreground">{feature.desc}</p>
+											</div>
+										</NavLink>
+									) : (
+										<div className="border border-border/50 rounded-xl p-6 h-full">
+											<div className={`w-12 h-12 rounded-xl bg-${feature.color === 'primary' ? 'primary' : feature.color === 'accent' ? 'accent' : feature.color === 'green' ? 'green-500' : feature.color === 'blue' ? 'blue-500' : feature.color + '-500'}/20 flex items-center justify-center mb-4`}>
+												<span className={`text-${feature.color === 'primary' ? 'primary' : feature.color === 'accent' ? 'accent' : feature.color === 'green' ? 'green-500' : feature.color === 'blue' ? 'blue-500' : feature.color + '-500'}`}>
+													{feature.icon}
 												</span>
-											)}
-										</h3>
-										<p className="text-sm text-muted-foreground">
-											{feature.desc}
-										</p>
-									</div>
-								))}
-							</div>
-						</div>
-					</div>
-				);
-
-			case "api":
-				return (
-					<div className="space-y-8">
-						<div className="bg-card border rounded-2xl p-8">
-							<div className="flex items-center gap-4 mb-6">
-								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-									<Code className="w-6 h-6 text-primary" />
-								</div>
-								<div>
-									<h2 className="text-2xl font-semibold">API Reference</h2>
-									<p className="text-muted-foreground">
-										Integrate zenWhisper into your applications
-									</p>
-								</div>
-							</div>
-
-							<div className="bg-muted rounded-xl p-6 mb-6">
-								<div className="flex items-center justify-between mb-4">
-									<h3 className="text-lg font-semibold">
-										Base URL
-									</h3>
-									<button className="p-2 hover:bg-muted-foreground/20 rounded-lg transition-colors">
-										<Copy className="w-4 h-4" />
-									</button>
-								</div>
-								<code className="block p-4 bg-background rounded-lg text-sm font-mono">
-									https://api.zenwhisper.com/v1
-								</code>
-							</div>
-
-							<div className="space-y-6">
-								<div>
-									<h3 className="text-lg font-semibold mb-4">
-										Authentication
-									</h3>
-									<p className="text-muted-foreground mb-4">
-										All API requests must include your API key in the
-										Authorization header:
-									</p>
-									<div className="bg-muted rounded-xl p-4 overflow-x-auto">
-										<pre className="text-sm">
-											<code>{`Authorization: Bearer YOUR_API_KEY`}</code>
-										</pre>
-									</div>
-								</div>
-
-								<div>
-									<h3 className="text-lg font-semibold mb-4">
-										Example Request
-									</h3>
-									<div className="bg-muted rounded-xl p-4 overflow-x-auto">
-										<pre className="text-sm">
-											<code>{`curl -X POST https://api.zenwhisper.com/v1/messages \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{"message": "Hello World", "roomId": "12345"}'`}</code>
-										</pre>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				);
-
-			case "tutorials":
-				return (
-					<div className="space-y-8">
-						<div className="bg-card border rounded-2xl p-8">
-							<div className="flex items-center gap-4 mb-6">
-								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-									<Video className="w-6 h-6 text-primary" />
-								</div>
-								<div>
-									<h2 className="text-2xl font-semibold">Video Tutorials</h2>
-									<p className="text-muted-foreground">
-										Learn by watching step-by-step guides
-									</p>
-								</div>
-							</div>
-
-							<div className="grid md:grid-cols-2 gap-6">
-								{[
-									{
-										title: "Getting Started",
-										duration: "5:23",
-										desc: "Complete walkthrough of the basics",
-										level: "Beginner",
-									},
-									{
-										title: "Advanced Chat Features",
-										duration: "8:15",
-										desc: "Master real-time messaging",
-										level: "Intermediate",
-									},
-									{
-										title: "Classroom Management",
-										duration: "10:42",
-										desc: "Create and manage virtual classrooms",
-										level: "Advanced",
-									},
-									{
-										title: "AI Tools Integration",
-										duration: "7:30",
-										desc: "Leverage AI for better learning",
-										level: "Intermediate",
-									},
-								].map((video, idx) => (
-									<div
-										key={idx}
-										className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow cursor-pointer"
-									>
-										<div className="aspect-video bg-muted rounded-lg mb-4 flex items-center justify-center">
-											<Video className="w-8 h-8 text-muted-foreground/40" />
+											</div>
+											<h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+											<p className="text-sm text-muted-foreground">{feature.desc}</p>
 										</div>
-										<h3 className="font-medium mb-2">
-											{video.title}
-										</h3>
-										<div className="flex items-center justify-between text-sm text-muted-foreground">
-											<span>{video.duration}</span>
-											<span className="px-2 py-0.5 rounded-full bg-muted">
-												{video.level}
-											</span>
-										</div>
-									</div>
-								))}
-							</div>
+									)}
+								</div>
+							))}
 						</div>
 					</div>
 				);
@@ -411,15 +262,21 @@ const Docs = () => {
 	return (
 		<div className="max-w-7xl mx-auto px-6 py-12">
 			{/* Page Header */}
-			<div className="mb-8 text-center">
-				<h1 className="text-4xl font-bold mb-2">Documentation</h1>
-				<p className="text-muted-foreground">
-					Complete guide to zenWhisper
+			<div className="mb-8 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+				<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
+					<BookOpen className="w-4 h-4" />
+					<span>Documentation</span>
+				</div>
+				<h1 className="text-4xl md:text-5xl font-bold mb-2">
+					<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Docs</span>
+				</h1>
+				<p className="text-muted-foreground text-lg">
+					Everything you need to know about zenWhisper
 				</p>
 			</div>
 
 			{/* Search Bar */}
-			<div className="mb-8">
+			<div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
 				<div className="relative max-w-2xl mx-auto">
 					<Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
 					<input
@@ -427,29 +284,28 @@ const Docs = () => {
 						placeholder="Search documentation..."
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
-						className="w-full pl-12 pr-4 py-3 border rounded-xl bg-background"
+						className="w-full pl-12 pr-4 py-3 border-2 border-border/50 rounded-xl bg-background focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all outline-none"
 					/>
 				</div>
 			</div>
 
 			{/* Sidebar Navigation - Mobile Only */}
-			<div className="lg:hidden mb-8">
-				<div className="bg-card border rounded-2xl p-4">
+			<div className="lg:hidden mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+				<div className="border border-border/50 rounded-2xl p-4 bg-card">
 					<nav className="space-y-2">
 						{filteredSections.map((section) => (
-							<div key={section.id}>
-								<button
-									onClick={() => setActiveSection(section.id)}
-									className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
-										activeSection === section.id
-											? "bg-primary text-primary-foreground"
-											: "text-muted-foreground hover:text-foreground hover:bg-muted"
-									}`}
-								>
-									{section.icon}
-									<span className="font-medium">{section.title}</span>
-								</button>
-							</div>
+							<button
+								key={section.id}
+								onClick={() => setActiveSection(section.id)}
+								className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+									activeSection === section.id
+										? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+										: "text-muted-foreground hover:text-foreground hover:bg-muted"
+								}`}
+							>
+								{section.icon}
+								<span className="font-medium">{section.title}</span>
+							</button>
 						))}
 					</nav>
 				</div>
@@ -458,67 +314,44 @@ const Docs = () => {
 			{/* Desktop Layout with Sidebar */}
 			<div className="hidden lg:grid grid-cols-[280px_1fr] gap-8 items-start max-w-6xl mx-auto">
 				{/* Sidebar - Desktop */}
-				<div className="shrink-0">
-					<div className="bg-card border rounded-2xl p-6 sticky top-24">
-						<nav className="space-y-6">
+				<div className="shrink-0 animate-in fade-in slide-in-from-left-4 duration-700 delay-200">
+					<div className="border border-border/50 rounded-2xl p-6 bg-card sticky top-24">
+						<nav className="space-y-2">
 							{filteredSections.map((section) => (
-								<div key={section.id}>
-									<button
-										onClick={() => setActiveSection(section.id)}
-										className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all mb-2 ${
-											activeSection === section.id
-												? "bg-primary text-primary-foreground"
-												: "text-muted-foreground hover:text-foreground hover:bg-muted"
-										}`}
-									>
-										{section.icon}
-										<span className="font-medium">{section.title}</span>
-									</button>
-									{activeSection === section.id && (
-										<div className="ml-4 space-y-1">
-											{section.items.map((item, idx) => (
-												<a
-													key={idx}
-													href="#"
-													className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg transition-colors"
-												>
-													{item.icon}
-													{item.title}
-												</a>
-											))}
-										</div>
-									)}
-								</div>
+								<button
+									key={section.id}
+									onClick={() => setActiveSection(section.id)}
+									className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+										activeSection === section.id
+											? "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/25"
+											: "text-muted-foreground hover:text-foreground hover:bg-muted"
+									}`}
+								>
+									{section.icon}
+									<span className="font-medium">{section.title}</span>
+								</button>
 							))}
 						</nav>
 
-						<div className="mt-8 pt-8 border-t">
-							<div className="space-y-3">
-								<a
-									href="https://github.com/zenwhisper"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-center gap-3 px-4 py-3 text-muted-foreground hover:text-foreground rounded-xl transition-colors"
-								>
-									<GitBranch className="w-4 h-4" />
-									<span>GitHub</span>
-									<ExternalLink className="w-3 h-3 ml-auto" />
-								</a>
-								<NavLink
-									to="/faq"
-									className="flex items-center gap-3 px-4 py-3 text-muted-foreground hover:text-foreground rounded-xl transition-colors"
-								>
-									<HelpCircle className="w-4 h-4" />
-									<span>FAQ</span>
-									<ExternalLink className="w-3 h-3 ml-auto" />
-								</NavLink>
-							</div>
+						<div className="mt-8 pt-8 border-t border-border/50">
+							<a
+								href="https://github.com/devrizvy/zenWhisper-client-v2"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex items-center gap-3 px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl transition-all group"
+							>
+								<GitBranch className="w-4 h-4" />
+								<span>GitHub Repo</span>
+								<ExternalLink className="w-3 h-3 ml-auto group-hover:scale-110 transition-transform" />
+							</a>
 						</div>
 					</div>
 				</div>
 
 				{/* Content */}
-				<div className="min-w-0">{renderContent()}</div>
+				<div className="min-w-0 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+					{renderContent()}
+				</div>
 			</div>
 
 			{/* Mobile Layout - Full Width Content */}
