@@ -8,7 +8,7 @@
 	"description": "Glimmer - Educational collaboration platform with real-time chat, notes, and AI summaries",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/devrizvy/glimmer.git"
+		"url": "https://github.com/devrizvy/glimmer"
 	},
 	"scripts": {
 		"dev": "vite",
