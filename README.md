@@ -5,12 +5,12 @@
 ```
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║   ███████╗███████╗███╗   ██╗██╗    ██╗██╗  ██╗██╗███████╗██████╗ ███████╗██████╗ ║
-║   ╚══███╔╝██╔════╝████╗  ██║██║    ██║██║  ██║██║██╔════╝██╔══██╗██╔════╝██╔══██╗║
-║     ███╔╝ █████╗  ██╔██╗ ██║██║ █╗ ██║███████║██║███████╗██████╔╝█████╗  ██████╔╝║
-║    ███╔╝  ██╔══╝  ██║╚██╗██║██║███╗██║██╔══██║██║╚════██║██╔═══╝ ██╔══╝  ██╔══██╗║
-║   ███████╗███████╗██║ ╚████║╚███╔███╔╝██║  ██║██║███████║██║     ███████╗██║  ██║║
-║   ╚══════╝╚══════╝╚═╝  ╚═══╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝║
+║  ███████╗██╗ ██████╗ ███╗   ██╗ ██████╗ ███████╗██╗  ██╗██╗ ██████╗  ██████╗ ███████╗██████╗ ║
+║  ██╔════╝██║██╔═══██╗████╗  ██║██╔════╝ ██╔════╝██║  ██║██║██╔═══██╗██╔══██╗██╔════╝██╔══██╗║
+║  █████╗  ██║██║   ██║██╔██╗ ██║██║  ███╗█████╗  ███████║██║██║   ██║██████╔╝█████╗  ██████╔╝║
+║  ██╔══╝  ██║██║   ██║██║╚██╗██║██║   ██║██╔══╝  ██╔══██║██║██║   ██║██╔══██╗██╔══╝  ██╔══██╗║
+║  ██║     ██║╚██████╔╝██║ ╚████║╚██████╔╝███████╗██║  ██║██║╚██████╔╝██║  ██║███████╗██║  ██║║
+║  ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝║
 ║                                                           ║
 ║                Collaborative Study Platform               ║
 ║              "Where ideas illuminate together"           ║
@@ -71,7 +71,7 @@ In today's digital learning landscape, students need more than just chat apps—
 
 ### User Experience
 
-- **Zen Aesthetic**: Calming teal/green color palette designed for focus
+- **Elegant Aesthetic**: Calming teal/green color palette designed for focus
 - **Glass Morphism**: Modern, elegant UI with smooth animations
 - **Responsive Design**: Seamless experience across desktop, tablet, and mobile
 - **Dark Mode**: Easy on the eyes during late-night study sessions
@@ -210,7 +210,7 @@ glimmer/
 │   ├── Layout/
 │   │   └── MainLayout.tsx         # App shell
 │   │
-│   └── index.css                  # Global styles + Zen theme
+│   └── index.css                  # Global styles + theme
 │
 ├── .env                            # Environment variables
 ├── package.json                    # Dependencies
@@ -282,7 +282,7 @@ saveToNotes(summary);
 ### Color Palette
 
 ```css
-/* Primary Colors - Zen Theme */
+/* Primary Colors - Theme */
 --primary: oklch(0.65 0.12 155);           /* Calming Teal */
 --primary-foreground: oklch(0.98 0.02 155); /* Light Text */
 
@@ -312,15 +312,15 @@ font-family: 'JetBrains Mono Variable', monospace;
 ### Animations
 
 ```css
-/* Zen Wave Animation */
-@keyframes zen-wave {
+/* Wave Animation */
+@keyframes wave {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   25% { transform: translateY(-2px) rotate(0.5deg); }
   75% { transform: translateY(2px) rotate(-0.5deg); }
 }
 
-/* Zen Pulse Animation */
-@keyframes zen-pulse {
+/* Pulse Animation */
+@keyframes pulse {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
 }
@@ -399,7 +399,7 @@ Contributions make the open-source community an amazing place to learn, inspire,
 - Add **comments** for complex logic
 - Keep components **small and focused**
 - Use **semantic HTML**
-- Follow the **zen aesthetic** design principles
+- Follow the **elegant aesthetic** design principles
 
 ---
 
