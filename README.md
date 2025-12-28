@@ -5,15 +5,17 @@
 ```
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║  ███████╗██╗ ██████╗ ███╗   ██╗ ██████╗ ███████╗██╗  ██╗██╗ ██████╗  ██████╗ ███████╗██████╗ ║
-║  ██╔════╝██║██╔═══██╗████╗  ██║██╔════╝ ██╔════╝██║  ██║██║██╔═══██╗██╔══██╗██╔════╝██╔══██╗║
-║  █████╗  ██║██║   ██║██╔██╗ ██║██║  ███╗█████╗  ███████║██║██║   ██║██████╔╝█████╗  ██████╔╝║
-║  ██╔══╝  ██║██║   ██║██║╚██╗██║██║   ██║██╔══╝  ██╔══██║██║██║   ██║██╔══██╗██╔══╝  ██╔══██╗║
-║  ██║     ██║╚██████╔╝██║ ╚████║╚██████╔╝███████╗██║  ██║██║╚██████╔╝██║  ██║███████╗██║  ██║║
-║  ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝║
+
+██████╗ ██╗     ██╗███╗   ███╗███╗   ███╗███████╗██████╗ 
+██╔════╝ ██║     ██║████╗ ████║████╗ ████║██╔════╝██╔══██╗
+██║  ███╗██║     ██║██╔████╔██║██╔████╔██║█████╗  ██████╔╝
+██║   ██║██║     ██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██╔══██╗
+╚██████╔╝███████╗██║██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║  ██║
+╚═════╝ ╚══════╝╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝
+                                                                                                                                                                         
 ║                                                           ║
 ║                Collaborative Study Platform               ║
-║              "Where ideas illuminate together"           ║
+║              "Where ideas illuminate together"            ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
 ```
@@ -23,7 +25,7 @@
 [![Socket.IO](https://img.shields.io/badge/Socket.IO-4.8.1-010101?style=for-the-badge&logo=socket.io&logoColor=white)](https://socket.io/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1.17-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-[Live Demo](https://glimmer.com) • [Documentation](#documentation) • [Report Bug](https://github.com/devrizvy/glimmer/issues) • [Request Feature](https://github.com/devrizvy/glimmer/issues)
+[Live Demo](https://glimmer.com) 
 
 </div>
 
@@ -221,62 +223,6 @@ glimmer/
 
 ---
 
-## Usage Examples
-
-### 1. Starting a Private Chat
-
-```typescript
-// Navigate to the chat page
-navigate('/chat/users');
-
-// Select a user to start chatting
-handleUserSelect(selectedUser);
-
-// Send a message
-sendPrivateMessage({
-  chatId: chatId,
-  receiverEmail: partnerEmail,
-  receiverUsername: partnerUsername,
-  message: "Hey! Want to study together?"
-});
-```
-
-### 2. Creating a Virtual Classroom
-
-```typescript
-// Create a new classroom
-const roomId = generateRoomId(); // Auto-generated 8-digit ID
-createNewRoom({
-  roomId: roomId,
-  roomName: "Biology Exam Prep"
-});
-
-// Join the classroom
-joinRoom(roomId, username);
-
-// Send a message to the room
-sendRoomMessage({
-  roomId: roomId,
-  room: "Biology Exam Prep",
-  message: "Let's review Chapter 5!"
-});
-```
-
-### 3. Using AI Summary (Coming Soon)
-
-```typescript
-// Upload a PDF
-uploadPDF(file);
-
-// Get AI summary
-const summary = await generateSummary(pdfId);
-
-// Save to notes
-saveToNotes(summary);
-```
-
----
-
 ## Design System
 
 ### Color Palette
@@ -451,7 +397,7 @@ If you found this project helpful, please consider:
 │                                                             │
 │         "Where ideas illuminate together"                    │
 │                                                             │
-│                       Glimmer © 2024                        │
+│                       Glimmer © 2025                        │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
