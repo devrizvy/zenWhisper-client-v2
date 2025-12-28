@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowLeft, Send, Phone, Video, MoreVertical } from "lucide-react";
+import { ArrowLeft, Send, MoreVertical, Smile } from "lucide-react";
 import { io } from "socket.io-client";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -56,7 +56,62 @@ const ChatFeed = () => {
 	const [typingTimeout, setTypingTimeout] = useState<number | null>(null);
 	const [messages, setMessages] = useState<Message[]>([]);
 	const [isConnected, setIsConnected] = useState(false);
+	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+	const [activeEmojiCategory, setActiveEmojiCategory] = useState("smileys");
 	const messagesEndRef = useRef<HTMLDivElement>(null);
+	const emojiPickerRef = useRef<HTMLDivElement>(null);
+
+	// Categorized emojis with icons
+	const emojiCategories = [
+		{
+			id: "smileys",
+			name: "Smileys",
+			icon: "😊",
+			emojis: ["😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "😉", "😊", "😇", "🥰", "😍", "🤩", "😘", "😗", "😚", "😙", "🥲", "😋", "😛", "😜", "🤪", "😝", "🤑", "🤗", "🤭", "🫢", "🤫", "🤔", "🫡", "🤐", "🤨", "😐", "😑", "😶", "🫥", "😏", "😒", "🙄", "😬", "🤥", "😌", "😔", "😪", "🤤", "😴", "😷", "🤒", "🤕", "🤢", "🤮", "🤧", "🥵", "🥶", "😶‍🌫️", "🥴", "😵", "🤯", "🤠", "🥳", "🥸", "😎", "🤓", "🧐"]
+		},
+		{
+			id: "gestures",
+			name: "Gestures",
+			icon: "👋",
+			emojis: ["👋", "🤚", "🖐️", "✋", "🖖", "👌", "🤌", "🤏", "✌️", "🤞", "🤟", "🤘", "🤙", "👈", "👉", "👆", "🖕", "👇", "☝️", "👍", "👎", "✊", "👊", "🤛", "🤜", "👏", "🙌", "👐", "🤲", "🤝", "🙏", "✍️", "💪", "🦵", "🦶", "👂", "🦻", "👃", "🧠", "🫀", "🫁", "🦷", "🦴", "👀", "👁️", "👅", "👄", "💋", "🩸"]
+		},
+		{
+			id: "hearts",
+			name: "Hearts",
+			icon: "❤️",
+			emojis: ["❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "🤍", "🤎", "💔", "❤️‍🔥", "❤️‍🩹", "❤️‍👨‍👩‍👧‍👦", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "♥️", "♦️", "♣️", "♠️", "♠️", "♣️", "♥️", "♦️", "💯", "💢", "💥", "💫", "💦", "💨", "🕳️", "💣", "💬", "💭", "🗯️", "💤", "👁️‍🗨️", "🗨️", "🗯️", "💭", "💤"]
+		},
+		{
+			id: "emotions",
+			name: "Emotions",
+			icon: "😢",
+			emojis: ["👶", "🧒", "👦", "👧", "🧑", "👱", "👨", "🧔", "👩", "🧓", "👴", "👵", "🙍", "🙎", "🙅", "🙆", "💁", "🙋", "🧏", "🙇", "🤦", "🤷", "👨‍🦰", "👩‍🦰", "👨‍🦱", "👩‍🦱", "👨‍🦳", "👩‍🦳", "🧔", "👵", "👴", "👲", "👱‍♀️", "👱", "🧑‍🦰", "🧑‍🦱", "🧑‍🦳", "🧑‍🦲", "👱‍♀️", "👱", "😠", "😡", "🤬", "😈", "👿", "💀", "☠️", "💩", "🤡", "👹", "👺", "👻", "👽", "👾", "🤖"]
+		},
+		{
+			id: "activities",
+			name: "Activities",
+			icon: "⚽",
+			emojis: ["⚽", "🏀", "🏈", "⚾", "🥎", "🎾", "🏐", "🏉", "🥏", "🎱", "🪀", "🏓", "🏸", "🏒", "🏑", "🥍", "🏏", "🪃", "🥅", "⛳", "🪁", "🏹", "🎣", "🤿", "🥊", "🥋", "🎽", "🛹", "🛼", "🛷", "⛸️", "🥌", "🎿", "⛷️", "🏂", "🪂", "🏋️", "🤼", "🤸", "🤺", "⛹️", "🤾", "🏌️", "🏇", "🧘", "🏊", "🤽", "🚣", "🧗", "🚴", "🚵"]
+		},
+		{
+			id: "symbols",
+			name: "Symbols",
+			icon: "⭐",
+			emojis: ["⭐", "🌟", "✨", "⚡", "💥", "💫", "🔥", "💧", "🌈", "☀️", "🌙", "🌎", "🌍", "🌏", "🌐", "🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘", "🌚", "🌛", "🌜", "🌝", "🌞", "⭐", "🌟", "🌠", "☁️", "⛅", "⛈️", "🌤", "🌧️", "🌨️", "❄️", "☃️", "⛄", "🌬️", "💨", "💧", "💦", "☔", "☂️", "🌊", "🌫️", "🌪️", "🌈", "🌂"]
+		},
+		{
+			id: "animals",
+			name: "Animals",
+			icon: "🐶",
+			emojis: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🙈", "🙉", "🙊", "🐒", "🐔", "🐧", "🐦", "🐤", "🐣", "🐥", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🐛", "🦋", "🐌", "🐞", "🐜", "🪲", "🪳", "🪰", "🦟", "🦗", "🕷️", "🦂", "🐢", "🐍", "🦎", "🦖", "🦕", "🐙", "🦑", "🦐", "🦞"]
+		},
+		{
+			id: "food",
+			name: "Food",
+			icon: "🍕",
+			emojis: ["🍕", "🍔", "🍟", "🌭", "🍿", "🧂", "🥓", "🥩", "🍗", "🍖", "🌮", "🌯", "🥙", "🥚", "🍳", "🥘", "🍲", "🥣", "🥗", "🍿", "🧈", "🧂", "🥫", "🍱", "🍘", "🍙", "🍚", "🍛", "🍜", "🍝", "🍠", "🍢", "🍣", "🍤", "🍥", "🥮", "🍡", "🥟", "🥠", "🥡", "🍦", "🍧", "🍨", "🍩", "🍪", "🎂", "🍰", "🧁", "🥧", "🍫", "🍬", "🍭", "🍮", "🍯", "🍼", "🥛", "☕", "🍵", "🍶"]
+		}
+	];
 
 	// Generate chat ID (consistent ordering)
 	const chatId = [currentUserEmail, partnerEmail].sort().join("_");
@@ -95,9 +150,32 @@ const ChatFeed = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 	};
 
+	// Close emoji picker when clicking outside
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
+				setShowEmojiPicker(false);
+			}
+		};
+
+		if (showEmojiPicker) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [showEmojiPicker]);
+
 	useEffect(() => {
 		scrollToBottom();
 	}, [messages]);
+
+	// Handle emoji selection
+	const handleEmojiSelect = (emoji: string) => {
+		setCurrentMessage(prev => prev + emoji);
+		setShowEmojiPicker(false);
+	};
 
 	// Socket connection setup for real-time messaging
 	useEffect(() => {
@@ -344,12 +422,6 @@ const ChatFeed = () => {
 								className={`w-2 h-2 rounded-full ${isConnected ? "bg-primary" : "bg-destructive"}`}
 							></div>
 							<button className="p-3 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
-								<Phone className="w-4 h-4" />
-							</button>
-							<button className="p-3 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
-								<Video className="w-4 h-4" />
-							</button>
-							<button className="p-3 text-foreground/60 hover:text-foreground hover:bg-sidebar-accent/30 rounded-xl transition-all">
 								<MoreVertical className="w-4 h-4" />
 							</button>
 						</div>
@@ -490,51 +562,122 @@ const ChatFeed = () => {
 				</div>
 
 				{/* Message Input */}
-				<div className="mira-glass border-t border-sidebar-border bg-gradient-to-b from-background/95 to-background/80">
+				<div className="mira-glass border-t border-sidebar-border bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl">
 					<div className="container mx-auto p-4">
 						{/* Connection Status */}
 						<div className="flex items-center justify-between mb-3">
 							<div className="flex items-center gap-2">
-								<div
-									className={`w-2 h-2 rounded-full ${isConnected ? "bg-green-500" : "bg-destructive"} ${isConnected ? "animate-pulse" : ""}`}
-								></div>
-								<span className="text-xs text-muted-foreground">
+								<div className={`relative`}>
+									<div className={`w-2.5 h-2.5 rounded-full ${isConnected ? "bg-green-500 shadow-lg shadow-green-500/50" : "bg-destructive"} ${isConnected ? "animate-pulse" : ""}`}></div>
+									{isConnected && <div className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-green-500 animate-ping opacity-75"></div>}
+								</div>
+								<span className="text-xs text-muted-foreground font-medium">
 									{isConnected ? `💬 Chat with ${partnerUsername}` : "🔄 Connecting..."}
 								</span>
 							</div>
-							<div className="text-xs text-muted-foreground">
-								{currentMessage.length}/500 characters
+							<div className={`text-xs font-medium ${currentMessage.length >= 450 ? 'text-destructive' : currentMessage.length >= 350 ? 'text-amber-500' : 'text-muted-foreground'}`}>
+								{currentMessage.length}/500
 							</div>
 						</div>
 
 						<form onSubmit={handleOnSubmit} className="space-y-3">
 							<div className="flex items-end gap-2">
-								{/* Action Buttons */}
-								<div className="flex items-center gap-1">
+								{/* Emoji Button */}
+								<div className="relative" ref={emojiPickerRef}>
 									<Button
 										type="button"
 										variant="ghost"
 										size="sm"
-										className="h-10 w-10 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent transition-all"
+										onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+										className={`h-11 w-11 rounded-2xl transition-all duration-300 relative overflow-hidden ${
+											showEmojiPicker
+												? "text-foreground bg-gradient-to-br from-primary/20 to-accent/20 border-2 border-primary/30 shadow-lg shadow-primary/20"
+												: "text-muted-foreground hover:text-foreground hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 border-2 border-transparent hover:border-primary/20"
+										}`}
 									>
-										<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-										</svg>
+										{showEmojiPicker && (
+											<div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 animate-pulse"></div>
+										)}
+										<Smile className="w-5 h-5 relative z-10" />
 									</Button>
-									<Button
-										type="button"
-										variant="ghost"
-										size="sm"
-										className="h-10 w-10 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent transition-all"
-									>
-										<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-										</svg>
-									</Button>
+
+									{/* Enhanced Emoji Picker Popover */}
+									{showEmojiPicker && (
+										<div className="absolute bottom-14 left-0 z-50 w-80 mira-glass border border-border/50 rounded-3xl shadow-2xl bg-background/95 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-3 duration-300 overflow-hidden">
+											{/* Header with gradient */}
+											<div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 px-4 py-3 border-b border-border/50">
+												<div className="flex items-center justify-between">
+													<div className="flex items-center gap-2">
+														<span className="text-xl">😊</span>
+														<h3 className="font-semibold text-foreground text-sm">Emoji Picker</h3>
+													</div>
+													<button
+														type="button"
+														onClick={() => setShowEmojiPicker(false)}
+														className="p-1 rounded-lg hover:bg-destructive/10 hover:text-destructive transition-all text-muted-foreground"
+													>
+														<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+															<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+														</svg>
+													</button>
+												</div>
+											</div>
+
+											{/* Category Tabs */}
+											<div className="flex gap-1 p-2 overflow-x-auto border-b border-border/30 scrollbar-thin">
+												{emojiCategories.map((category) => (
+													<button
+														key={category.id}
+														type="button"
+														onClick={() => setActiveEmojiCategory(category.id)}
+														className={`flex-shrink-0 p-2 rounded-xl transition-all duration-200 group ${
+															activeEmojiCategory === category.id
+																? "bg-gradient-to-br from-primary to-accent text-white shadow-lg scale-105"
+																: "hover:bg-accent/50 text-muted-foreground hover:text-foreground"
+														}`}
+														title={category.name}
+													>
+														<span className="text-lg">{category.icon}</span>
+													</button>
+												))}
+											</div>
+
+											{/* Emoji Grid */}
+											<div className="p-3 max-h-64 overflow-y-auto">
+												<div className="grid grid-cols-8 gap-1.5">
+													{emojiCategories.find(cat => cat.id === activeEmojiCategory)?.emojis.map((emoji, index) => (
+														<button
+															key={index}
+															type="button"
+															onClick={() => handleEmojiSelect(emoji)}
+															className="aspect-square text-xl flex items-center justify-center rounded-xl hover:bg-gradient-to-br hover:from-primary/20 hover:to-accent/20 transition-all duration-200 transform hover:scale-110 active:scale-95 border border-transparent hover:border-primary/30"
+															title={emoji}
+														>
+															{emoji}
+														</button>
+													))}
+												</div>
+											</div>
+
+											{/* Footer */}
+											<div className="px-3 py-2 bg-muted/30 border-t border-border/30">
+												<div className="flex items-center justify-between text-xs text-muted-foreground">
+													<span className="flex items-center gap-1">
+														<span>💡</span>
+														Click an emoji to add it
+													</span>
+													<span className="font-medium">
+														{emojiCategories.find(cat => cat.id === activeEmojiCategory)?.name}
+													</span>
+												</div>
+											</div>
+										</div>
+									)}
 								</div>
 
 								{/* Message Input */}
-								<div className="flex-1 relative">
+								<div className="flex-1 relative group">
+									<div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 blur-lg"></div>
 									<textarea
 										value={currentMessage}
 										onChange={(e) => {
@@ -544,7 +687,7 @@ const ChatFeed = () => {
 											}
 										}}
 										placeholder={`Message ${partnerUsername}...`}
-										className="w-full min-h-[44px] max-h-32 px-4 py-3 pr-12 rounded-xl resize-none mira-glass border border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 text-base placeholder:text-muted-foreground/60 transition-all"
+										className="relative w-full min-h-[48px] max-h-40 px-5 py-3.5 pr-16 rounded-2xl resize-none mira-glass border-2 border-border/50 focus:border-primary/50 focus:border-primary/50 focus:ring-4 focus:ring-primary/10 text-base placeholder:text-muted-foreground/50 transition-all duration-300 shadow-sm"
 										rows={1}
 										onKeyDown={(e) => {
 											if (e.key === 'Enter' && !e.shiftKey) {
@@ -554,54 +697,63 @@ const ChatFeed = () => {
 										}}
 										style={{
 											height: 'auto',
-											minHeight: '44px'
+											minHeight: '48px'
 										}}
 										onInput={(e) => {
 											const target = e.target as HTMLTextAreaElement;
 											target.style.height = 'auto';
-											target.style.height = Math.min(target.scrollHeight, 128) + 'px';
+											target.style.height = Math.min(target.scrollHeight, 160) + 'px';
 										}}
 									/>
 									{currentMessage.length > 300 && (
-										<div className="absolute right-3 bottom-2">
-											<div className={`text-xs font-medium ${currentMessage.length >= 500 ? 'text-destructive' : 'text-muted-foreground'}`}>
+										<div className="absolute right-4 bottom-3 z-10">
+											<div className={`px-2 py-1 rounded-lg text-xs font-bold backdrop-blur-sm ${
+												currentMessage.length >= 500
+													? 'bg-destructive/20 text-destructive'
+													: 'bg-amber-500/20 text-amber-500'
+											}`}>
 												{500 - currentMessage.length}
 											</div>
 										</div>
 									)}
 								</div>
 
-								{/* Send Button */}
+								{/* Enhanced Send Button */}
 								<Button
 									type="submit"
 									disabled={!currentMessage.trim() || !isConnected || currentMessage.length >= 500}
-									className="h-10 px-4 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-sm hover:shadow-md hover:scale-105 active:scale-100"
+									className="h-11 px-5 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground rounded-2xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center gap-2 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 active:scale-95 relative overflow-hidden group"
 								>
-									<Send size={16} className="transition-transform group-hover:translate-x-0.5" />
-									{currentMessage.trim() && <span className="hidden sm:inline">Send</span>}
+									<div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+									<Send size={18} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
+									{currentMessage.trim() && <span className="hidden sm:inline relative z-10">Send</span>}
 								</Button>
 							</div>
 						</form>
 
 						{/* Typing Indicator */}
 						{isTyping && (
-							<div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground animate-pulse">
-								<div className="flex space-x-1">
-									<div className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce"></div>
-									<div className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-									<div className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+							<div className="mt-3 px-4 py-2.5 mira-glass border border-primary/20 rounded-xl inline-flex items-center gap-3 text-sm text-primary animate-in fade-in slide-in-from-left-2 duration-300">
+								<div className="flex space-x-1.5">
+									<div className="w-2 h-2 rounded-full bg-primary animate-bounce shadow-lg shadow-primary/50"></div>
+									<div className="w-2 h-2 rounded-full bg-primary animate-bounce shadow-lg shadow-primary/50" style={{ animationDelay: '0.15s' }}></div>
+									<div className="w-2 h-2 rounded-full bg-primary animate-bounce shadow-lg shadow-primary/50" style={{ animationDelay: '0.3s' }}></div>
 								</div>
-								<span>{partnerUsername} is typing</span>
+								<span className="font-medium">{partnerUsername} is typing</span>
 							</div>
 						)}
 
-						{/* Help Text */}
-						<div className="mt-2 flex items-center justify-between">
-							<span className="text-xs text-muted-foreground">
-								💡 Press Enter to send, Shift+Enter for new line
-							</span>
-							<div className="flex items-center gap-3 text-xs text-muted-foreground">
-								<span>Be thoughtful and respectful</span>
+						{/* Enhanced Help Text */}
+						<div className="mt-3 px-4 py-2.5 rounded-xl bg-muted/30 border border-border/30">
+							<div className="flex items-center justify-between text-xs">
+								<span className="text-muted-foreground flex items-center gap-1.5">
+									<span className="text-base">💡</span>
+									<span className="font-medium">Press Enter to send, Shift+Enter for new line</span>
+								</span>
+								<div className="flex items-center gap-2 text-muted-foreground">
+									<div className="w-px h-3 bg-border"></div>
+									<span className="font-medium">Be thoughtful and respectful</span>
+								</div>
 							</div>
 						</div>
 					</div>
